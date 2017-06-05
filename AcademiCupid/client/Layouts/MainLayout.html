@@ -1,0 +1,21 @@
+<template name ="MainLayout">
+	{{> Header}}
+	<div class="container" style="border:solid">
+		<div class="row" style="text-align:center">
+			<span>
+				<i class="glyphicon glyphicon-apple"></i>
+			</span>
+			<span style="font-size:20px">
+				This is the main layout
+			</span>
+			<span>
+				<i class="glyphicon glyphicon-apple"></i>
+			</span>
+		</div>
+	</div>
+	
+	<main>
+		{{> Template.dynamic template=main}}
+	</main>
+
+</template>
