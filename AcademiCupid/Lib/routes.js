@@ -48,6 +48,13 @@ FlowRouter.route('/mainpage',{
 	}
 });
 
+FlowRouter.route('/eventinvitation', {
+	name: 'EventInvitation',
+	action() { // this is what's going to happen when you hit this route
+		BlazeLayout.render('MainLayout', {main: 'EventInvitation'});
+	}
+});
+
 FlowRouter.route('/profile',{
 	name: 'ProfilePage',
 	action(){

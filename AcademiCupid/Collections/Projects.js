@@ -11,38 +11,43 @@ Projects.allow({
 
 Skills = new SimpleSchema({
 	name:{
-		type: String
+		type: String,
+		label: "Skill"
 	}
 });
 
 ProjectsSchema = new SimpleSchema({
 	name:{
-		type: String
+		type: String,
+		label: "Project Name"
 	},
 	reqSkills:{
-		type: [Skills]
+		type: [Skills],
+		label: "Required Skill(s)"
 	},
 	owner:{
 		type: String,
 		label: "Owner",
 		autoValue: function() {
- 			return this.userId //gives a default value for this field
+ 			return this.userId
 		},
 		autoform: {
- 			type: "hidden" //This makes this field hidden from view. Hence it will not appear on our form.
+ 			type: "hidden" 
 		}
 	},
   members: {
     type: [String],
-    optional: true
+    optional: true,
+    autoform: {
+ 			type: "hidden" 
+	}
   },
   belongsToEvent: {
-     type: String,
-     optional:true
-  //   autoform: {
-  //     type: "hidden" //This makes this field hidden from view. Hence it will not appear on our form.
-  //   },
-
+  	type: String,
+    optional:true,
+    autoform: {
+    	type: "hidden"
+	}
   }
 });
 

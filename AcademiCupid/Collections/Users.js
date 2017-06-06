@@ -4,8 +4,8 @@ User.allow({
 	insert: function(userId, doc){
 		return !!userId;
 	},
-	update:function(userId,doc){
-		return !!userId;
+	update:function(userId, doc){
+		return true;//!!userId;
 	}
 });
 
@@ -23,30 +23,29 @@ UserSchema = new SimpleSchema({
 		type: [Skills]
 	},
 	owner:{
-  		type: String,
-  		label: "Owner",
-  		autoValue: function() {
-   			return this.userId //gives a default value for this field
-  		},
-  		autoform: {
-   			type: "hidden" //This makes this field hidden from view. Hence it will not appear on our form.
-  		}
-  	},
-  	enrolled:{
-  		type: [String],
-  		autoform: {
-   			type: "hidden"
-  		},
-  		optional:true
-  	},
-  	projects:{
-  		type: [String],
-  		autoform: {
-   			type: "hidden"
-  		},
-  		optional:true
-  	}
+		type: String,
+		label: "Owner",
+		autoValue: function() {
+ 			return this.userId //gives a default value for this field
+		},
+		autoform: {
+ 			type: "hidden" //This makes this field hidden from view. Hence it will not appear on our form.
+		}
+	},
+	enrolled:{
+		type: [String],
+		autoform: {
+ 			type: "hidden"
+		},
+		optional:true
+	},
+	projects:{
+		type: [String],
+		autoform: {
+ 			type: "hidden"
+		},
+		optional:true
+	}
 });
 
 User.attachSchema(UserSchema);
-

@@ -15,14 +15,3 @@ AutoForm.hooks({
     }
   }
 });
-
-// AutoForm.hooks({
-//   addProspectForm:{
-//     before: {
-//       insert: function(doc) {
-//         doc.belongsToEvent = Session.get('currentEvent');
-//           return doc;
-//       }
-//     }
-//   }
-// });
