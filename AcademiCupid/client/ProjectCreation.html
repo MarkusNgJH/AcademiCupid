@@ -1,0 +1,17 @@
+<template name="ProjectCreation">
+	<div class="container">
+		<h2>{{getEvent.name}}</h2>
+	</div>
+	<div class="container col-lg-3 col-md-3 col-sm-12 col-xs-12">
+		<a href="/event/{{$.Session.get 'currentEvent'}}" class="btn btn-primary">Back to main page</a>
+	</div>
+	<div class="container col-lg-6 col-md-6 col-sm-12 col-xs-12" style="border:1px solid; padding:20px;">
+		<div class="row">
+			<h1>This is the project creation page</h1>
+		</div>
+		<div class="row">
+			{{> quickForm collection="Projects" id = "insertProjectsForm" type = "insert"}}	
+		</div>	
+	</div>
+	<div class="container col-lg-3 col-md-3 col-sm-0 col-xs-0"></div>
+</template>

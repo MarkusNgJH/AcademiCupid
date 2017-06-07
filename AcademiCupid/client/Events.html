@@ -1,0 +1,28 @@
+<template name = "Events">
+	<div class="container">
+		<h2>This is the events template</h2>
+	</div>
+	<div class="container">
+		<div class="container col-lg-4 col-md-6 col-sm-8 col-sm-10" style="border:1px solid; padding:20px;">
+			<div class="row">
+				<h3>You can add new events here:</h3>
+			</div>
+			<div class="row">
+				{{> quickForm collection="Events" id = "insertEventsForm" type = "insert"}}
+			</div>
+		</div>	
+	</div>
+	<div class="container">
+		<h4>Your Current Events:</h4>
+		<ul class="list-group"> 
+			{{#each events}}
+				<li class="list-group-item">
+					<a href="/event/{{_id}}" class="event-selected">
+						{{>Event}}
+					</a>
+				</li>
+			{{/each}}
+		</ul>	
+	</div>
+
+</template>
