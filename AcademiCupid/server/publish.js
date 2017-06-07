@@ -1,9 +1,14 @@
 Meteor.publish('User', function(){
-	return User.find({owner: this.userId});
+	return User.find({});
 });
 
 Meteor.publish('Events', function(){
-	return Events.find({owner: this.userId});
+	return Events.find({
+		$or: [
+			{owner: this.userId},
+		    { participants: { $in: [ this.userId ] } }
+		  ]
+	});
 });
 
 Meteor.publish('singleEvent', function(id) {
