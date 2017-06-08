@@ -17,17 +17,19 @@ Skills = new SimpleSchema({
 
 UserSchema = new SimpleSchema({
 	name:{
-		type: String
+		type: String,
+    optional: true
 	},
 	skills:{
-		type: [Skills]
+		type: [Skills],
+    optional: true
 	},
 	owner:{
 		type: String,
 		label: "Owner",
-		autoValue: function() {
- 			return this.userId //gives a default value for this field
-		},
+		// autoValue: function() {
+ 	// 		return this.userId //gives a default value for this field
+		// },
 		autoform: {
  			type: "hidden" //This makes this field hidden from view. Hence it will not appear on our form.
 		}

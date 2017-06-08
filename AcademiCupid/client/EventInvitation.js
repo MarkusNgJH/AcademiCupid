@@ -1,13 +1,13 @@
 Template.EventInvitation.events ({
 	'submit form': function(event){
-		event.preventDefault();
-		// console.log("Form submitted");
-		// console.log(event.type);
+		event.preventDefault();	
 		var participantName = event.target.participantUsername.value;
-		console.log(participantName);
-		// var participant = User.findOne({name: participantName});
 		var currentEvent = Session.get('currentEvent');
-		console.log(currentEvent);
-		User.update({name: participantName}, {$addToSet: {enrolled : currentEvent}});
+		var user_id = User.findOne({name: participantName})._id;
+		var acct_id = User.findOne({name: participantName}).owner;
+		console.log("user_id " + user_id);
+		console.log("acct_id " + acct_id)
+		User.update(user_id, {$addToSet: {enrolled : currentEvent}});
+		Events.update(currentEvent, {$addToSet: {participants: acct_id}});
 	}
 });
