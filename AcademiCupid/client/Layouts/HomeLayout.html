@@ -1,4 +1,10 @@
 <template name = "HomeLayout">
-	{{> Header}}
-	<h1>This is the login page</h1>
+	<div class="jumbotron">
+		<div class="container-fluid">
+			<div class="row col-lg-10 col-md-10 col-sm-10 col-xs-12">
+				<h1>AcademiCupid</h1>
+			</div>
+		</div>
+	</div>
+	{{> Template.dynamic template=main}}
 </template>
