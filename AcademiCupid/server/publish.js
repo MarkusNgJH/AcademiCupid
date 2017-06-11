@@ -19,3 +19,7 @@ Meteor.publish('singleEvent', function(id) {
 Meteor.publish('Projects', function(){
 	return Projects.find({});
 });
+
+Meteor.publish('userData', function() {
+	return Meteor.users.find();
+});

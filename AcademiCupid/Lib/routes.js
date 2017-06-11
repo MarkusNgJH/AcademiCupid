@@ -16,7 +16,17 @@ FlowRouter.triggers.enter([function(context, redirect){
 FlowRouter.route('/',{
 	name: 'LoginPage',
 	action(){
-		BlazeLayout.render('HomeLayout');
+		if(Meteor.userId()) { //this returns true if the user is logged in
+			FlowRouter.go('EventsPage'); //hence if the user is logged in, redirect him to the recipe-book page (the next section of code below). Otherwise, render the HomeLayout
+		}
+		BlazeLayout.render('HomeLayout', {main: "login"});
+	}
+});
+
+FlowRouter.route('/registration',{
+	name: 'registrationPage',
+	action(){
+		BlazeLayout.render('HomeLayout', {main: "register"});
 	}
 });
 
