@@ -1,7 +1,21 @@
 <template name="EventInvitation">
+	<script type="text/javascript">
+		$('ui dropdown').dropdown();
+		$('#multi-select').dropdown();
+		$('.dropdown').dropdown('refresh');
+	</script>
 	<div class="container">
 		<form>
 			<input type="text" name="participantUsername">
+			<select class="ui fluid search dropdown" id="multi-select" multiple="">
+			{{#each getUsers}}
+				<option value={{_id}}>
+					{{#each emails}}
+						{{address}}
+					{{/each}}
+				</option>
+			{{/each}}
+			</select>
 			<input type="submit" value="submit">	
 		</form>
 	</div>
@@ -10,6 +24,6 @@
 	find this participant using his username -> retrieve userid
 	userid put into the event's "participants" array
 	and must update user's "enrolledin" array
-	-->
+-->
 
 </template>
