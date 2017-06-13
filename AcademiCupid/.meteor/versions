@@ -22,6 +22,7 @@ caching-compiler@1.1.9
 caching-html-compiler@1.1.2
 callback-hook@1.0.10
 check@1.2.5
+cleandersonlobo:sweetalert2@1.2.0
 coffeescript@1.0.17
 datariot:ganalytics@0.2.1
 ddp@1.2.5
@@ -50,6 +51,7 @@ htmljs@1.0.11
 http@1.2.12
 id-map@1.0.9
 jquery@1.11.10
+juliancwirko:postcss@1.2.0
 kadira:blaze-layout@2.3.0
 kadira:flow-router@2.12.1
 launch-screen@1.1.1
@@ -103,6 +105,8 @@ reactive-var@1.0.11
 reload@1.1.11
 retry@1.0.9
 routepolicy@1.0.12
+semantic:ui@2.2.6_5
+semantic:ui-data@2.2.6_4
 service-configuration@1.0.11
 session@1.1.7
 sha@1.0.9
@@ -111,7 +115,6 @@ spacebars@1.0.15
 spacebars-compiler@1.1.2
 spiderable@1.0.13
 srp@1.0.10
-standard-minifier-css@1.3.4
 standard-minifier-js@2.1.0
 stolinski:stylus-multi@1.4.3
 templating@1.3.2
