@@ -33,7 +33,9 @@ Template.Profile.events({
 								 'profile': {
 								 	'firstName': fName,
 								 	'lastName': lName,
-								 	'skills': updatedSkills
+								 	'skills': updatedSkills,
+								 	'enrolled': [],
+								 	'projects': []
 									 }
 
 							 	}
