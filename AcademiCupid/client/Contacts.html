@@ -1,7 +1,27 @@
 <template name="Contacts">
  {{#each getAllUsers}}
-  <div>
-      <h4> {{profile.firstName}}</h4>
+ <div class = "ui massive middle aligned celled list">
+  <div class = "item">
+  		<img class = "ui avatar image" src="/images/download.png">
+  	<div class = "content">
+      <a class="header"> {{profile.firstName}} {{profile.lastName}}</a>
+      <div class="description"> Skills are listed here</div>
+    </div>
+  </div>
   </div>
  {{/each}}
 </template>
+
+<!--
+<div class = "ui piled compact segment">
+  <div class = "ui fluid card">
+  	<div>
+  		<img src="/images/download.png">
+  	</div>
+  	<div class = "content">
+      <a class="header"> {{profile.firstName}}</a>
+    </div>
+  </div>
+  </div>
+
+-->

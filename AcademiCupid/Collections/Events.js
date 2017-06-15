@@ -9,6 +9,12 @@ Events.allow({
 	}
 });
 
+Meteor.users.allow({
+	update:function(userId, doc){
+		return !!userId;
+	}
+});
+
 EventsSchema = new SimpleSchema({
 	name:{
 		type: String
@@ -21,14 +27,18 @@ EventsSchema = new SimpleSchema({
 		autoform: {
    			type: "hidden" //This makes this field hidden from view. Hence it will not appear on our form.
   		},
-		optional: true
+		autoValue: function(){
+			return [];
+		}
 	},
 	projects: {
 		type: [String],
 		autoform: {
    			type: "hidden" //This makes this field hidden from view. Hence it will not appear on our form.
   		},
-		optional: true
+  		autoValue: function(){
+  			return [];
+  		}
 	},
 	owner:{
   		type: String,

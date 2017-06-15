@@ -1,7 +1,3 @@
-Meteor.publish('User', function(){
-	return User.find({});
-});
-
 Meteor.publish('Events', function(){
 	return Events.find({
 		$or: [
@@ -21,5 +17,5 @@ Meteor.publish('Projects', function(){
 });
 
 Meteor.publish('userData', function() {
-	return Meteor.users.find();
+	return Meteor.users.find({});
 });
