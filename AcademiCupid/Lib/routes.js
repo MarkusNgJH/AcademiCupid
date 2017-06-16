@@ -51,6 +51,20 @@ FlowRouter.route('/projectcreation', {
 	}
 });
 
+FlowRouter.route('/project/:id', {
+	name: 'ProjectSingle',
+	action() { // this is what's going to happen when you hit this route
+		BlazeLayout.render('MainLayout', {main: 'ProjectSingle'});
+	}
+});
+
+FlowRouter.route('/projectinvitation/:id', {
+	name: 'ProjectInvitation',
+	action() { // this is what's going to happen when you hit this route
+		BlazeLayout.render('MainLayout', {main: 'ProjectInvitation'});
+	}
+});
+
 FlowRouter.route('/mainpage',{
 	name: 'MainPage',
 	action(){

@@ -1,3 +1,8 @@
+Template.Profile.rendered = function () {
+	$('ui dropdown').dropdown();
+	$('#multi-select').dropdown();
+}
+
 Template.Profile.events({
 	'submit form': function(event) {
 		event.preventDefault();

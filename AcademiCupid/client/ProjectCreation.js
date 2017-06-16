@@ -10,6 +10,7 @@ AutoForm.hooks({
     before: {
       insert: function(doc) {
        doc.belongsToEvent = Session.get('currentEvent');
+       doc.members = [];
        return doc;
       }
     }

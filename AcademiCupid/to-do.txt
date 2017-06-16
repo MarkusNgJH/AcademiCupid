@@ -1,0 +1,7 @@
+event invitation
+project invitation
+projects page
+contacts list (only print participants)
+styling <= split
+milestone 2 (video)
+skill validation

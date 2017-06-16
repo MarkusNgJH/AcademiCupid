@@ -14,6 +14,17 @@ Template.Events.events({
 	}
 });
 
+AutoForm.hooks({
+  insertEventsForm:{
+    before: {
+      insert: function(doc) {
+       doc.participants = [];
+       return doc;
+      }
+    }
+  }
+});
+
 /*
 Template.Recipes.onCreated(function() {
  var self = this; 
