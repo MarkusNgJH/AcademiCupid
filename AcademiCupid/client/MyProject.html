@@ -1,5 +1,7 @@
 <template name="MyProject">
 	<h3>My Project</h3>
 	{{getProject.name}}
-	<!-- <a href="/projectinvitation/{{_id}}">Click here to Project Invitation</a> -->
+	{{#if isProjectOwner}}
+		<a href="/projectinvitation/{{getProject._id}}">Click here to Project Invitation</a>
+	{{/if}}
 </template>

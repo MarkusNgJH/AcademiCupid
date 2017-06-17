@@ -8,3 +8,11 @@ Template.NavBar.events({
 		Session.set('currentEvent', id);
 	}
 });
+
+Template.NavBar.helpers({
+	isEventOwner: function () {
+		var currentEventId = Session.get('currentEvent');
+		var eventOwner = Events.findOne(currentEventId).owner;
+		return eventOwner === Meteor.userId();
+	}
+});

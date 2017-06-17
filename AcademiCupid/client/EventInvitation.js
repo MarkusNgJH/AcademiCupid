@@ -10,35 +10,47 @@ Template.EventInvitation.rendered = function() {
 // 	// document.location.reload(true); //refreshes the page
 // });
 
-
+function isNotDuplicate(str, arr) {
+	for(var i = 0; i < arr.length; i++) {
+		if(str === arr[i]) {
+			return false;
+		}
+	}
+	return true;
+}
 
 Template.EventInvitation.events ({
 	'submit form': function(event){
 		event.preventDefault();
-		var currentEvent = Session.get('currentEvent');
+		var currentEventId = Session.get('currentEvent');
 		var selectedUsers = document.getElementsByClassName("item active filtered");
 		for(var i = 0; i < selectedUsers.length; i++) {
 			var nextUserId = selectedUsers[i].getAttribute("data-value");
 			var originalUser = Meteor.users.findOne(nextUserId);
-			var originalEvent = Events.findOne(currentEvent);
+			var originalEvent = Events.findOne(currentEventId);
 			var enrolledEvents = originalUser.profile.enrolled;
-			console.log("printing enrolledEvents");
 			console.log(enrolledEvents);
-			enrolledEvents.push(currentEvent);
-			console.log("printing enrolledEvents after push");
-			console.log(enrolledEvents);
+			if (isNotDuplicate(currentEventId, enrolledEvents)) {
+				enrolledEvents.push(currentEventId);
+			} else {
+				swal({
+                  title: originalUser.emails[0].address + ' is already enrolled',
+                  text: 'Please try agian',
+                  type: 'error',
+                  showConfirmButton: true
+                });
+			}
 			var eventParticipants = originalEvent.participants;
-			console.log("printing eventParticipants");
 			console.log(eventParticipants);
-			eventParticipants.push(nextUserId);
-			console.log("printing eventParticipants after push");
-			console.log(eventParticipants);
+			if (isNotDuplicate(nextUserId, eventParticipants)) {
+				eventParticipants.push(nextUserId);
+			}
 			//var fName = original.profile.firstName;
 			//var lName =  original.profile.lastName;
 			//var skills = original.profile.skills;
 			//console.log(Events.findOne(currentEvent));
 			Meteor.users.update(nextUserId, {$set: {"profile.enrolled": enrolledEvents}});
-			Events.update(currentEvent, {$set: {"participants": eventParticipants}});
+			Events.update(currentEventId, {$set: {"participants": eventParticipants}});
 		}
 		$('.dropdown').dropdown('clear');
 	}
@@ -46,7 +58,7 @@ Template.EventInvitation.events ({
 
 Template.EventInvitation.helpers ({
 	'getUsers': function() {
-		return Meteor.users.find({});
+		return Meteor.users.find({_id: {$ne: Meteor.userId()}});
 	}
 });
 
