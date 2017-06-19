@@ -1,6 +1,6 @@
 Template.MyProject.helpers({
 	getProject: function () {
-		currentEventId = Session.get('currentEvent');
+		currentEventId = FlowRouter.getParam('eventId');
 		// console.log("user id: " + Meteor.userId());
 		// console.log("currentEventId: " + currentEventId);
 		// return Projects.findOne({belongsToEvent: currentEventId});
@@ -11,8 +11,11 @@ Template.MyProject.helpers({
 			]
 		} );
 	},
+	eventId: function () {
+		 return FlowRouter.getParam('eventId');
+	},
 	isProjectOwner: function () {
-		var currentEventId = Session.get('currentEvent');
+		var currentEventId = FlowRouter.getParam('eventId');
 		var findProject = Projects.findOne( {
 			$and : [
 			{ belongsToEvent: currentEventId },

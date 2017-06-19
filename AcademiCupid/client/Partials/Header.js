@@ -11,11 +11,29 @@
 //     //pass the surname in the options
 
 //     user.profile['surname'] = options.surname	
-
 //     return user
 // }
 
 // https://medium.com/all-about-meteorjs/extending-meteor-users-300a6cb8e17f
+
+// Template.Header.rendered = function () {
+// 	$('.ui.sticky')
+// 	.sticky()
+// 	;
+// }
+
+Template.Header.helpers ({
+	eventSelected: function () {
+		return typeof FlowRouter.getParam('eventId') != 'undefined';
+	},
+	getEvent: function () {
+		var currentEventId = FlowRouter.getParam('eventId');
+		return Events.findOne(currentEventId);
+	},
+	currentUserId: function() {
+		return Meteor.userId();
+	}
+});
 
 Template.EventSingle.onCreated(function() {
  var self = this;

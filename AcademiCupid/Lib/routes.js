@@ -37,28 +37,28 @@ FlowRouter.route('/events', {
 	}
 });
 
-FlowRouter.route('/event/:id', {
+FlowRouter.route('/event=:eventId', {
 	name: 'EventSingle',
 	action() { // this is what's going to happen when you hit this route
 		BlazeLayout.render('MainLayout', {main: 'EventSingle'});
 	}
 });
 
-FlowRouter.route('/projectcreation', {
+FlowRouter.route('/event=:eventId/projectcreation', {
 	name: 'ProjectCreation',
 	action() { // this is what's going to happen when you hit this route
 		BlazeLayout.render('MainLayout', {main: 'ProjectCreation'});
 	}
 });
 
-FlowRouter.route('/project/:id', {
+FlowRouter.route('/event=:eventId/project=:projectId', {
 	name: 'ProjectSingle',
-	action() { // this is what's going to happen when you hit this route
+	action() {
 		BlazeLayout.render('MainLayout', {main: 'ProjectSingle'});
 	}
 });
 
-FlowRouter.route('/projectinvitation/:id', {
+FlowRouter.route('/event=:eventId/project=:projectId/projectinvitation', {
 	name: 'ProjectInvitation',
 	action() { // this is what's going to happen when you hit this route
 		BlazeLayout.render('MainLayout', {main: 'ProjectInvitation'});
@@ -72,14 +72,14 @@ FlowRouter.route('/mainpage',{
 	}
 });
 
-FlowRouter.route('/eventinvitation', {
+FlowRouter.route('/event=:eventId/eventinvitation', {
 	name: 'EventInvitation',
 	action() { // this is what's going to happen when you hit this route
 		BlazeLayout.render('MainLayout', {main: 'EventInvitation'});
 	}
 });
 
-FlowRouter.route('/profile',{
+FlowRouter.route('/profile=:userId',{
 	name: 'ProfilePage',
 	action(){
 		BlazeLayout.render('MainLayout', {main: "Profile"});

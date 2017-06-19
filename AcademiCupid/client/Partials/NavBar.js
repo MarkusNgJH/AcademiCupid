@@ -11,8 +11,11 @@ Template.NavBar.events({
 
 Template.NavBar.helpers({
 	isEventOwner: function () {
-		var currentEventId = Session.get('currentEvent');
+		var currentEventId = FlowRouter.getParam('eventId');
 		var eventOwner = Events.findOne(currentEventId).owner;
 		return eventOwner === Meteor.userId();
+	},
+	eventId: function () {
+		return FlowRouter.getParam('eventId');
 	}
 });

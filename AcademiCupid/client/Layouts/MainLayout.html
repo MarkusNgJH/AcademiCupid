@@ -1,22 +1,21 @@
 <template name ="MainLayout">
-<head><title> AcademiCupid </title></head>
-	{{> Header}}
-	<div class="container" style="border:solid">
-		<div class="row" style="text-align:center">
-			<span>
-				<i class="glyphicon glyphicon-apple"></i>
-			</span>
-			<span style="font-size:20px">
-				This is the main layout
-			</span>
-			<span>
-				<i class="glyphicon glyphicon-apple"></i>
-			</span>
-		</div>
-	</div>
-	
-	<main>
-		{{> Template.dynamic template=main}}
-	</main>
-
+	<!-- <div class="ui segment"> -->
+		<!-- <div class="ui sticky"> -->
+			{{> Header}}	
+		<!-- </div> -->
+		<!-- <div class="ui active tab"> -->
+			<div class="container" style="border:solid">
+				<div class="row" style="text-align:center">
+					<span><i class="glyphicon glyphicon-apple"></i></span>
+					<span style="font-size:20px">This is the main layout</span>
+					<span><i class="glyphicon glyphicon-apple"></i></span>
+				</div>
+			</div>
+			<main>
+				{{> Template.dynamic template=main}}
+			</main>
+		<!-- </div> -->
+	<!-- </div> -->
 </template>
+
+<!-- style="left: 459.5px; width: 670px !important; height: 43px !important;" -->

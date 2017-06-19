@@ -53,12 +53,20 @@ Template.EventInvitation.events ({
 			Events.update(currentEventId, {$set: {"participants": eventParticipants}});
 		}
 		$('.dropdown').dropdown('clear');
+		swal({
+            title: 'Successfully added participants!',
+            type: 'success',
+            showConfirmButton: true
+        });
 	}
 });
 
 Template.EventInvitation.helpers ({
 	'getUsers': function() {
 		return Meteor.users.find({_id: {$ne: Meteor.userId()}});
+	},
+	'eventId': function() {
+		return FlowRouter.getParam('eventId');
 	}
 });
 

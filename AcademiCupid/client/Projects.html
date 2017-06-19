@@ -1,7 +1,7 @@
 <template name="Projects">
 	{{#each getProjects}}
-		<div class="list-group">
-		  <a href="/project/{{_id}}" class="list-group-item">
+		<div class="list-group">	
+		  <a href="/event={{getEventId}}/project={{_id}}" class="list-group-item">
 		    <h4 class="list-group-item-heading">{{name}}</h4>
 		    {{#each reqSkills}}
 		    	<p class="list-group-item-text">{{name}}</p>

@@ -1,7 +1,18 @@
 <template name="MyProject">
-	<h3>My Project</h3>
-	{{getProject.name}}
-	{{#if isProjectOwner}}
-		<a href="/projectinvitation/{{getProject._id}}">Click here to Project Invitation</a>
-	{{/if}}
+	<div class="container">
+		<div class="row">
+			<h3>My Project:</h3>	
+		</div>
+		<div class="row">
+			{{#if isProjectOwner}}
+				<h4><strong>{{getProject.name}}</strong></h4>
+				<a href="/event={{eventId}}/project={{getProject._id}}/projectinvitation">Click here to Project Invitation</a>
+			{{else}}
+				<h4>You do not currently have a project.</h4>
+			{{/if}}	
+		</div>
+		<div class="row">
+			<br>
+		</div>
+	</div>
 </template>

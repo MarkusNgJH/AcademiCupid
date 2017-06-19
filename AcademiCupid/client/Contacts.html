@@ -1,22 +1,29 @@
 <template name="Contacts">
   {{#each getParticipants}}
-    <div class="ui middle aligned celled list">
-      <div class="item">
-        <img class="ui avatar image" src="/images/download.png">
-        <div class="content">
-          <a class="header"> {{profile.firstName}} {{profile.lastName}}</a>
-          {{#each profile.skills}}
-          <div class="description">
-            {{name}}
+    <a href="/profile={{_id}}">
+      <div class="ui middle aligned celled list">
+        <div class="item">
+          <img class="ui avatar image" src="/images/download.png">
+          <div class="content">
+            <h6 class="header"> {{profile.firstName}} {{profile.lastName}}</h6>
+            <a class="header">
+              {{#each emails}}
+                {{address}}
+              {{/each}}
+            </a>
+            {{#each profile.skills}}
+            <div class="description">
+              {{name}}
+            </div>
+            {{else}}
+            <div class="description">
+              No skill to display
+            </div>
+            {{/each}}
           </div>
-          {{else}}
-          <div class="description">
-            No skill to display
-          </div>
-          {{/each}}
         </div>
       </div>
-    </div>
+    </a>
   {{/each}}
 </template>
 

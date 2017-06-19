@@ -1,21 +1,31 @@
 <template name = "Header">
 	<div class="jumbotron">
 		<div class="container-fluid">
-			<div class="row col-lg-10 col-md-10 col-sm-10 col-xs-12">
-				<h1><a href="/events">AcademiCupid</a></h1>
-				<h4>{{$.Session.get 'currentEvent'}}</h4>
-			</div>
-			<div class="row col-lg-2 col-md-2 col-sm-2 col-xs-12">
+			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
 				<div class="row">
+					<a href="/events"><h1>AcademiCupid</h1></a>	
+				</div>
+				{{#if eventSelected}}
+					<div class="row">
+						<h4>Current Event: {{getEvent.name}}</h4>
+					</div>
+					<div class="row">
+						<h5>Event Coordinator: {{getEvent.owner}}</h5>
+					</div>
+				{{/if}}
+			</div>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+				<div>
 					{{> loginButtons}}	
 				</div>
-				<div class="row">
+				<div>
 					<br>
 				</div>
-				<div class="row">
-					<a class="btn btn-default" href="/profile" role="button">My Profile</a>
+				<div>
+					<a class="btn btn-default" href="/profile={{currentUserId}}" role="button">My Profile</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
+

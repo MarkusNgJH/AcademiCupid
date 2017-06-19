@@ -1,6 +1,9 @@
 Template.Projects.helpers({
+	getEventId: function () {
+		return FlowRouter.getParam('eventId');
+	},
 	getProjects: function() {
-		var eventId = Session.get('currentEvent');
+		var eventId = FlowRouter.getParam('eventId');
 		return Projects.find({belongsToEvent: eventId});
 	}
 });

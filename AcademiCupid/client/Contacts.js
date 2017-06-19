@@ -1,6 +1,6 @@
 Template.Contacts.helpers ({
 	'getParticipants': function() {
-		var currentEventId = Session.get('currentEvent');
+		var currentEventId = FlowRouter.getParam('eventId');
 		var currentEvent = Events.findOne(currentEventId);
 		// console.log("currentEvent: " + currentEvent);
 		var eventParticipantsId = currentEvent.participants;

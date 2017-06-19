@@ -3,6 +3,13 @@ Template.Profile.rendered = function () {
 	$('#multi-select').dropdown();
 }
 
+Template.Profile.helpers({
+	getUser: function () {
+		selectedUserId = FlowRouter.getParam('userId');
+		return Meteor.users.findOne(selectedUserId);
+	}
+});
+
 Template.Profile.events({
 	'submit form': function(event) {
 		event.preventDefault();
