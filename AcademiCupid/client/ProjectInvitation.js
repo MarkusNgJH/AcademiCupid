@@ -7,7 +7,7 @@ Template.ProjectInvitation.rendered = function() {
 Template.ProjectInvitation.events ({
 	'submit form': function(event){
 		event.preventDefault();
-		var projectId = FlowRouter.getParam('id');
+		var projectId = FlowRouter.getParam('projectId');
 		var currentProject = Projects.findOne(projectId);
 		var selectedUsersId = document.getElementsByClassName("item active filtered");
 		for(var i = 0; i < selectedUsersId.length; i++) {
@@ -27,8 +27,15 @@ Template.ProjectInvitation.events ({
 });
 
 Template.ProjectInvitation.helpers ({
+	'getEventId': function() {
+		return FlowRouter.getParam('eventId');
+	}, 
+	'getProject': function () {
+		var currentProjectId = FlowRouter.getParam('projectId');
+		return Projects.findOne(currentProjectId);
+	},
 	'getParticipants': function() {
-		var currentEventId = Session.get('currentEvent');
+		var currentEventId = FlowRouter.getParam('eventId');
 		var currentEvent = Events.findOne(currentEventId);
 		// console.log("currentEvent: " + currentEvent);
 		var eventParticipantsId = currentEvent.participants;

@@ -1,5 +1,10 @@
 <template name="ProjectInvitation">
-	<h1>This is Project Invitation template</h1>
+	<div class="container">
+		<a href="/event={{getEventId}}" class="btn btn-primary">Back to Main Page</a>
+	</div>
+	<div class="container">
+		<h1>Project Invitation for {{getProject.name}}</h1>	
+	</div>
 	<div class="container">
 		<form>
 			<input type="text" name="participantUsername">

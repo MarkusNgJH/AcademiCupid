@@ -4,7 +4,7 @@ Projects.allow({
 	insert: function(userId, doc){
 		return !!userId;
 	},
-	update:function(userId,doc){
+	update: function(userId,doc){
 		return !!userId;
 	}
 });
@@ -29,26 +29,30 @@ ProjectsSchema = new SimpleSchema({
 		type: String,
 		label: "Owner",
 		autoValue: function() {
- 			return this.userId
+			return this.userId
 		},
 		autoform: {
- 			type: "hidden" 
+			type: "hidden" 
 		}
 	},
-  members: {
-    type: [String],
-    optional: true,
-    autoform: {
- 			type: "hidden" 
+	members: {
+		type: [String],
+		optional: true,
+		autoform: {
+			type: "hidden" 
+		}
+	},
+	belongsToEvent: {
+		type: String,
+		optional:true,
+		autoform: {
+			type: "hidden"
+		}
+	},
+	description: {
+		type: String,
+		optional: true
 	}
-  },
-  belongsToEvent: {
-  	type: String,
-    optional:true,
-    autoform: {
-    	type: "hidden"
-	}
-  }
 });
 
 Projects.attachSchema(ProjectsSchema);
