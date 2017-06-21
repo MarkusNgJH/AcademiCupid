@@ -1,3 +1,4 @@
+
 Template.ProjectSingle.onCreated(function() {
     Session.set('editMode', false);
 });
@@ -32,5 +33,14 @@ Template.ProjectSingle.events({
 	'click .toggle-edit': function() {
 		console.log(Session.get('editMode'));
 		Session.set('editMode', !Session.get('editMode'));
+	},
+	'click .validate-skill': function() {
+		console.log("skill validated");
+	},
+	'mouseenter .hover-animate':function(){
+    	$('.hover-animate').mouseenter(function(){
+        $(this).transition({animation: 'pulse', duration: 200});
+});
+		console.log("hover");
 	}
 });
