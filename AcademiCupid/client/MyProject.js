@@ -24,5 +24,16 @@ Template.MyProject.helpers({
 		} );
 		console.log(findProject);
 		return findProject != null;
+	},
+	isMember: function () {
+		var currentEventId = FlowRouter.getParam('eventId');
+		var findProject = Projects.findOne( {
+			$and : [
+			{ belongsToEvent: currentEventId },
+			{ owner: Meteor.userId() }
+			]
+		} );
+		console.log(findProject);
+		return findProject != null;
 	}
 });
