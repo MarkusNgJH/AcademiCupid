@@ -11,10 +11,6 @@ Template.Profile.helpers({
 });
 
 Template.Profile.events({
-	// 'mouseenter .content': function() {
-	// 	console.log("hello");
-	// 	console.log(this);
-	// },
 	'submit form': function(event) {
 		event.preventDefault();
 		function userSkills(skillName, ownerId) {

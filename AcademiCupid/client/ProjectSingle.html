@@ -1,77 +1,83 @@
 <template name="ProjectSingle">
-	<div class="container">
-		<a href="/event={{getEventId}}" class="ui orange labeled icon button">
-		<i class = "angle double left icon"></i>
-		Back to Main Page
-		</a>
-	</div>
-	{{#if editMode}}
-		<div class="container">
+	<div class = "ui grid">
+		<div class="ui row">
+			<a href="/event={{getEventId}}" class="ui orange labeled icon button">
+				<i class = "angle double left icon"></i>
+				Back to Main Page
+			</a>
+		</div>
+		{{#if editMode}}
+		<div class="ui row">
 			{{> quickForm collection="Projects" id=getProjectId type="update" doc=getProject autosave=true}}
 			<button class="ui orange labeled icon button toggle-edit">
-			<i class = "compress icon"></i>
-			Click to close
+				<i class = "compress icon"></i>
+				Click to close
 			</button>
 		</div>
-	{{else}}
-		<div class="container">
-			 <button class="ui teal labeled icon button toggle-edit">
-			 <i class = "write icon"></i>
-			 Click to edit project
-			 </button>
+		{{else}}
+		<div class="ui row">
+			<button class="ui teal labeled icon button toggle-edit">
+				<i class = "write icon"></i>
+				Click to edit project
+			</button>
 		</div>
 		<br><br><br>
 		<div class = "ui two column stackable grid container">
-		<div class = "four wide column">
-		<h1 class="ui center aligned icon header">
-			<i class = "circular users icon"> </i>
-			{{getProject.name}}	
-		</h1>
-		<div class="ui center aligned container">
-			<h2 class = "ui horizontal divider header">Skills sought after</h2>
-			<div class = "ui very relaxed huge celled list">
-				
-				{{#each getProject.reqSkills}}
-				<a class = "item validate-skill">
-					<i class = "medium check circle icon"></i>
-					<div class = "content">
-					<div class = "header">{{name}}</div>
-					</div>
-				</a>
-				{{/each}}
-				
-			</div>
-		</div>
-		</div>
-		<div class = "twelve wide column">
-		<h2 class = "ui center aligned header">Current Members</h2>
-		<div class = "ui center aligned container">
-		<div class="ui huge horizontal divided relaxed animated list">
-			{{#each getProjectMembers}}
-				<div class = "ui linked item hover-animate" >
-					<a href="/profile={{_id}}">
-					<img class = "ui tiny avatar image" src="/images/download.png">
-						<div class = "content">
-						<li>
-							<div id = "name" class = "header">
-								{{profile.firstName}}&nbsp;{{profile.lastName}}
+			<div class = "four wide equal height column">
+				<h1 class="ui center aligned icon header">
+					<i class = "circular users icon"> </i>
+					{{getProject.name}}	
+				</h1>
+				<div class="ui center aligned container">
+					<h2 class = "ui horizontal divider header">Skills sought after</h2>
+					<div class = "ui very relaxed huge celled list">
+
+						{{#each getProject.reqSkills}}
+						<a class = "item validate-skill">
+							<i class = "medium check circle icon"></i>
+							<div class = "content">
+								<div class = "header">{{name}}</div>
 							</div>
-								<br>
-							<div>
-								{{#each emails}}
-									{{address}}
-								{{/each}}
-							</div>
-						</li>
-						</div>
 						</a>
+						{{/each}}
+
 					</div>
-				{{/each}}
-				<br><br><br>
-				<div class = "row"> {{getProject.description}} </div>
+				</div>
 			</div>
-		</div>
-		</div>
+			<div class = "eleven wide stretched column">
+				<h2 class = "ui center aligned header">Current Members</h2>
+				<div class = "ui center aligned container">
+					<div class="ui huge horizontal divided relaxed animated list">
+						{{#each getProjectMembers}}
+						<div class = "ui linked item hover-animate" >
+							<a href="/profile={{_id}}">
+								<img class = "ui tiny avatar image" src="/images/download.png">
+								<div class = "content">
+									<li>
+										<div id = "name" class = "header">
+											{{profile.firstName}}&nbsp;{{profile.lastName}}
+										</div>
+										<br>
+										<div>
+											{{#each emails}}
+											{{address}}
+											{{/each}}
+										</div>
+									</li>
+								</div>
+							</a>
+						</div>
+						{{/each}}
+						<br><br><br>
+						<div class = "row"> 
+							<div class = "ui text container">
+								{{getProject.description}} 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	{{/if}}
+	</div>
 </template>

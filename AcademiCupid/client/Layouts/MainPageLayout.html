@@ -1,32 +1,28 @@
 <template name="MainPageLayout">
-	{{> Slider}}
-	{{> NavBar}}
-	<div class="container">
-		<h2>This is main page template</h2>
-	</div>
-	<div class="container col-lg-2 col-md-2 col-sm-2 col-sm-2" style="overflow:scroll; height:500px">
+	<div class = "ui two column grid tight">
+	<div class="ui three wide column" style="overflow:scroll;">
 		<h2>Contacts</h2>
 		{{> Contacts}}
 	</div>
-	<div class="container col-lg-9 col-md-9 col-sm-9 col-sm-9" style="padding:20px;overflow:scroll; height:500px">
-		<div class="row">
+	<div class="ui thirteen wide column" style="overflow:scroll;">
+		<div class = "ui grid">
+
 			{{> MyProject}}
-		</div>
-		<div class="row">
-			<h2 class = "ui horizontal divider header">
-				<i class="spinner icon"></i>
-			Project Exchange
+
+			<div class = "ui center aligned container">
+			<h2 class="ui horizontal divider header">
+  				<i class="spinner icon"></i>
+  					
+  					Project Exchange
+  			
 			</h2>
-		</div>
-		<div class="row">
 			{{> Projects}}
-		</div>		
+			</div>
+
 	</div>
-	<div class="container col-lg-12 col-md-12 col-sm-12 col-sm-12">
-		<div class="row">
-			<br>		
-		</div>
 	</div>
+	</div>
+
 </template>
 <!--
 <div class="list-group">

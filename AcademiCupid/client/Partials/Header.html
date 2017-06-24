@@ -1,31 +1,33 @@
 <template name = "Header">
-	<div class="container col-lg-12" style="background-color: grey;">
-		<div class="container-fluid">
-			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-				<div class="row">
-					<a href="/events"><h1>AcademiCupid</h1></a>	
-				</div>
-				{{#if eventSelected}}
-					<div class="row">
-						<h4>Current Event: {{getEvent.name}}</h4>
-					</div>
-					<div class="row">
-						<h5>Event Coordinator: {{getEvent.owner}}</h5>
-					</div>
-				{{/if}}
-			</div>
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-				<div>
-					{{> loginButtons}}	
-				</div>
-				<div>
-					<br>
-				</div>
-				<div>
-					<a class="btn btn-default" href="/profile={{currentUserId}}" role="button">My Profile</a>
-				</div>
-			</div>
+	<div class = "one wide column">
+	</div> 
+
+	<div class="thirteen wide column">
+		<div class="row">
+			<a href="/events">
+			<h1 class = "ui header">AcademiCupid</h1>
+			</a>	
+		</div>
+		{{#if eventSelected}}
+		<div class="row">
+			<h4>Current Event: {{getEvent.name}}</h4>
+		</div>
+		<div class="row">
+			<h5>Event Coordinator: {{getEvent.owner}}</h5>
+		</div>
+		{{/if}}
+	</div>
+	<div class="two wide column">
+		<div>
+			{{> loginButtons}}	
+		</div>
+		<div>
+			<br>
+		</div>
+		<div>
+			<a class="btn btn-default" href="/profile={{currentUserId}}" role="button">My Profile</a>
 		</div>
 	</div>
+
 </template>
 

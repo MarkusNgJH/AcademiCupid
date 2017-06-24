@@ -1,39 +1,39 @@
 <template name="Projects">
 	<div class="ui divided items">	
-	{{#each getProjects}}
-			<div class="item">
-		  		<div class="ui tiny image">
-		  			<img src="/images/project.png">
-		  		</div>
-		  	<div class = content>
-		    <a class="ui small header"> {{name}} </a>
-		    <br>
-		    <div class = "ui horizontal list">
-		    	{{#each reqSkills}}
-		    		<div class="ui label">{{name}}</div>
-		    	{{/each}}
-		    </div>
-		    <div class="description">
-		    	<div class="container">
-		    	<p>{{description}}</p>
-		    	</div>
-		    </div>
-		    <br>
-		    <div class="extra">
-		    	<a href="/event={{getEventId}}/project={{_id}}" class="ui button">
-          			Visit Project
-          		<i class="right chevron icon"></i>
-        	</a>
+		{{#each getProjects}}
+		<div class="item">
+			<div class="ui tiny image">
+				<img src="/images/project.png">
 			</div>
-		    </div>	
-		    <br>
+			<div class = content>
+				<a class="ui small header"> {{name}} </a>
+				<br>
+				<div class = "ui horizontal list">
+					{{#each reqSkills}}
+					<div class="ui label">{{name}}</div>
+					{{/each}}
+				</div>
+				<div class="description">
+					<div class="ui text container">
+						{{description}}
+					</div>
+				</div>
+				<br>
+				<div class="extra">
+					<a href="/event={{getEventId}}/project={{_id}}" class="ui button">
+						Visit Project
+						<i class="right chevron icon"></i>
+					</a>
+				</div>
+			</div>	
+			<br>
 
-			</div>
-	{{else}}
+		</div>
+		{{else}}
 		<div class="container">
 			<h3>This event has no project.</h3>
 		</div>
-	{{/each}}
+		{{/each}}
 	</div>
 </template>
 
