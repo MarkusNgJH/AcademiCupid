@@ -1,21 +1,39 @@
 <template name ="MainLayout">
 	<!-- <div class="ui segment"> -->
-		<!-- <div class="ui sticky"> -->
-			{{> Header}}	
-		<!-- </div> -->
-		<!-- <div class="ui active tab"> -->
-			<div class="container" style="border:solid">
-				<div class="row" style="text-align:center">
-					<span><i class="glyphicon glyphicon-apple"></i></span>
-					<span style="font-size:20px">This is the main layout</span>
-					<span><i class="glyphicon glyphicon-apple"></i></span>
-				</div>
+	<!-- <div class="ui sticky"> -->
+	{{> Header}}	
+	<!-- </div> -->
+	<!-- <div class="ui active tab"> -->
+	<div class="ui grid">
+		<div class="three wide column" style="background-color: grey;">
+			<div class="ui vertical menu">
+				<a class="active item">
+					Home
+				</a>
+				<a class="item">
+					Messages
+				</a>
+				<a class="item">
+					Friends
+				</a>
 			</div>
+		</div>	
+
+	<!-- <div class="container" style="border:solid">
+		<div class="row" style="text-align:center">
+			<span><i class="glyphicon glyphicon-apple"></i></span>
+			<span style="font-size:20px">This is the main layout</span>
+			<span><i class="glyphicon glyphicon-apple"></i></span>
+		</div>
+	</div> -->
+		<div class="thirteen wide column">
 			<main>
 				{{> Template.dynamic template=main}}
-			</main>
-		<!-- </div> -->
-	<!-- </div> -->
+			</main>	
+		</div>
+	</div>
+<!-- </div> -->
+<!-- </div> -->
 </template>
 
 <!-- style="left: 459.5px; width: 670px !important; height: 43px !important;" -->

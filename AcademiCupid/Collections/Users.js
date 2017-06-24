@@ -21,8 +21,8 @@ UserSchema = new SimpleSchema({
     optional: true
 	},
 	skills:{
-		type: [Skills],
-    optional: true
+		type: [String],
+    	optional: true
 	},
 	owner:{
 		type: String,
@@ -47,7 +47,16 @@ UserSchema = new SimpleSchema({
  			type: "hidden"
 		},
 		optional:true
-	}
+	}//,
+	// tags: {
+	//     type: Array,
+	//     autoform: {
+	//       type: 'select2',
+	//       afFieldInput: {
+	//         multiple: true
+	//       }
+	//     }
+	// }
 });
 
 User.attachSchema(UserSchema);
