@@ -1,26 +1,27 @@
 <template name="MainPageLayout">
 	<div class = "ui two column grid tight">
-	<div class="ui three wide column" style="overflow:scroll;">
-		<h2>Contacts</h2>
-		{{> Contacts}}
-	</div>
-	<div class="ui thirteen wide column" style="overflow:scroll;">
-		<div class = "ui grid">
 
-			{{> MyProject}}
+		<div class="ui thirteen wide column" style="overflow:scroll;">
+			<div class = "ui grid">
 
-			<div class = "ui center aligned container">
-			<h2 class="ui horizontal divider header">
-  				<i class="spinner icon"></i>
-  					
-  					Project Exchange
-  			
-			</h2>
-			{{> Projects}}
+				{{> MyProject}}
+
+				<div class = "ui center aligned container">
+					<h2 class="ui horizontal divider header">
+						<i class="spinner icon"></i>
+
+						Project Exchange
+
+					</h2>
+					{{> Projects}}
+				</div>
+
 			</div>
-
-	</div>
-	</div>
+		</div>
+		<div class="ui three wide column" style="overflow:scroll;">
+			<h2>Contacts</h2>
+			{{> Contacts}}
+		</div>
 	</div>
 
 </template>
