@@ -1,13 +1,13 @@
 <template name="ProjectSingle">
 	<div class = "ui grid">
-		<div class="ui row">
+		<div class="ui row container">
 			<a href="/event={{getEventId}}" class="ui orange labeled icon button">
 				<i class = "angle double left icon"></i>
 				Back to Main Page
 			</a>
 		</div>
 		{{#if editMode}}
-		<div class="ui row">
+		<div class="ui row container">
 			{{> quickForm collection="Projects" id=getProjectId type="update" doc=getProject autosave=true}}
 			<button class="ui orange labeled icon button toggle-edit">
 				<i class = "compress icon"></i>
@@ -15,7 +15,7 @@
 			</button>
 		</div>
 		{{else}}
-		<div class="ui row">
+		<div class="ui row container">
 			<button class="ui teal labeled icon button toggle-edit">
 				<i class = "write icon"></i>
 				Click to edit project
