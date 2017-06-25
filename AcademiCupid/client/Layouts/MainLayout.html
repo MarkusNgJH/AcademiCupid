@@ -1,33 +1,18 @@
 <template name ="MainLayout">
-	<!-- <div class="ui segment"> -->
-	<!-- <div class="ui sticky"> -->
-	<div class = "ui grid">
-		<div class = "black row">
-			{{> Header}}	
-		</div>
-		<!-- </div> -->
-		<!-- <div class="ui active tab"> -->
-		<div class = "row"></div>
-		<div class="ui grid">
-					<div class="ui grey inverted vertical menu">
-						<a href = "/events" class="active red item">
-							Home
-						</a>
-						<a href = "/profile=:" class="item">
-							Profile
-						</a>
-						<a class="item">
-							Friends
-						</a>
-					</div>
-				
-				<div class="fourteen wide left floated column">
-					{{> Template.dynamic template=main}}
-				</div>
+	<div class = "ui centered grid">
+		<div class="row">
+			<div class="sixteen wide column">
+				{{> Header}}		
 			</div>
-			<!-- </div> -->
-		
+		</div>
+		<div class="row">
+			<div class="two wide black column">				
+				{{> NavBar}}					
+			</div>
+			<div class="fourteen wide column">
+				{{> Template.dynamic template=main}}
+			</div>				
+		</div>
 	</div>
 </template>
 
-<!-- style="left: 459.5px; width: 670px !important; height: 43px !important;" -->

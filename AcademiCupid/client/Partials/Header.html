@@ -1,33 +1,33 @@
 <template name = "Header">
-	<div class = "one wide column">
-	</div> 
-
-	<div class="thirteen wide column">
-		<div class="row">
-			<a href="/events">
-			<h1 class = "ui blue huge header">AcademiCupid</h1>
-			</a>	
+	<div class="ui grid" style="background-color:#212A42;height:200px;padding:40px 50px 0px 50px;">
+		<div class="thirteen wide column">
+			<div class="row">
+				<a href="/events">
+					<h1 class = "ui orange header" style="font-size:5rem">AcademiCupid</h1>
+				</a>	
+			</div>
+			{{#if eventSelected}}
+			<div class="ui sizer vertical segment">
+				<div class="row">
+					<h4 class="ui medium teal header">Current Event: {{getEvent.name}}</h4>
+				</div>
+				<div class="row">
+					<h4 class="ui medium teal header">Event Coordinator: {{getEvent.owner}}</h4>
+				</div>
+			</div>
+			{{/if}}
 		</div>
-		{{#if eventSelected}}
-		<div class="row">
-			<h4>Current Event: {{getEvent.name}}</h4>
+		<div class="right aligned three wide column">
+			<div>
+				{{> loginButtons}}	
+			</div>
+			<div>
+				<br>
+			</div>
+			<div>
+				<a class="btn btn-default" href="/profile={{currentUserId}}" role="button">My Profile</a>
+			</div>
 		</div>
-		<div class="row">
-			<h5>Event Coordinator: {{getEvent.owner}}</h5>
-		</div>
-		{{/if}}
-	</div>
-	<div class="two wide column">
-		<div>
-			{{> loginButtons}}	
-		</div>
-		<div>
-			<br>
-		</div>
-		<div>
-			<a class="btn btn-default" href="/profile={{currentUserId}}" role="button">My Profile</a>
-		</div>
-	</div>
-
+	</div>		
 </template>
 

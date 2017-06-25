@@ -1,8 +1,7 @@
 <template name="MainPageLayout">
-	<div class = "ui two column grid tight">
+	<div class = "ui fluid grid">
 
-		<div class="ui thirteen wide column" style="overflow:scroll;">
-			<div class = "ui grid">
+		<div class="ui thirteen wide column" style="overflow-y: scroll;overflow-x:hidden;height:1000px">
 
 				{{> MyProject}}
 
@@ -16,9 +15,8 @@
 					{{> Projects}}
 				</div>
 
-			</div>
 		</div>
-		<div class="ui three wide column" style="overflow:scroll;">
+		<div class="ui three wide column" style="overflow-y: scroll;overflow-x:hidden;height:1000px">
 			<h2>Contacts</h2>
 			{{> Contacts}}
 		</div>
