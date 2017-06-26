@@ -1,16 +1,30 @@
 <template name="NavBar">
-	<div id="NavMenu" class="ui vertical labeled icon inverted menu">
+	<div id="NavMenu" class="ui fluid vertical labeled icon inverted menu">
 	  <a class="item" href="/profile={{currentUserId}}">
 	    <i class="user icon"></i>
 	    My Profile
 	  </a>
 	  <a class="item" href="/events">
-	    <i class="video camera icon"></i>
+	    <i class="university icon"></i>
 	    My Events
 	  </a>
-	  <a class="item">
-	    <i class="video play icon"></i>
-	    Videos
+	  <a class="item" href="/profile={{currentUserId}}/myprojects">
+	    <i class="file text outline icon"></i>
+	    My Projects
 	  </a>
+	  {{#if selectedEvent}}
+		  <a class="item" href="/event={{eventId}}/projectcreation">
+		    <i class="add circle icon"></i>
+		    Create Project
+		  </a>
+		  {{#if isEventOwner}}
+			  <a class="item" href="/event={{eventId}}/eventinvitation">
+			    <i class="add user icon"></i>
+			    Event Invitation
+			  </a>
+		  {{/if}}
+	  {{/if}}
+	  
+	  
 	</div>
 </template>

@@ -18,6 +18,9 @@ Template.login.events({
             }
         });
         return false;
+    },
+    'click #register-button': function() {
+        $('.ui.modal').modal('show');
     }
 });
 

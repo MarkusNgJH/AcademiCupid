@@ -2,12 +2,14 @@
 	<div class="ui container">
 		<div class="row">
 			{{#if getProject}}
-				<h3 class="ui block header">Enrolled Project: {{getProject.name}}</h3>
-				{{#if isProjectOwner}}	
-				<a href="/event={{eventId}}/project={{getProject._id}}/projectinvitation">
-					<button class="ui teal button">Invite Someone?</button>
-					</a>
-				{{/if}}
+				<h3 class="ui block header">
+					Enrolled Project: {{getProject.name}}
+					{{#if isProjectOwner}}	
+						<a href="/event={{eventId}}/project={{getProject._id}}/projectinvitation">
+							&nbsp;&nbsp;&nbsp;&nbsp;<button class="ui teal button">Invite Someone?</button>
+						</a>
+					{{/if}}
+				</h3>
 			{{else}}
 				<h3 class="ui block header">You currently have no project</h3>
 			{{/if}}	

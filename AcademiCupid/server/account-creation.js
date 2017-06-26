@@ -8,6 +8,7 @@ Accounts.onCreateUser(function(options, user) {
     user.profile.skills = options.skills;
     user.profile.enrolled = [];
     user.profile.projects = [];
+    user.profile.description = null;
 
     // Basic Prof Picture Setup
     user.profile.profPicture = Meteor.absoluteUrl() + "img/default/user.jpg";

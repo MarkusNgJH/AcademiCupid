@@ -58,6 +58,13 @@ FlowRouter.route('/event=:eventId/project=:projectId', {
 	}
 });
 
+FlowRouter.route('/profile=:userId/myprojects', {
+	name: 'MyProjects',
+	action() {
+		BlazeLayout.render('MainLayout', {main: 'MyProjects'});
+	}
+});
+
 FlowRouter.route('/event=:eventId/project=:projectId/projectinvitation', {
 	name: 'ProjectInvitation',
 	action() { // this is what's going to happen when you hit this route

@@ -30,6 +30,12 @@ Template.Header.helpers ({
 		var currentEventId = FlowRouter.getParam('eventId');
 		return Events.findOne(currentEventId);
 	},
+	getEventOwnerName: function() {
+		var currentEventId = FlowRouter.getParam('eventId');
+		var eventOwnerId = Events.findOne(currentEventId).owner;
+		var eventOwner = Meteor.users.findOne(eventOwnerId)
+		return eventOwner.profile.firstName + " " + eventOwner.profile.lastName;
+	},
 	currentUserId: function() {
 		return Meteor.userId();
 	}

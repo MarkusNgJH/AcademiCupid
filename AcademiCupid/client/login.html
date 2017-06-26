@@ -1,5 +1,4 @@
 <template name="login">
-	<h1>This is the login template</h1>
     <div class="ui vertical center aligned segment">
         <div class="ui stackable container grid">
             <div class="row">
@@ -33,14 +32,24 @@
             </div>
             <div class="row">
                 <div class="sixteen wide column">
-                    <div class="ui basic segment center aligned top">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    <button class="ui orange huge button" id="register-button" type="submit">Register</button>
+                </div>
+                <div class="ui modal">
+                    {{> register}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<!-- Button trigger modal -->
+                        <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                           Register for new account
-                        </button>
+                        </button> -->
 
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -56,10 +65,4 @@
                               </div>
                             </div>
                           </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
+                        </div> -->

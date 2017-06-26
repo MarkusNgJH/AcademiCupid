@@ -1,4 +1,22 @@
 <template name="EventSingle">
-	<h1>{{getEvent.name}}</h1>
-	{{> MainPageLayout}}
+	<div class = "ui fluid grid">
+		<div id="ContactsContainer" class="ui four wide column" style="overflow-y: scroll;overflow-x:hidden;">
+			<div class="ui container segment">
+				<h2 class="ui header">Participants</h2>
+				{{> Contacts}}		
+			</div>	
+		</div>
+		<div id="ProjectExchangeContainer" class="ui right floated twelve wide column">
+			<div class="ui container segment">
+				{{> MyProject}}	
+			</div>
+			<div class="ui container segment">
+				<h3 class="ui block header">
+				  Project Exchange
+				</h3>
+				{{> Projects}}
+			</div>
+
+		</div>
+	</div>
 </template>

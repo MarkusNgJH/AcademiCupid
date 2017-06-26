@@ -14,8 +14,11 @@ Template.ProjectSingle.helpers({
 	getProjectMembers: function() {
 		var currentProjectId = FlowRouter.getParam('projectId');
 		var currentProject = Projects.findOne(currentProjectId);
+		var projectOwnerId = currentProject.owner;
+		var projectOwner = Meteor.users.findOne(projectOwnerId);
 		var memberIds = currentProject.members;
 		var projectMembers = [];
+		projectMembers.push(projectOwner);
 		for(var i = 0; i < memberIds.length; i++) {
 			projectMembers.push(Meteor.users.findOne(memberIds[i]));
 		}

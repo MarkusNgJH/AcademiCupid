@@ -9,8 +9,7 @@ Template.NavBar.rendered = function () {
         			$("#NavMenu").removeClass("fluid");
         			$("#NavMenu").addClass("fixed");
         		}
-	        }
-	        else if ($(window).scrollTop() < 185){
+	        } else {
 	        	if($("#NavMenu").hasClass("fixed")) {
 	        		$("#NavMenu").removeClass("fixed");	
 	        		$("#NavMenu").addClass("fluid");
@@ -39,5 +38,9 @@ Template.NavBar.helpers({
 	},
 	currentUserId: function() {
 		return Meteor.userId();
+	},
+	selectedEvent: function() {
+		var currentEventId = FlowRouter.getParam('eventId');
+		return !(currentEventId == undefined);
 	}
 });

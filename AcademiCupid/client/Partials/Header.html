@@ -2,30 +2,24 @@
 	<div class="ui grid" style="background-color:#212A42;height:200px;padding:40px 50px 0px 50px;">
 		<div class="thirteen wide column">
 			<div class="row">
-				<a href="/events">
-					<h1 class = "ui orange header" style="font-size:5rem">AcademiCupid</h1>
+				<a href="/events" style="text-decoration: none">
+					<h1 class="ui header" style="font-size:5rem;color:#FFBA4C;">AcademiCupid</h1>
 				</a>	
 			</div>
 			{{#if eventSelected}}
 			<div class="ui sizer vertical segment">
 				<div class="row">
-					<h4 class="ui medium teal header">Current Event: {{getEvent.name}}</h4>
+					<h4 class="ui medium header" style="color: white;">Current Event: {{getEvent.name}}</h4>
 				</div>
 				<div class="row">
-					<h4 class="ui medium teal header">Event Coordinator: {{getEvent.owner}}</h4>
+					<a href="/profile={{getEvent.owner}}" class="ui medium header" style="color: white;">Event Coordinator: {{getEventOwnerName}}</a>
 				</div>
 			</div>
 			{{/if}}
 		</div>
 		<div class="right aligned three wide column">
-			<div>
+			<div class="ui header">
 				{{> loginButtons}}	
-			</div>
-			<div>
-				<br>
-			</div>
-			<div>
-				<a class="btn btn-default" href="/profile={{currentUserId}}" role="button">My Profile</a>
 			</div>
 		</div>
 	</div>		

@@ -16,6 +16,10 @@ AutoForm.hooks({
     },
     onSuccess: function (formType, result) {
       var projectId = result;
+      var projectCreator = Meteor.users.findOne(Meteor.userId());
+      var projects = projectCreator.profile.projects;
+      projects.push(projectId);
+      Meteor.users.update(Meteor.userId(), {$set:{"profile.projects":projects}});
       var eventId = FlowRouter.getParam('eventId');
       FlowRouter.go('ProjectSingle', { eventId: eventId, projectId: projectId });
     }

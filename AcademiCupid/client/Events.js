@@ -21,6 +21,14 @@ AutoForm.hooks({
        doc.participants = [];
        return doc;
       }
+    },
+    onSuccess: function (formType, result) {
+      var eventId = result;
+      var eventCreator = Meteor.users.findOne(Meteor.userId());
+      var enrolled = eventCreator.profile.enrolled;
+      enrolled.push(eventId);
+      Meteor.users.update(Meteor.userId(), {$set:{"profile.enrolled":enrolled}});
+      FlowRouter.go('EventSingle', {eventId: eventId});
     }
   }
 });

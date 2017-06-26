@@ -1,3 +1,27 @@
+Template.EventSingle.rendered = function() {
+	var windowHeight = $(window).height();
+	var windowWidth = $(window).width();
+	var contactsPositionLeft = windowWidth / 8 - 25;
+	// var contentHeight = windowHeight - 250;
+	// var projExHeight = $("#ProjectExchangeContainer").height();
+	$("#ContactsContainer").css("height", windowHeight);
+	$(document).ready(function(){
+	    $(window).scroll(function(){
+	        if($(window).scrollTop() > 185) {
+    			$("#ContactsContainer").css("position", "fixed");
+    			$("#ContactsContainer").css("left", contactsPositionLeft);
+    			$("#ContactsContainer").css("top", -50);
+    			$("#ContactsContainer").css("transform", "scale(0.9)");
+	        } else {
+        		$("#ContactsContainer").css("position", "relative");
+        		$("#ContactsContainer").css("left", 0);
+        		$("#ContactsContainer").css("top", 0);
+        		$("#ContactsContainer").css("transform", "scale(1)");
+	        }
+	    });
+	});
+}
+
 Template.EventSingle.onCreated(function() {
 	var self = this;
 	self.autorun(function() {

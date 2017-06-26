@@ -1,0 +1,38 @@
+<template name="MyProjects">
+	<div class="ui raised very padded container segment">
+		<h2 class="ui header" style="font-size:3em;">{{getUser.profile.firstName}}&nbsp;{{getUser.profile.lastName}}'s Projects</h2>
+		<div class="ui divided items">
+		{{#each getUserProjects}}
+			<div class="item">
+				<div class="ui tiny image">
+					<img src="/images/project.png">
+				</div>
+				<div class = content>
+					<a class="ui small header"> {{name}} </a>
+					<br>
+					<div class = "ui horizontal list">
+						{{#each reqSkills}}
+						<div class="ui label">{{name}}</div>
+						{{/each}}
+					</div>
+					<div class="description">
+						<div class="ui text container">
+							{{description}}
+						</div>
+					</div>
+					<br>
+					<div class="extra">
+						<a href="/event={{getEventId}}/project={{_id}}" class="ui button">
+							Visit Project
+							<i class="right chevron icon"></i>
+						</a>
+					</div>
+				</div>	
+				<br>
+			</div>
+		{{else}}
+			No project to display.			
+		{{/each}}
+		</div>
+	</div>
+</template>

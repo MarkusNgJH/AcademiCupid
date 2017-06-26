@@ -1,16 +1,38 @@
 <template name="Profile">
-	<div class = "ui grid">
-		<div class="ui container">
-			<h2 class="ui orange block header inverted">{{getUser.profile.firstName}}&nbsp;{{getUser.profile.lastName}}</h2>
-			<div class="container toggle-edit">
-				<i class="large edit icon"></i>
-				<p>Edit your profile</p>	
+	<div class = "ui container grid" style="margin: 20px 20px 0px 20px;">
+
+		<div class="ui row raised container segment">
+			<div class="ten wide column">
+				<h2 class="ui blue block header" style="font-size: 3em">
+					{{getUser.profile.firstName}}&nbsp;{{getUser.profile.lastName}}
+				</h2>
+				<h3 class="ui header">
+					Email: {{#each getUser.emails}}{{address}}{{/each}}
+				</h3>
 			</div>
-			<h3>
-				Email: {{#each getUser.emails}}{{address}}{{/each}}
-			</h3>
+			<div class="six wide column">
+				{{#if isEditMode}}
+				<button class="ui orange labeled icon button toggle-edit">
+					<i class = "compress icon"></i>
+					Close Edit Mode
+				</button>
+				{{else}}
+					{{#if isOwner}}
+					<button class="ui teal labeled icon button toggle-edit">
+						<i class = "write icon"></i>
+						Edit Profile
+					</button>
+					{{/if}}
+				{{/if}}
+			</div>
 		</div>
+
+		{{#if isEditMode}}
 		<div class="ui container" style="border:solid; padding:20px;">
+			<script type="text/javascript">
+				$('ui dropdown').dropdown();
+				$('#multi-select').dropdown();
+			</script>
 			<div class="row">
 				<h3>Update personal particulars</h3>
 			</div>
@@ -26,7 +48,7 @@
 					</div>
 					<div class="field">
 						<label>Add new skills</label>
-						<select name="skills" multiple="" class="ui fluid dropdown" id="multi-select">
+						<select name="skills" multiple="" class="ui fluid search dropdown" id="multi-select">
 							<option value="">Skills</option>
 							<option value="angular">Angular</option>
 							<option value="css">CSS</option>
@@ -63,5 +85,115 @@
 				</form>
 			</div>
 		</div>
+		{{else}}
+		<div class="row">
+			<div class="eight wide column">
+				<div class="ui row raised container segment">
+					<div class="ui sizer vertical segment">
+						<div class="ui huge header">
+							Description
+						</div>
+					</div>
+				</div>
+				<div class="ui row raised container segment">
+					<div class="ui sizer vertical segment">
+						<div class="ui huge header">
+							Skills
+						</div>
+						<div class="ui grid">
+							<div class="one wide column"></div>
+							<div class="thirteen wide column">
+								<div class="ui inverted segment">
+									<div class="ui inverted relaxed divided list">
+										{{#each getUser.profile.skills}}
+										<div class="item">
+											<div class="content">
+												<a class="ui {{validatedByCurrUser}} large label">
+													{{name}}
+													<div class="detail">{{validators.length}}</div>
+												</a>	
+											</div>
+										</div>
+										{{else}}
+										<div class="item">
+											<div class="content">
+												<div class="header">No skill to display.</div>
+											</div>
+										</div>
+										{{/each}}	
+									</div>			
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="eight wide column">
+				<div class="ui row raised container segment">
+					<div class="ui sizer vertical segment">
+						<div class="ui huge header">
+							Projects
+						</div>
+						<div class="ui grid">
+							<div class="one wide column"></div>
+							<div class="thirteen wide column">
+								<div class="ui inverted segment">
+									<div class="ui inverted relaxed divided list">
+										{{#each getUser.profile.projects}}
+										<div class="item">
+											<div class="content">
+												<div class="ui medium header">{{getProjectName(this)}}</div>
+												<div class="description">Event: {{getProjectBelongsToEventName(this)}}</div>
+											</div>
+										</div>
+										{{else}}
+										<div class="item">
+											<div class="content">
+												<div class="header">No project to display.</div>
+											</div>
+										</div>
+										{{/each}}	
+									</div>			
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ui row raised container segment">
+					<div class="ui sizer vertical segment">
+						<div class="ui huge header">
+							Events
+						</div>
+						<div class="ui grid">
+							<div class="one wide column"></div>
+							<div class="thirteen wide column">
+								<div class="ui inverted segment">
+									<div class="ui inverted relaxed divided list">
+										{{#each getUser.profile.enrolled}}
+										<div class="item">
+											<div class="content">
+												<div class="ui medium header">{{getEventName(this)}}</div>
+											</div>
+										</div>
+										{{else}}
+										<div class="item">
+											<div class="content">
+												<div class="header">No event to display.</div>
+											</div>
+										</div>
+										{{/each}}	
+									</div>			
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+		
 	</div>
 </template>

@@ -22,7 +22,8 @@ function isNotDuplicate(str, arr) {
 Template.EventInvitation.events ({
 	'submit form': function(event){
 		event.preventDefault();
-		var currentEventId = Session.get('currentEvent');
+		var validInput = true;
+		var currentEventId = FlowRouter.getParam('eventId');
 		var selectedUsers = document.getElementsByClassName("item active filtered");
 		for(var i = 0; i < selectedUsers.length; i++) {
 			var nextUserId = selectedUsers[i].getAttribute("data-value");
@@ -39,6 +40,8 @@ Template.EventInvitation.events ({
                   type: 'error',
                   showConfirmButton: true
                 });
+                validInput = false;
+                break;
 			}
 			var eventParticipants = originalEvent.participants;
 			console.log(eventParticipants);
@@ -52,12 +55,14 @@ Template.EventInvitation.events ({
 			Meteor.users.update(nextUserId, {$set: {"profile.enrolled": enrolledEvents}});
 			Events.update(currentEventId, {$set: {"participants": eventParticipants}});
 		}
-		$('.dropdown').dropdown('clear');
-		swal({
-            title: 'Successfully added participants!',
-            type: 'success',
-            showConfirmButton: true
-        });
+		if(validInput) {
+			$('.dropdown').dropdown('clear');
+			swal({
+	            title: 'Successfully added participants!',
+	            type: 'success',
+	            showConfirmButton: true
+	        });
+		}
 	}
 });
 
