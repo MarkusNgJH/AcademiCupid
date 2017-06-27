@@ -5,5 +5,8 @@ Template.Projects.helpers({
 	getProjects: function() {
 		var eventId = FlowRouter.getParam('eventId');
 		return Projects.find({belongsToEvent: eventId});
+	},
+	getVacancy:function(capacity, vacancy){
+		return capacity - vacancy;
 	}
 });

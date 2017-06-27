@@ -43,9 +43,6 @@ UserSchema = new SimpleSchema({
 	},
 	projects:{
 		type: [String],
-		autoform: {
- 			type: "hidden"
-		},
 		optional:true
 	}//,
 	// tags: {

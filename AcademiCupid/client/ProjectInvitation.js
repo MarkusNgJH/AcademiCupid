@@ -21,6 +21,7 @@ Template.ProjectInvitation.events ({
 			// currentProject.members.push(nextUserId);
 			Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
 			Projects.update(projectId, {$set: {"members": currentProjectMembers}});
+			Projects.update(projectId, {$set: {"numMembers": currentProjectMembers.length}})
 		}
 		$('.dropdown').dropdown('clear');
 	}

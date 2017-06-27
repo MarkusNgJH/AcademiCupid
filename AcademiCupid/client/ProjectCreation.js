@@ -11,6 +11,7 @@ AutoForm.hooks({
       insert: function(doc) {
        doc.belongsToEvent = FlowRouter.getParam('eventId');
        doc.members = [];
+       doc.numMembers = 1;
        return doc;
       }
     },

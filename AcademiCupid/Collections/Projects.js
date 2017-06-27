@@ -42,6 +42,13 @@ ProjectsSchema = new SimpleSchema({
 			type: "hidden" 
 		}
 	},
+	numMembers:{
+		type: Number,
+		optional:true,
+		autoform:{
+			type: "hidden"
+		}
+	},
 	belongsToEvent: {
 		type: String,
 		optional:true,
@@ -52,6 +59,11 @@ ProjectsSchema = new SimpleSchema({
 	description: {
 		type: String,
 		optional: true
+	},
+	capacity:{
+		type: Number,
+		optional:true,
+		allowedValues: [2,3,4,5,6,7,8],
 	}
 });
 
