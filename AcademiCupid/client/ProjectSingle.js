@@ -1,4 +1,3 @@
-
 Template.ProjectSingle.onCreated(function() {
     Session.set('editMode', false);
 });
@@ -29,6 +28,16 @@ Template.ProjectSingle.helpers({
 	},
 	editMode: function () {
 		return Session.get('editMode');
+	},
+	getProjectCapacity:function(){
+		var id = FlowRouter.getParam('projectId');
+		var project = Projects.findOne({_id: id});
+		return project.capacity;
+	},
+	getNumMembers:function(){
+		var id = FlowRouter.getParam('projectId');
+		var project = Projects.findOne({_id: id});
+		return project.numMembers; //+1 for the project leader
 	}
 });
 

@@ -1,8 +1,28 @@
 Template.ProjectInvitation.rendered = function() {
- $('ui dropdown').dropdown();
- $('#multi-select').dropdown();
- $('.dropdown').dropdown('refresh');
+	$('ui dropdown').dropdown();
+	$('#multi-select').dropdown();
+	$('.dropdown').dropdown('refresh');
 }
+
+function isNotDuplicate(str, arr) {
+	for(var i = 0; i < arr.length; i++) {
+		if(str === arr[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+function hasDuplicate(inputArr){
+	var result;
+	var currentProjectId = FlowRouter.getParam('projectId');
+	var currentProject = Projects.findOne(currentProjectId);
+	var projectMembers = currentProject.members;
+	for(var i=0; i<inputArr; i++){
+		result = isNotDuplicate(inputArr[i], projectMembers);
+	}
+	return !result; // returns true if at least one input exists in current Array
+}	
 
 Template.ProjectInvitation.events ({
 	'submit form': function(event){
@@ -10,22 +30,30 @@ Template.ProjectInvitation.events ({
 		var projectId = FlowRouter.getParam('projectId');
 		var currentProject = Projects.findOne(projectId);
 		var selectedUsersId = document.getElementsByClassName("item active filtered");
-		for(var i = 0; i < selectedUsersId.length; i++) {
-			var nextUserId = selectedUsersId[i].getAttribute("data-value");
-			var nextUser = Meteor.users.findOne(nextUserId);
-			var userProjects = nextUser.profile.projects;
-			userProjects.push(projectId);
-			var currentProjectMembers = currentProject.members;
-			currentProjectMembers.push(nextUserId);
-			// nextUser.profile.projects.push(projectId);
-			// currentProject.members.push(nextUserId);
-			Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
-			Projects.update(projectId, {$set: {"members": currentProjectMembers}});
-			Projects.update(projectId, {$set: {"numMembers": currentProjectMembers.length}})
+		if(hasDuplicate(selectedUsersId)){							
+			swal({
+				title: 'Selected User(s) is already a member',
+				text: 'Please try again',
+				type: 'error',
+				showConfirmButton: true
+			});}
+			else{
+				for(var i = 0; i < selectedUsersId.length; i++) {
+					var nextUserId = selectedUsersId[i].getAttribute("data-value");
+					var nextUser = Meteor.users.findOne(nextUserId);
+					var userProjects = nextUser.profile.projects;
+					userProjects.push(projectId);
+					var currentProjectMembers = currentProject.members;
+					currentProjectMembers.push(nextUserId);
+					Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
+					Projects.update(projectId, {$set: {"members": currentProjectMembers}});
+					Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
+				}
+				$('.dropdown').dropdown('clear');
+			}
+
 		}
-		$('.dropdown').dropdown('clear');
-	}
-});
+	});
 
 Template.ProjectInvitation.helpers ({
 	'getEventId': function() {
