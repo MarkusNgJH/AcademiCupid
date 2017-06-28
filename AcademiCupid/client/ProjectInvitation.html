@@ -6,16 +6,30 @@
 		<h1>Project Invitation for {{getProject.name}}</h1>	
 	</div>
 	<div class="container">
+		<h2>Invite Participants</h2>
 		<form>
-			<input type="text" name="participantUsername">
 			<select class="ui fluid search dropdown" id="multi-select" multiple="">
-			{{#each getParticipants}}
+				{{#each getParticipants}}
 				<option value={{_id}}>
 					{{#each emails}}
-						{{address}}
+					{{address}}
 					{{/each}}
 				</option>
-			{{/each}}
+				{{/each}}
+			</select>
+			<input type="submit" value="submit">	
+		</form>
+		<h2>Remove Members</h2>
+		{{getMembers}}
+		<form>
+			<select class="ui fluid search dropdown" id="multi-select" multiple="">
+				{{#each getMembers}}
+				<option value={{_id}}>
+					{{#each emails}}
+					{{address}}
+					{{/each}}
+				</option>
+				{{/each}}
 			</select>
 			<input type="submit" value="submit">	
 		</form>

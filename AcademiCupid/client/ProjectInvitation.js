@@ -6,7 +6,7 @@ Template.ProjectInvitation.rendered = function() {
 
 function isNotDuplicate(str, arr) {
 	for(var i = 0; i < arr.length; i++) {
-		if(str === arr[i]) {
+		if(str == arr[i]) {
 			return false;
 		}
 	}
@@ -14,14 +14,15 @@ function isNotDuplicate(str, arr) {
 }
 
 function hasDuplicate(inputArr){
-	var result;
 	var currentProjectId = FlowRouter.getParam('projectId');
 	var currentProject = Projects.findOne(currentProjectId);
 	var projectMembers = currentProject.members;
 	for(var i=0; i<inputArr; i++){
-		result = isNotDuplicate(inputArr[i], projectMembers);
+		if(!isNotDuplicate(inputArr[i], projectMembers)){
+			return true;
+		};
 	}
-	return !result; // returns true if at least one input exists in current Array
+	return false; // returns true if at least one input exists in current Array
 }	
 
 Template.ProjectInvitation.events ({
@@ -36,7 +37,8 @@ Template.ProjectInvitation.events ({
 				text: 'Please try again',
 				type: 'error',
 				showConfirmButton: true
-			});}
+			});
+		}
 			else{
 				for(var i = 0; i < selectedUsersId.length; i++) {
 					var nextUserId = selectedUsersId[i].getAttribute("data-value");
@@ -68,15 +70,25 @@ Template.ProjectInvitation.helpers ({
 		var currentEvent = Events.findOne(currentEventId);
 		// console.log("currentEvent: " + currentEvent);
 		var eventParticipantsId = currentEvent.participants;
-		console.log("eventParticipantsId: " + eventParticipantsId);
+		//console.log("eventParticipantsId: " + eventParticipantsId);
 		var eventParticipants = [];
 		for (var i = 0; i < eventParticipantsId.length; i++) {
 			if(eventParticipantsId[i] != Meteor.userId()) {
 				eventParticipants.push(Meteor.users.findOne(eventParticipantsId[i]));
 			}
 		}
-		console.log(eventParticipants);
+		//console.log(eventParticipants);
 		return eventParticipants;
+	},
+	'getMembers': function() {
+		var projectId = FlowRouter.getParam('projectId');
+		console.log("Project Id:" + projectId)
+		var currentProject = Projects.findOne(projectId);
+		console.log("initiate getMembers")
+		console.log(currentProject.members)
+		var members = currentProject.members
+		console.log(members)
+		return members;
 	}
 });
 
