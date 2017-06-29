@@ -82,12 +82,12 @@ Template.ProjectInvitation.helpers ({
 	},
 	'getMembers': function() {
 		var projectId = FlowRouter.getParam('projectId');
-		console.log("Project Id:" + projectId)
 		var currentProject = Projects.findOne(projectId);
-		console.log("initiate getMembers")
-		console.log(currentProject.members)
-		var members = currentProject.members
-		console.log(members)
+		var membersId = currentProject.members
+		var members = [];
+		for (var i = 0; i<membersId.length; i++){
+			members.push(Meteor.users.findOne(membersId[i]))
+		}
 		return members;
 	}
 });
