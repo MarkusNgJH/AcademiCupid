@@ -6,7 +6,7 @@ Template.ProjectInvitation.rendered = function() {
 
 function isNotDuplicate(str, arr) {
 	for(var i = 0; i < arr.length; i++) {
-		if(str == arr[i]) {
+		if(str === arr[i]) {
 			return false;
 		}
 	}
@@ -16,9 +16,9 @@ function isNotDuplicate(str, arr) {
 function hasDuplicate(inputArr){
 	var currentProjectId = FlowRouter.getParam('projectId');
 	var currentProject = Projects.findOne(currentProjectId);
-	var projectMembers = currentProject.members;
+	var projectMembersId = currentProject.members;
 	for(var i=0; i<inputArr; i++){
-		if(!isNotDuplicate(inputArr[i], projectMembers)){
+		if(!isNotDuplicate(inputArr[i], projectMembersId)){
 			return true;
 		};
 	}
@@ -31,31 +31,28 @@ Template.ProjectInvitation.events ({
 		var projectId = FlowRouter.getParam('projectId');
 		var currentProject = Projects.findOne(projectId);
 		var selectedUsersId = document.getElementsByClassName("item active filtered");
-		if(hasDuplicate(selectedUsersId)){							
-			swal({
-				title: 'Selected User(s) is already a member',
-				text: 'Please try again',
-				type: 'error',
-				showConfirmButton: true
-			});
-		}
-			else{
-				for(var i = 0; i < selectedUsersId.length; i++) {
-					var nextUserId = selectedUsersId[i].getAttribute("data-value");
-					var nextUser = Meteor.users.findOne(nextUserId);
-					var userProjects = nextUser.profile.projects;
-					userProjects.push(projectId);
-					var currentProjectMembers = currentProject.members;
-					currentProjectMembers.push(nextUserId);
-					Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
-					Projects.update(projectId, {$set: {"members": currentProjectMembers}});
-					Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
-				}
-				$('.dropdown').dropdown('clear');
+		for(var i = 0; i < selectedUsersId.length; i++) {
+			var nextUserId = selectedUsersId[i].getAttribute("data-value");
+			if(!isNotDuplicate(nextUserId, currentProject.members)){
+					swal({
+                        title: 'Already have selected skill(s)',
+                        text: 'Please try again',
+                        type: 'error',
+                        showConfirmButton: true
+                    });
 			}
-
+			var nextUser = Meteor.users.findOne(nextUserId);
+			var userProjects = nextUser.profile.projects;
+			userProjects.push(projectId);
+			var currentProjectMembers = currentProject.members;
+			currentProjectMembers.push(nextUserId);
+			Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
+			Projects.update(projectId, {$set: {"members": currentProjectMembers}});
+			Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
 		}
-	});
+		$('.dropdown').dropdown('clear');
+	}
+});
 
 Template.ProjectInvitation.helpers ({
 	'getEventId': function() {
