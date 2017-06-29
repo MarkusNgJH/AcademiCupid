@@ -1,4 +1,15 @@
 <template name="Projects">
+	<form>
+		<select class="ui fluid selection dropdown" id="multi-select">
+			{{#each getProjects}}
+			<option value={{_id}}>
+				{{name}}
+			</option>
+			{{/each}}
+		</select>
+		<input type="submit" value="submit">	
+	</form>
+
 	<div class="ui divided items">	
 		{{#each getProjects}}
 		<div class="item">
@@ -10,8 +21,8 @@
 				<br>
 				<div class="huge statistic">
 					<div class="value">
-					<i class= "user icon"></i> 
-					<strong> {{numMembers}} / {{capacity}} Vacancies</strong>
+						<i class= "user icon"></i> 
+						<strong> {{numMembers}} / {{capacity}} Vacancies</strong>
 					</div>
 				</div>
 				<div class = "ui big horizontal list">

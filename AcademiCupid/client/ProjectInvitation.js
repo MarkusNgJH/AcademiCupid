@@ -13,18 +13,6 @@ function isNotDuplicate(str, arr) {
 	return true;
 }
 
-function hasDuplicate(inputArr){
-	var currentProjectId = FlowRouter.getParam('projectId');
-	var currentProject = Projects.findOne(currentProjectId);
-	var projectMembersId = currentProject.members;
-	for(var i=0; i<inputArr; i++){
-		if(!isNotDuplicate(inputArr[i], projectMembersId)){
-			return true;
-		};
-	}
-	return false; // returns true if at least one input exists in current Array
-}	
-
 Template.ProjectInvitation.events ({
 	'submit form': function(event){
 		event.preventDefault();
@@ -36,6 +24,15 @@ Template.ProjectInvitation.events ({
 			if(!isNotDuplicate(nextUserId, currentProject.members)){
 					swal({
                         title: 'Selected User(s) has already been invited',
+                        text: 'Please try again',
+                        type: 'error',
+                        showConfirmButton: true
+                    });
+                    break;
+			}
+			else if(currentProject.numMembers >= currentProject.capacity){
+					swal({
+                        title: 'Your Team is at full capacity',
                         text: 'Please try again',
                         type: 'error',
                         showConfirmButton: true

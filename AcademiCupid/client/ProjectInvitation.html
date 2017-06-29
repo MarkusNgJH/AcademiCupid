@@ -6,6 +6,19 @@
 		<h1>Project Invitation for {{getProject.name}}</h1>	
 	</div>
 	<div class="container">
+		
+		<h3> Current Members </h3>
+		<div class ="ui mini horizontal divided list">
+		{{#unless getMembers}}
+			<h4> No Current Members</h4>
+		{{/unless}}
+		{{#each getMembers}}
+		<div class = "ui label">
+			<i class="user icon"></i>
+			{{profile.firstName}} {{profile.lastName}}<br>
+		</div>
+		{{/each}}
+		</div>
 		<h2>Invite Participants</h2>
 		<form>
 			<select class="ui fluid search dropdown" id="multi-select" multiple="">

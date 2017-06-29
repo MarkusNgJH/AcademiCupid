@@ -1,4 +1,17 @@
 <template name="Contacts">
+    <form>
+    <select class="ui fluid selection dropdown" id="multi-select">
+      {{#each getParticipants}}
+      <option value={{_id}}>
+              {{#each emails}}
+                {{address}}
+              {{/each}}
+      </option>
+      {{/each}}
+    </select>
+    <input type="submit" value="submit">  
+  </form>
+
   {{#each getParticipants}}
     <a href="/profile={{_id}}">
       <div class="ui middle aligned celled list">

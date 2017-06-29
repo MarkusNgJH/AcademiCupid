@@ -13,3 +13,13 @@ Template.Contacts.helpers ({
 		return eventParticipants;
 	}
 });
+
+Template.Contacts.events ({
+	'submit form': function(event){
+		event.preventDefault();
+		var eventId = FlowRouter.getParam('eventId');
+		var selectedUserId = document.getElementsByClassName("item active selected");
+		var userId = selectedUserId[0].getAttribute("data-value");
+		FlowRouter.go('ProfilePage', {userId: userId })
+	}
+});
