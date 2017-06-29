@@ -35,11 +35,12 @@ Template.ProjectInvitation.events ({
 			var nextUserId = selectedUsersId[i].getAttribute("data-value");
 			if(!isNotDuplicate(nextUserId, currentProject.members)){
 					swal({
-                        title: 'Already have selected skill(s)',
+                        title: 'Selected User(s) has already been invited',
                         text: 'Please try again',
                         type: 'error',
                         showConfirmButton: true
                     });
+                    break;
 			}
 			var nextUser = Meteor.users.findOne(nextUserId);
 			var userProjects = nextUser.profile.projects;
