@@ -1,8 +1,14 @@
+Template.ProjectInvitation.onCreated(function() {
+    Session.set('editMode', false);
+});
+
 Template.ProjectInvitation.rendered = function() {
 	$('ui dropdown').dropdown();
 	$('#multi-select').dropdown();
 	$('.dropdown').dropdown('refresh');
+	Session.set('editMode', false);
 }
+
 
 function isNotDuplicate(str, arr) {
 	for(var i = 0; i < arr.length; i++) {
@@ -49,13 +55,23 @@ Template.ProjectInvitation.events ({
 			Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
 		}
 		$('.dropdown').dropdown('clear');
-	}
+	},
+	'click .toggle-edit': function() {
+		console.log(Session.get('editMode'));
+		Session.set('editMode', !Session.get('editMode'));
+			$('ui dropdown').dropdown();
+	$('#multi-select').dropdown();
+	$('.dropdown').dropdown('refresh');
+	},
 });
 
 Template.ProjectInvitation.helpers ({
 	'getEventId': function() {
 		return FlowRouter.getParam('eventId');
 	}, 
+	editMode: function () {
+		return Session.get('editMode');
+	},
 	'getProject': function () {
 		var currentProjectId = FlowRouter.getParam('projectId');
 		return Projects.findOne(currentProjectId);

@@ -6,45 +6,57 @@
 		<h1>Project Invitation for {{getProject.name}}</h1>	
 	</div>
 	<div class="container">
-		
+		<div class="ui row container">
+			<button class="ui teal labeled icon button toggle-edit">
+				<i class = "write icon"></i>
+				Toggle
+			</button>
+		</div>
 		<h3> Current Members </h3>
 		<div class ="ui mini horizontal divided list">
-		{{#unless getMembers}}
+			{{#unless getMembers}}
 			<h4> No Current Members</h4>
-		{{/unless}}
-		{{#each getMembers}}
-		<div class = "ui label">
-			<i class="user icon"></i>
-			{{profile.firstName}} {{profile.lastName}}<br>
+			{{/unless}}
+			{{#each getMembers}}
+			<div class = "ui label">
+				<i class="user icon"></i>
+				{{profile.firstName}} {{profile.lastName}}<br>
+			</div>
+			{{/each}}
 		</div>
-		{{/each}}
+		{{#if editMode}}
+		<div class = "container">
+			<h2>Invite Participants</h2>
+			<form>
+				<select class="ui fluid search dropdown" id="multi-select" multiple="">
+					{{#each getParticipants}}
+					<option value={{_id}}>
+						{{#each emails}}
+						{{address}}
+						{{/each}}
+					</option>
+					{{/each}}
+				</select>
+				<input type="submit" value="submit">	
+			</form>
 		</div>
-		<h2>Invite Participants</h2>
-		<form>
-			<select class="ui fluid search dropdown" id="multi-select" multiple="">
-				{{#each getParticipants}}
-				<option value={{_id}}>
-					{{#each emails}}
-					{{address}}
+		{{else}}
+		<div class = "container">
+			<h2>Remove Members</h2>
+			{{getMembers}}
+			<form>
+				<select class="ui fluid search dropdown" id="multi-select" multiple="">
+					{{#each getMembers}}
+					<option value={{_id}}>
+						{{#each emails}}
+						{{address}}
+						{{/each}}
+					</option>
 					{{/each}}
-				</option>
-				{{/each}}
-			</select>
-			<input type="submit" value="submit">	
-		</form>
-		<h2>Remove Members</h2>
-		{{getMembers}}
-		<form>
-			<select class="ui fluid search dropdown" id="multi-select" multiple="">
-				{{#each getMembers}}
-				<option value={{_id}}>
-					{{#each emails}}
-					{{address}}
-					{{/each}}
-				</option>
-				{{/each}}
-			</select>
-			<input type="submit" value="submit">	
-		</form>
+				</select>
+				<input type="submit" value="submit">	
+			</form>
+		</div>
+		{{/if}}
 	</div>
 </template>
