@@ -83,13 +83,19 @@ Template.ProjectInvitation.events ({
 	'click .toggle-edit': function() {
 		console.log(Session.get('editMode'));
 		Session.set('editMode', !Session.get('editMode'));
-	// 		$('ui dropdown').dropdown();
-	// $('#multi-select').dropdown();
-	// $('.dropdown').dropdown('refresh');
+		//location.reload();
+		// $('ui dropdown').dropdown();
+		// $('#multi-select').dropdown();
+		// $('.dropdown').dropdown('refresh');
 },
 });
 
 Template.ProjectInvitation.helpers ({
+	'refreshDropdown':function(){
+		$('ui dropdown').dropdown();
+		$('#multi-select').dropdown();
+		$('.dropdown').dropdown('refresh');
+	},
 	'getEventId': function() {
 		return FlowRouter.getParam('eventId');
 	}, 
