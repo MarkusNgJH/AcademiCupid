@@ -1,12 +1,11 @@
 Template.ProjectInvitation.onCreated(function() {
-    Session.set('editMode', false);
+	Session.set('editMode', false);
 });
 
 Template.ProjectInvitation.rendered = function() {
 	$('ui dropdown').dropdown();
 	$('#multi-select').dropdown();
 	$('.dropdown').dropdown('refresh');
-	Session.set('editMode', false);
 }
 
 
@@ -19,50 +18,75 @@ function isNotDuplicate(str, arr) {
 	return true;
 }
 
+function remove(target, arr){
+	arr.splice(arr.indexOf(target), 1);
+}
+
 Template.ProjectInvitation.events ({
 	'submit form': function(event){
 		event.preventDefault();
+		var editMode = Session.get('editMode');
 		var projectId = FlowRouter.getParam('projectId');
 		var currentProject = Projects.findOne(projectId);
 		var selectedUsersId = document.getElementsByClassName("item active filtered");
-		for(var i = 0; i < selectedUsersId.length; i++) {
-			var nextUserId = selectedUsersId[i].getAttribute("data-value");
-			if(!isNotDuplicate(nextUserId, currentProject.members)){
+		if(editMode){
+			for(var i = 0; i < selectedUsersId.length; i++) {
+				var nextUserId = selectedUsersId[i].getAttribute("data-value");
+				if(!isNotDuplicate(nextUserId, currentProject.members)){
 					swal({
-                        title: 'Selected User(s) has already been invited',
-                        text: 'Please try again',
-                        type: 'error',
-                        showConfirmButton: true
-                    });
-                    break;
-			}
-			else if(currentProject.numMembers >= currentProject.capacity){
+						title: 'Selected User(s) has already been invited',
+						text: 'Please try again',
+						type: 'error',
+						showConfirmButton: true
+					});
+					break;
+				}
+				else if(currentProject.numMembers >= currentProject.capacity){
 					swal({
-                        title: 'Your Team is at full capacity',
-                        text: 'Please try again',
-                        type: 'error',
-                        showConfirmButton: true
-                    });
-                    break;
+						title: 'Your Team is at full capacity',
+						text: 'Please try again',
+						type: 'error',
+						showConfirmButton: true
+					});
+					break;
+				}
+				var nextUser = Meteor.users.findOne(nextUserId);
+				var userProjects = nextUser.profile.projects;
+				userProjects.push(projectId);
+				var currentProjectMembers = currentProject.members;
+				currentProjectMembers.push(nextUserId);
+				Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
+				Projects.update(projectId, {$set: {"members": currentProjectMembers}});
+				Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
 			}
-			var nextUser = Meteor.users.findOne(nextUserId);
-			var userProjects = nextUser.profile.projects;
-			userProjects.push(projectId);
-			var currentProjectMembers = currentProject.members;
-			currentProjectMembers.push(nextUserId);
-			Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
-			Projects.update(projectId, {$set: {"members": currentProjectMembers}});
-			Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
+			$('.dropdown').dropdown('clear');
 		}
-		$('.dropdown').dropdown('clear');
+		else{
+			console.log('delete');
+			for(var i = 0; i < selectedUsersId.length; i++) {
+				var nextUserId = selectedUsersId[i].getAttribute("data-value");
+				var nextUser = Meteor.users.findOne(nextUserId);
+				var userProjects = nextUser.profile.projects;
+				// userProjects.push(projectId);
+				remove(projectId, userProjects);
+				var currentProjectMembers = currentProject.members;
+				// currentProjectMembers.push(nextUserId);
+				remove(nextUserId, currentProjectMembers);
+				Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
+				Projects.update(projectId, {$set: {"members": currentProjectMembers}});
+				Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
+			}
+			$('.dropdown').dropdown('clear');
+		}
 	},
+
 	'click .toggle-edit': function() {
 		console.log(Session.get('editMode'));
 		Session.set('editMode', !Session.get('editMode'));
-			$('ui dropdown').dropdown();
-	$('#multi-select').dropdown();
-	$('.dropdown').dropdown('refresh');
-	},
+	// 		$('ui dropdown').dropdown();
+	// $('#multi-select').dropdown();
+	// $('.dropdown').dropdown('refresh');
+},
 });
 
 Template.ProjectInvitation.helpers ({
