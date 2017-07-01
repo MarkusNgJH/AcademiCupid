@@ -3,60 +3,87 @@
 		<a href="/event={{getEventId}}" class="btn btn-primary">Back to Main Page</a>
 	</div>
 	<div class="container">
-		<h1>Project Invitation for {{getProject.name}}</h1>	
-	</div>
-	<div class="container">
-		<div class="ui row container">
-			<button class="ui teal labeled icon button toggle-edit">
-				<i class = "write icon"></i>
-				Toggle
-			</button>
+		<h1 class = "ui center aligned icon header">
+			<i class="circular users icon"></i>
+			Team Management for {{getProject.name}}</h1>	
 		</div>
-		<h3> Current Members </h3>
-		<div class ="ui mini horizontal divided list">
-			{{#unless getMembers}}
-			<h4> No Current Members</h4>
-			{{/unless}}
-			{{#each getMembers}}
-			<div class = "ui label">
-				<i class="user icon"></i>
-				{{profile.firstName}} {{profile.lastName}}<br>
+		<div class="container">
+			<div class="ui row container">
 			</div>
-			{{/each}}
-		</div>
-		{{#if editMode}}
-		<div class = "container">
-			<h2>Invite Participants</h2>
-			<form>
-				<select class="ui fluid search dropdown" id="multi-select" multiple="">
-					{{#each getParticipants}}
-					<option value={{_id}}>
-						{{#each emails}}
-						{{address}}
+			<div class = "ui horizontal dividing header"> <h2> Current Members </h2> </div>
+			<div class ="ui middle aligned horizontal divided list">
+				{{#unless getMembers}}
+				<h4> No Current Members</h4>
+				{{/unless}}
+				{{#each getMembers}}
+				<div class = "item">
+					<!-- <i class="user icon"></i> -->
+					<div class="right floated content">
+						<div class="ui button">Remove</div>
+					</div>
+					<i class="user icon"></i>
+					<div class = "content"> 
+						{{profile.firstName}} {{profile.lastName}}
+					</div>
+				</div>
+				{{/each}}
+			</div>
+			{{#if editMode}}
+			<div class = "container">
+				<h2>Invite Participants</h2>
+
+				<button class="ui grey labeled icon button toggle-edit">
+					<i class = "remove user icon"></i>
+					Click to Remove Member Instead
+				</button>
+
+				<script>
+					$('ui dropdown').dropdown();
+					$('#multi-select').dropdown();
+					$('.dropdown').dropdown('refresh');
+				</script>
+				<form>
+					<select class="ui fluid search dropdown" id="multi-select" multiple="">
+						{{#each getParticipants}}
+						<option value={{_id}}>
+							{{#each emails}}
+							{{address}}
+							{{/each}}
+						</option>
 						{{/each}}
-					</option>
-					{{/each}}
-				</select>
-				<input type="submit" value="submit">	
-			</form>
-		</div>
-		{{else}}
-		<div class = "container">
-			<h2>Remove Members</h2>
-			{{getMembers}}
-			<form>
-				<select class="ui fluid search dropdown" id="multi-select" multiple="">
-					{{#each getMembers}}
-					<option value={{_id}}>
-						{{#each emails}}
-						{{address}}
+					</select>
+					<button type="submit" name="remove-button" class="ui blue submit button">
+						Invite
+					</button>			
+				</form>
+			</div>
+			{{else}}
+			<div class = "container">
+				<h2>Remove Members</h2>
+				<button class="ui grey labeled icon button toggle-edit">
+					<i class = "add user icon"></i>
+					Click to Invite Participants Instead
+				</button>
+				<script>
+					$('ui dropdown').dropdown();
+					$('#multi-select').dropdown();
+					$('.dropdown').dropdown('refresh');
+				</script>
+				<form>
+					<select class="ui fluid search dropdown" id="multi-select" multiple="">
+						{{#each getMembers}}
+						<option value={{_id}}>
+							{{#each emails}}
+							{{address}}
+							{{/each}}
+						</option>
 						{{/each}}
-					</option>
-					{{/each}}
-				</select>
-				<input type="submit" value="submit">	
-			</form>
+					</select>
+					<button type="submit" name="remove-button" class="ui blue submit button">
+						Remove
+					</button>		
+				</form>
+			</div>
+			{{/if}}
 		</div>
-		{{/if}}
-	</div>
-</template>
+	</template>

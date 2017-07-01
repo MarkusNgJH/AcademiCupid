@@ -1,14 +1,16 @@
 Template.EventInvitation.rendered = function() {
- $('ui dropdown').dropdown();
- $('#multi-select').dropdown();
- $('.dropdown').dropdown('refresh');
+	$('ui dropdown').dropdown();
+	$('#multi-select').dropdown();
+	$('.dropdown').dropdown('refresh');
 }
 
-// Template.EventInvitation.onCreated(function() {
-// 	var currentEvent = Session.get('curentEvent');
-// 	console.log(currentEvent);
-// 	// document.location.reload(true); //refreshes the page
-// });
+Template.EventInvitation.onCreated(function() {
+	Session.set('editMode', false);
+});
+
+function remove(target, arr){
+	arr.splice(arr.indexOf(target), 1);
+}
 
 function isNotDuplicate(str, arr) {
 	for(var i = 0; i < arr.length; i++) {
@@ -25,45 +27,71 @@ Template.EventInvitation.events ({
 		var validInput = true;
 		var currentEventId = FlowRouter.getParam('eventId');
 		var selectedUsers = document.getElementsByClassName("item active filtered");
-		for(var i = 0; i < selectedUsers.length; i++) {
-			var nextUserId = selectedUsers[i].getAttribute("data-value");
-			var originalUser = Meteor.users.findOne(nextUserId);
-			var originalEvent = Events.findOne(currentEventId);
-			var enrolledEvents = originalUser.profile.enrolled;
-			console.log(enrolledEvents);
-			if (isNotDuplicate(currentEventId, enrolledEvents)) {
-				enrolledEvents.push(currentEventId);
-			} else {
+		var editMode = Session.get('editMode');
+		if(editMode){
+			for(var i = 0; i < selectedUsers.length; i++) {
+				var nextUserId = selectedUsers[i].getAttribute("data-value");
+				var originalUser = Meteor.users.findOne(nextUserId);
+				var originalEvent = Events.findOne(currentEventId);
+				var enrolledEvents = originalUser.profile.enrolled;
+				console.log(enrolledEvents);
+				if (isNotDuplicate(currentEventId, enrolledEvents)) {
+					enrolledEvents.push(currentEventId);
+				} else {
+					swal({
+						title: originalUser.emails[0].address + ' is already enrolled',
+						text: 'Please try agian',
+						type: 'error',
+						showConfirmButton: true
+					});
+					validInput = false;
+					break;
+				}
+				var eventParticipants = originalEvent.participants;
+				console.log(eventParticipants);
+				if (isNotDuplicate(nextUserId, eventParticipants)) {
+					eventParticipants.push(nextUserId);
+				}
+				Meteor.users.update(nextUserId, {$set: {"profile.enrolled": enrolledEvents}});
+				Events.update(currentEventId, {$set: {"participants": eventParticipants}});
+			}
+			if(validInput) {
+				$('.dropdown').dropdown('clear');
 				swal({
-                  title: originalUser.emails[0].address + ' is already enrolled',
-                  text: 'Please try agian',
-                  type: 'error',
-                  showConfirmButton: true
-                });
-                validInput = false;
-                break;
+					title: 'Successfully added participants!',
+					type: 'success',
+					showConfirmButton: true
+				});
 			}
-			var eventParticipants = originalEvent.participants;
-			console.log(eventParticipants);
-			if (isNotDuplicate(nextUserId, eventParticipants)) {
-				eventParticipants.push(nextUserId);
+		}
+		else{
+			console.log("remove")
+			for(var i = 0; i < selectedUsers.length; i++) {
+				var nextUserId = selectedUsers[i].getAttribute("data-value");
+				var originalUser = Meteor.users.findOne(nextUserId);
+				var originalEvent = Events.findOne(currentEventId);
+				var enrolledEvents = originalUser.profile.enrolled;
+				var eventParticipants = originalEvent.participants;
+				remove(nextUserId, eventParticipants);
+				remove(currentEventId, enrolledEvents);
+				Meteor.users.update(nextUserId, {$set: {"profile.enrolled": enrolledEvents}});
+				Events.update(currentEventId, {$set: {"participants": eventParticipants}});
 			}
-			//var fName = original.profile.firstName;
-			//var lName =  original.profile.lastName;
-			//var skills = original.profile.skills;
-			//console.log(Events.findOne(currentEvent));
-			Meteor.users.update(nextUserId, {$set: {"profile.enrolled": enrolledEvents}});
-			Events.update(currentEventId, {$set: {"participants": eventParticipants}});
+			if(validInput) {
+				$('.dropdown').dropdown('clear');
+				swal({
+					title: 'Successfully removed participants!',
+					type: 'success',
+					showConfirmButton: true
+				});
+			}
 		}
-		if(validInput) {
-			$('.dropdown').dropdown('clear');
-			swal({
-	            title: 'Successfully added participants!',
-	            type: 'success',
-	            showConfirmButton: true
-	        });
-		}
-	}
+	},
+
+	'click .toggle-edit': function() {
+		console.log(Session.get('editMode'));
+		Session.set('editMode', !Session.get('editMode'));
+	},
 });
 
 Template.EventInvitation.helpers ({
@@ -72,38 +100,23 @@ Template.EventInvitation.helpers ({
 	},
 	'eventId': function() {
 		return FlowRouter.getParam('eventId');
-	}
+	},
+	'getParticipants': function() {
+		var currentEventId = FlowRouter.getParam('eventId');
+		var currentEvent = Events.findOne(currentEventId);
+		// console.log("currentEvent: " + currentEvent);
+		var eventParticipantsId = currentEvent.participants;
+		//console.log("eventParticipantsId: " + eventParticipantsId);
+		var eventParticipants = [];
+		for (var i = 0; i < eventParticipantsId.length; i++) {
+			if(eventParticipantsId[i] != Meteor.userId()) {
+				eventParticipants.push(Meteor.users.findOne(eventParticipantsId[i]));
+			}
+		}
+		//console.log(eventParticipants);
+		return eventParticipants;
+	},
+	editMode: function () {
+		return Session.get('editMode');
+	},
 });
-
-// var selectedSkills = document.getElementsByClassName("item active filtered");
-// 		var newSkillArr = [];
-// 		var original = Meteor.users.findOne(Meteor.userId());
-// 		if (original.profile.skills === null) {
-// 			var originalSkills = [];
-// 		} else {
-// 			var originalSkills = original.profile.skills;
-// 		}
-// 		for(var i = 0; i < selectedSkills.length; i++) {
-// 			var nextSkill = selectedSkills[i].innerHTML;
-// 			var testSkill = new userSkills(nextSkill, original._id);
-// 			// if (!originalSkills.includes(nextSkill)) {
-// 			newSkillArr.push(testSkill);
-// 			// }
-// 		}
-// 		console.log(newSkillArr);
-// 		// console.log(original.emails.address);
-// 		// console.log(original);
-// 		var fName = event.target.fName.value;
-// 		var lName = event.target.lName.value;
-// 		var updatedSkills = originalSkills.concat(newSkillArr)
-// 		Meteor.users.update(
-// 			Meteor.userId(), { $set: {
-// 								 'profile': {
-// 								 	'firstName': fName,
-// 								 	'lastName': lName,
-// 								 	'skills': updatedSkills
-// 									 }
-
-// 							 	}
-// 							}		
-// 		);
