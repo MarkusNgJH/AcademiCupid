@@ -1,14 +1,23 @@
 <template name="ProjectCreation">
-	<div class="container col-lg-3 col-md-3 col-sm-12 col-xs-12">
-		<a href="/event={{getEvent._id}}" class="btn btn-primary">Back to main page</a>
-	</div>
-	<div class="container col-lg-6 col-md-6 col-sm-12 col-xs-12" style="border:1px solid; padding:20px;">
-		<div class="row">
-			<h1 class="ui header">Create a new project</h1>
+	<div class="ui stackable three column grid">
+		<div class="three wide column">
+			<a href="/event={{getEvent._id}}" class="btn btn-primary">Back to main page</a>	
 		</div>
-		<div class="row">
-			{{> quickForm collection="Projects" id = "insertProjectsForm" type = "insert" doc=this}}	
-		</div>	
-	</div>
-	<div class="container col-lg-3 col-md-3 col-sm-0 col-xs-0"></div>
+		<div class="nine wide column">
+			<div class="ui container raised segment">
+				{{#autoForm collection="Projects" id="itemsInsertForm" type="insert" template="semanticUI"}}
+				    <fieldset>
+				      <legend><h1 class="ui header">Create a new project</h1></legend>
+				      {{> afQuickField name='name'}}
+				      {{> afQuickField name='description'}}
+				      {{> afQuickField name='desiredSkills' type="select" multiple=true search=true}}
+				    </fieldset>
+				    <br>
+				    <button type="submit" class="btn btn-primary">Insert</button>
+			  	{{/autoForm}}		
+			</div>
+		</div>
+		<div class="three wide column">
+		</div>
+	</div>				
 </template>

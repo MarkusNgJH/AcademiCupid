@@ -15,7 +15,7 @@ AutoForm.hooks({
        return doc;
       }
     },
-    onSuccess: function (formType, result) {
+    onSuccess: function (formType, result) { //redirect user to the newly created project page
       var projectId = result;
       var projectCreator = Meteor.users.findOne(Meteor.userId());
       var projects = projectCreator.profile.projects;

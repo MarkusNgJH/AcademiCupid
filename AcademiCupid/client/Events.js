@@ -1,6 +1,7 @@
 Meteor.subscribe('User');
 Meteor.subscribe('Events');
 Meteor.subscribe('Projects');
+Meteor.subscribe('Skills');
 
 Template.Events.helpers({
  events: ()=> {
