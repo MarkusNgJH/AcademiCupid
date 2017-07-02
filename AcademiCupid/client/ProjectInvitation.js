@@ -1,7 +1,3 @@
-Template.ProjectInvitation.onCreated(function() {
-	Session.set('editMode', false);
-});
-
 Template.ProjectInvitation.rendered = function() {
 	$('ui dropdown').dropdown();
 	$('#multi-select').dropdown();
@@ -29,7 +25,7 @@ Template.ProjectInvitation.events ({
 		var projectId = FlowRouter.getParam('projectId');
 		var currentProject = Projects.findOne(projectId);
 		var selectedUsersId = document.getElementsByClassName("item active filtered");
-		if(editMode){
+		
 			for(var i = 0; i < selectedUsersId.length; i++) {
 				var nextUserId = selectedUsersId[i].getAttribute("data-value");
 				if(!isNotDuplicate(nextUserId, currentProject.members)){
@@ -60,34 +56,28 @@ Template.ProjectInvitation.events ({
 				Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
 			}
 			$('.dropdown').dropdown('clear');
-		}
-		else{
-			console.log('delete');
-			for(var i = 0; i < selectedUsersId.length; i++) {
-				var nextUserId = selectedUsersId[i].getAttribute("data-value");
-				var nextUser = Meteor.users.findOne(nextUserId);
-				var userProjects = nextUser.profile.projects;
-				// userProjects.push(projectId);
-				remove(projectId, userProjects);
-				var currentProjectMembers = currentProject.members;
-				// currentProjectMembers.push(nextUserId);
-				remove(nextUserId, currentProjectMembers);
-				Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
-				Projects.update(projectId, {$set: {"members": currentProjectMembers}});
-				Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
-			}
-			$('.dropdown').dropdown('clear');
-		}
 	},
 
 	'click .toggle-edit': function() {
 		console.log(Session.get('editMode'));
 		Session.set('editMode', !Session.get('editMode'));
-		//location.reload();
-		// $('ui dropdown').dropdown();
-		// $('#multi-select').dropdown();
-		// $('.dropdown').dropdown('refresh');
-},
+	},
+
+	'click .remove':function(){
+		console.log(this._id);
+		var projectId = FlowRouter.getParam('projectId');
+		console.log(projectId);
+		var currentProject = Projects.findOne(projectId); 
+		var userId = this._id;
+		var selectedUser = Meteor.users.findOne(userId);
+		var userProjects = selectedUser.profile.projects;
+		var currentProjectMembers = currentProject.members;
+		remove(projectId, userProjects);
+		remove(userId, currentProjectMembers);
+		Meteor.users.update(userId, {$set: {"profile.projects": userProjects}});
+		Projects.update(projectId, {$set: {"members": currentProjectMembers}});
+		Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})	
+	}
 });
 
 Template.ProjectInvitation.helpers ({
@@ -114,11 +104,11 @@ Template.ProjectInvitation.helpers ({
 		//console.log("eventParticipantsId: " + eventParticipantsId);
 		var eventParticipants = [];
 		for (var i = 0; i < eventParticipantsId.length; i++) {
+
 			if(eventParticipantsId[i] != Meteor.userId()) {
 				eventParticipants.push(Meteor.users.findOne(eventParticipantsId[i]));
 			}
 		}
-		//console.log(eventParticipants);
 		return eventParticipants;
 	},
 	'getMembers': function() {
@@ -132,8 +122,3 @@ Template.ProjectInvitation.helpers ({
 		return members;
 	}
 });
-
-// event: ()=> {
-// 		var id = FlowRouter.getParam('id'); //the param name is 'id'. Refer to routes.js. The name will be the string after the colon. Hence, we are getting the id from the route itself, i.e. from the URL
-// 		return Events.findOne({_id: id}); //this id is then used to find the correct recipe within our Recipe collection
-// 	},

@@ -30,8 +30,9 @@
 					<select class="ui fluid search dropdown" id="multi-select" multiple="">
 						{{#each getUsers}}
 						<option value={{_id}}>
+							{{profile.firstName}} {{profile.lastName}}
 							{{#each emails}}
-							{{address}}
+							:  {{address}}
 							{{/each}}
 						</option>
 						{{/each}}
@@ -60,9 +61,10 @@
 						<select class="ui fluid search dropdown" id="multi-select" multiple="">
 							{{#each getParticipants}}
 							<option value={{_id}}>
-								{{#each emails}}
-								{{address}}
-								{{/each}}
+							{{profile.firstName}} {{profile.lastName}}
+							{{#each emails}}
+							:  {{address}}
+							{{/each}}
 							</option>
 							{{/each}}
 						</select>
