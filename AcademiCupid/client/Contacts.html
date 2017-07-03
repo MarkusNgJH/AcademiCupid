@@ -1,6 +1,7 @@
 <template name="Contacts">
     <form>
-    <select class="ui fluid selection dropdown" id="multi-select">
+    <select class="ui fluid selection dropdown" id="multi-select" 
+    >
       {{#each getParticipants}}
       <option value={{_id}}>
               {{#each emails}}
@@ -9,7 +10,7 @@
       </option>
       {{/each}}
     </select>
-    <input type="submit" value="submit">  
+    <input type="submit" id="theSubmitButton" value="submit">
   </form>
 
   {{#each getParticipants}}
@@ -39,17 +40,3 @@
     </a>
   {{/each}}
 </template>
-
-<!--
-<div class = "ui piled compact segment">
-  <div class = "ui fluid card">
-  	<div>
-  		<img src="/images/download.png">
-  	</div>
-  	<div class = "content">
-      <a class="header"> {{profile.firstName}}</a>
-    </div>
-  </div>
-  </div>
-
--->

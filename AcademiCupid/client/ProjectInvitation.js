@@ -120,5 +120,12 @@ Template.ProjectInvitation.helpers ({
 			members.push(Meteor.users.findOne(membersId[i]))
 		}
 		return members;
+	},
+	'getOwner':function(){
+		var projectId = FlowRouter.getParam('projectId');
+		var currentProject = Projects.findOne(projectId);
+		var ownerId = currentProject.owner;
+		var owner = Meteor.users.findOne(ownerId);
+		return owner;
 	}
 });

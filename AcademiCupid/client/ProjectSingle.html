@@ -30,11 +30,11 @@
 				</h1>
 				<div class="ui center aligned container">
 					<div class="huge statistic">
-					<div class="value">
-					<i class= "user icon"></i> 
-					<strong> {{getNumMembers}} / {{getProjectCapacity}} Vacancies</strong>
+						<div class="value">
+							<i class= "user icon"></i> 
+							<strong> {{getNumMembers}} / {{getProjectCapacity}} Vacancies</strong>
+						</div>
 					</div>
-				</div>
 					<h2 class = "ui horizontal divider header">Skills sought after</h2>
 					<div class = "ui very relaxed huge celled list">
 
@@ -55,7 +55,7 @@
 				<div class = "ui center aligned container">
 					<div class="ui huge horizontal divided relaxed animated list">
 						{{#each getProjectMembers}}
-						<div class = "ui linked item hover-animate" >
+						<div class = "ui linked item" data-content="Click for Details" >
 							<a href="/profile={{_id}}">
 								<img class = "ui tiny avatar image" src="/images/download.png">
 								<div class = "content">
@@ -84,6 +84,6 @@
 				</div>
 			</div>
 		</div>
-	{{/if}}
+		{{/if}}
 	</div>
 </template>
