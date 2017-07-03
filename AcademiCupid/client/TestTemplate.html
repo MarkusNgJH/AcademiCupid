@@ -1,6 +1,30 @@
 <template name="TestTemplate">
 	<h1>test Template</h1>
-	<div class="ui container raised segment">
-		{{> quickForm collection="Skills" id="insertSkillForm" doc=this type="insert"}}
-	</div>
+	<table class="ui celled table">
+		<thead>
+			<tr>
+				<th>Day</th>
+				<th>"0000 to 0200"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+				<th>"0000 to 0100"</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<!-- <td> Monday </td> -->
+				{{ #each getProperty(getDays) }}
+				 {{this}} 
+				{{/each}}
+			</tr>
+		</tbody>
+	</table>
 </template>
