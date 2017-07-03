@@ -25,7 +25,6 @@ Template.ProjectInvitation.events ({
 		var projectId = FlowRouter.getParam('projectId');
 		var currentProject = Projects.findOne(projectId);
 		var selectedUsersId = document.getElementsByClassName("item active filtered");
-		
 			for(var i = 0; i < selectedUsersId.length; i++) {
 				var nextUserId = selectedUsersId[i].getAttribute("data-value");
 				if(!isNotDuplicate(nextUserId, currentProject.members)){
@@ -37,7 +36,7 @@ Template.ProjectInvitation.events ({
 					});
 					break;
 				}
-				else if(currentProject.numMembers >= currentProject.capacity){
+				if(currentProject.numMembers >= currentProject.capacity){
 					swal({
 						title: 'Your Team is at full capacity',
 						text: 'Please try again',

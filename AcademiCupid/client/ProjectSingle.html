@@ -54,8 +54,12 @@
 				<h2 class = "ui center aligned header">Current Members</h2>
 				<div class = "ui center aligned container">
 					<div class="ui huge horizontal divided relaxed animated list">
+						<script>
+							$('.linked.item')
+							.popup();
+						</script>
 						{{#each getProjectMembers}}
-						<div class = "ui linked item" data-content="Click for Details" >
+						<div class = "ui linked item" data-tooltip= "Click for Details" >
 							<a href="/profile={{_id}}">
 								<img class = "ui tiny avatar image" src="/images/download.png">
 								<div class = "content">

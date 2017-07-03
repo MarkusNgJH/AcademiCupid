@@ -16,6 +16,14 @@ Meteor.publish('Projects', function(){
 	return Projects.find({});
 });
 
+Meteor.publish('User', function(){
+	return User.find({});
+});
+
+Meteor.publish('Skills', function(){
+	return Skills.find({});
+});
+
 Meteor.publish('userData', function() {
 	return Meteor.users.find({});
 });

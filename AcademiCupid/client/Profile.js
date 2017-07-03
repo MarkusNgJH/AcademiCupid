@@ -39,6 +39,9 @@ Template.Profile.helpers({
 	},
 	getEventName: function(eventId) {
 		return Events.findOne(eventId).name;
+	},
+	getSkills: function() {
+		return Skills.find({});
 	}
 });
 

@@ -93,6 +93,13 @@ FlowRouter.route('/profile=:userId',{
 	}
 });
 
+FlowRouter.route('/testpage',{
+	name: 'TestPage',
+	action(){
+		BlazeLayout.render('MainLayout', {main: "TestTemplate"});
+	}
+});
+
 /*
 Accounts.onLogin(function(){
 	FlowRouter.go('recipe-book');

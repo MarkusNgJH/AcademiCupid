@@ -1,3 +1,8 @@
+$('.linked.item')
+  .popup()
+;
+
+
 Template.ProjectSingle.onCreated(function() {
     Session.set('editMode', false);
 });

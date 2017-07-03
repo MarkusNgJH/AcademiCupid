@@ -49,25 +49,9 @@
 					<div class="field">
 						<label>Add new skills</label>
 						<select name="skills" multiple="" class="ui fluid search dropdown" id="multi-select">
-							<option value="">Skills</option>
-							<option value="angular">Angular</option>
-							<option value="css">CSS</option>
-							<option value="design">Graphic Design</option>
-							<option value="ember">Ember</option>
-							<option value="html">HTML</option>
-							<option value="ia">Information Architecture</option>
-							<option value="javascript">Javascript</option>
-							<option value="mech">Mechanical Engineering</option>
-							<option value="meteor">Meteor</option>
-							<option value="node">NodeJS</option>
-							<option value="plumbing">Plumbing</option>
-							<option value="python">Python</option>
-							<option value="rails">Rails</option>
-							<option value="react">React</option>
-							<option value="repair">Kitchen Repair</option>
-							<option value="ruby">Ruby</option>
-							<option value="ui">UI Design</option>
-							<option value="ux">User Experience</option>
+							{{#each getSkills}}
+								<option>{{name}}</option>
+							{{/each}}
 						</select>
 					</div>
 					<h4>Existing Skills</h4>

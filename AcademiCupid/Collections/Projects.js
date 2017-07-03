@@ -9,21 +9,48 @@ Projects.allow({
 	}
 });
 
-Skills = new SimpleSchema({
-	name:{
-		type: String,
-		label: "Skill"
-	}
-});
+// Skills = new SimpleSchema({
+// 	name:{
+// 		type: String,
+// 		label: "Skill"
+// 	}
+// });
 
 ProjectsSchema = new SimpleSchema({
 	name:{
 		type: String,
 		label: "Project Name"
 	},
-	reqSkills:{
-		type: [Skills],
-		label: "Required Skill(s)"
+	// reqSkills:{
+	// 	type: [Skills],
+	// 	label: "Required Skill(s)",
+	// 	optional: true,
+	// 	autoform: {
+	// 		type: "hidden"
+	// 	}
+	// },
+	desiredSkills: {
+		type: [String],
+		optional:true,
+		autoform: {
+		  afFieldInput: {
+		  	options: function() {
+		  		function oneOption(value, label) {
+			        this.value = value;
+			        this.label = label;
+		    	}
+		  		const allSkillsObj = Skills.find({});
+				var allSkillsName = [];
+				allSkillsObj.forEach((currSkillObj) => {
+				  	var nextSkillId = currSkillObj._id;
+				  	var nextSkillName = currSkillObj.name;
+				  	var nextOption = new oneOption(nextSkillId, nextSkillName);
+		  			allSkillsName.push(nextOption);
+				});
+				return allSkillsName;
+		  	}
+		  }
+		}
 	},
 	owner:{
 		type: String,
