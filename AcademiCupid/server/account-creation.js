@@ -23,10 +23,37 @@ Accounts.onCreateUser(function(options, user) {
             "18": false,
             "20": false,
             "22": false
+        },
+        "Tuesday": {
+            "0": false,
+            "2": false,
+            "4": false,
+            "6": false,
+            "8": false,
+            "10": false,
+            "12": false,
+            "14": false,
+            "16": false,
+            "18": false,
+            "20": false,
+            "22": false
+        },
+        "Wednesday": {
+            "0": false,
+            "2": false,
+            "4": false,
+            "6": false,
+            "8": false,
+            "10": false,
+            "12": false,
+            "14": false,
+            "16": false,
+            "18": false,
+            "20": false,
+            "22": false
         }
+        
     };
-
-
     user.profile.profPicture = Meteor.absoluteUrl() + "img/default/user.jpg";
 
     return user;

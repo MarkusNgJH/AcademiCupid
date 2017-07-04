@@ -5,26 +5,41 @@
 			<tr>
 				<th>Day</th>
 				<th>"0000 to 0200"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
-				<th>"0000 to 0100"</th>
+				<th>"0200 to 0400"</th>
+				<th>"0400 to 0600"</th>
+				<th>"0600 to 0900"</th>
+				<th>"0800 to 1000"</th>
+				<th>"1000 to 1200"</th>
+				<th>"1200 to 1400"</th>
+				<th>"1400 to 1600"</th>
+				<th>"1600 to 1800"</th>
+				<th>"1800 to 2000"</th>
+				<th>"2000 to 2200"</th>
+				<th>"2200 to 0000"</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<!-- <td> Monday </td> -->
-				{{ #each getProperty(getDays) }}
-				 {{this}} 
+			{{#each getSchedule}} <!-- WEEK -->
+			{{#let rowIndex=@index}}
+			<tr> 
+				{{#each this}} <!-- DAY -->
+				<td> 
+					<div class = "ui button" id = {{rowIndex}}{{@index}}> 
+						{{#unless this}} <!-- Timeslot -->
+						<div> Busy </div>
+						{{else}}
+						{{#if this}}
+						<div> Free </div>
+						{{else}}
+						{{ this }}
+						{{/if}}
+						{{/unless}}
+					</div>
+				</td> 
 				{{/each}}
 			</tr>
+			{{/let}}
+			{{/each}}
 		</tbody>
 	</table>
 </template>
