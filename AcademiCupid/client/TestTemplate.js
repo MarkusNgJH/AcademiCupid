@@ -5,7 +5,7 @@ Template.TestTemplate.helpers({
 		return Meteor.users.findOne(userId).profile.schedule;
 	},
 	getSchedule: function(){
-		console.log("schedule called")
+		//console.log("schedule called")
 		var userId = Meteor.userId();
 		var weekSchedule = [];
 		var oneWeek = Meteor.users.findOne(userId).profile.schedule;
@@ -21,24 +21,8 @@ Template.TestTemplate.helpers({
 				weekSchedule.push(daySchedule);
 			}
 		}
-		//console.log(weekSchedule); 
+		console.log(weekSchedule); 
 		return weekSchedule;
-	},
-	parseCell: function(arg){
-		//console.log(arg);
-		if(typeof(arg) === "string"){
-			return arg;
-		}
-		else{
-			if(!arg){
-				
-				return "Busy";
-			}
-			else{
-				
-				return "Free";
-			}
-		}
 	}
 });
 
@@ -48,12 +32,19 @@ Template.TestTemplate.events({
 		var row = position.split("")[0];
 		var col = position.split("")[1];
 		dayFinder = {"0": "Monday", "1": "Tuesday", "2": "Wednesday"};
-		var timeSlot = col * 2 - 2;
+		var timeSlot = col;
 		var Day = dayFinder[row];
 		console.log(Day + timeSlot);
 		var user = Meteor.users.findOne(Meteor.userId());
 		var currentSchedule = user.profile.schedule;
 		var fieldToUpdate = "profile.schedule." + Day + "." + timeSlot;
-		Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: !currentSchedule[Day][timeSlot]}});
+
+		if(currentSchedule[Day][timeSlot]==="Free"){
+			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Busy"}});
+		}
+		else if(currentSchedule[Day][timeSlot]==="Busy"){
+			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Free"}});
+		}
+		//console.log("schedule Updated");
 	}
 });

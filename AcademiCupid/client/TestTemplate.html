@@ -19,16 +19,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{#each getSchedule}} <!-- WEEK -->
+			{{#each getSchedule}} <!--WEEK --> 
 			{{#let rowIndex=@index}}
-			<tr> 
+			<tr> 	
+				<td> {{this.[0]}} </td>
 				{{#each this}} <!-- DAY -->
+				
 				<td> 
 					<div class = "ui button" id = {{rowIndex}}{{@index}}> 
-						{{rowIndex}}{{@index}}
-						{{parseCell(this)}}
+						{{this}}
 					</div>
 				</td> 
+				
 				{{/each}}
 			</tr>
 			{{/let}}
