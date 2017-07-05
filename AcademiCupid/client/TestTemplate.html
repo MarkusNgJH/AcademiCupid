@@ -25,15 +25,8 @@
 				{{#each this}} <!-- DAY -->
 				<td> 
 					<div class = "ui button" id = {{rowIndex}}{{@index}}> 
-						{{#unless this}} <!-- Timeslot -->
-						<div> Busy </div>
-						{{else}}
-						{{#if this}}
-						<div> Free </div>
-						{{else}}
-						{{ this }}
-						{{/if}}
-						{{/unless}}
+						{{rowIndex}}{{@index}}
+						{{parseCell(this)}}
 					</div>
 				</td> 
 				{{/each}}
