@@ -1,4 +1,10 @@
-<template name="TestTemplate">
+<template name="ScheduleSingle">
+	<style>
+	.clickable:hover {
+			background: #3374C2;
+		}
+	</style>
+
 	<h1>test Template</h1>
 	<table class="ui celled table">
 		<thead>
@@ -19,8 +25,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		{{getSchedules}}
-<!-- 			{{#each getSchedules}} 
+			{{#each getSchedule}} <!--WEEK --> 
 			{{#let rowIndex=@index}}
 			<tr> 	
 				<td>
@@ -28,7 +33,7 @@
 						{{getDayOfWeek(@index)}} 
 					</button>
 				</td>
-				{{#each this}} 
+				{{#each this}} <!-- DAY -->
 				<td class = "{{conditionalColor rowIndex @index}}"> 
 					<div class = "clickable" onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
 						{{this}}
@@ -40,7 +45,7 @@
 			</tr>
 			{{/let}}
 			{{/each}}
- -->
+
 		</tbody>
 	</table>
 </template>

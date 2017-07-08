@@ -5,12 +5,12 @@
 		</div>
 		<div class="nine wide column">
 			<div class="ui container raised segment">
-				{{#autoForm collection="Projects" id="itemsInsertForm" type="insert" template="semanticUI"}}
+				{{#autoForm collection="Projects" id="insertProjectsForm" type="insert" template="semanticUI"}}
 				    <fieldset>
 				      <legend><h1 class="ui header">Create a new project</h1></legend>
 				      {{> afQuickField name='name'}}
 				      {{> afQuickField name='description'}}
-				      {{> afQuickField name='desiredSkills' type="select" multiple=true search=true}}
+<!-- 				      {{> afQuickField name='desiredSkills' type="select" multiple=true search=true}} -->
 				    </fieldset>
 				    <br>
 				    <button type="submit" class="btn btn-primary">Insert</button>

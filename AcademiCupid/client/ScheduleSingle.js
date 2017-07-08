@@ -1,4 +1,4 @@
-Template.TestTemplate.helpers({
+Template.ScheduleSingle.helpers({
 	getDayOfWeek: function(arg){
 		if(arg == 0){
 			return "Monday";
@@ -22,34 +22,25 @@ Template.TestTemplate.helpers({
 			return "Sunday";
 		}
 	},
-	getSchedules: function(){
-		var projectId = "NyRmjyguwsvjbcJ86";
-		var project = Projects.findOne(projectId);
-		var membersID = project.members;
-		var members = []
-		for(var i = 0; i<membersID.length; i++){
-			members.push(Meteor.users.findOne(membersID[i]))
-		}
-		var ownerId = project.owner;
-		var owner = Meteor.users.findOne(ownerId);
-		members.push(owner); //Array of all members and owner object
-		week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-		var combinedWeek = [];
-		for(var dayOfWeek in week){
-			var combinedSingleDay = [];
-			for(var timeSlot=1; timeSlot<13; i++){
-				var combinedSingleTimeslot= [];
-				for(var memberIdx=0; memberIdx<members.length; memberIdx++){
-					combinedSingleTimeslot.push(
-						"sth"
-						); 
+	getSchedule: function(){
+		//console.log("schedule called")
+		var userId = Meteor.userId();
+		var weekSchedule = [];
+		var oneWeek = Meteor.users.findOne(userId).profile.schedule;
+		//console.log(oneWeek);
+		for (var oneDay in oneWeek) {
+			if (oneWeek.hasOwnProperty(oneDay)) {
+				var daySchedule = [];
+				//daySchedule.push(oneDay);
+				for(var timeSlot in oneWeek[oneDay]){
+					daySchedule.push(oneWeek[oneDay][timeSlot]);	
 				}
-				combinedSingleDay.push(combinedSingleTimeslot);
+				//console.log(daySchedule);
+				weekSchedule.push(daySchedule);
 			}
-			combinedWeek.push(combinedSingleDay);
 		}
-		console.log(combinedWeek);
-		return combinedWeek;
+		console.log(weekSchedule); 
+		return weekSchedule;
 	},
 	conditionalColor: function(row, col){
 		var userId = Meteor.userId();
