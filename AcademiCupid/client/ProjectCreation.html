@@ -10,10 +10,11 @@
 				      <legend><h1 class="ui header">Create a new project</h1></legend>
 				      {{> afQuickField name='name'}}
 				      {{> afQuickField name='description'}}
-<!-- 				      {{> afQuickField name='desiredSkills' type="select" multiple=true search=true}} -->
+				      {{> afQuickField name='capacity' options="allowed"}}
+					  {{> afQuickField name='desiredSkills' type="select" multiple=true search=true}} 
 				    </fieldset>
 				    <br>
-				    <button type="submit" class="btn btn-primary">Insert</button>
+				    <button type="submit" class="btn btn-primary"> Submit </button>
 			  	{{/autoForm}}		
 			</div>
 		</div>
