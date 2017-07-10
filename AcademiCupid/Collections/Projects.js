@@ -21,14 +21,6 @@ ProjectsSchema = new SimpleSchema({
 		type: String,
 		label: "Project Name"
 	},
-	// reqSkills:{
-	// 	type: [Skills],
-	// 	label: "Required Skill(s)",
-	// 	optional: true,
-	// 	autoform: {
-	// 		type: "hidden"
-	// 	}
-	// },
 	desiredSkills: {
 		type: [String],
 		optional:true,

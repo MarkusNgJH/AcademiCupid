@@ -23,7 +23,7 @@ Template.TestTemplate.helpers({
 		}
 	},
 	getSchedules: function(){
-		var projectId = "NyRmjyguwsvjbcJ86";
+		var projectId = "kd3yKy9cgWrYAEZ58";
 		var project = Projects.findOne(projectId);
 		var membersID = project.members;
 		var members = []
@@ -35,13 +35,20 @@ Template.TestTemplate.helpers({
 		members.push(owner); //Array of all members and owner object
 		week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 		var combinedWeek = [];
-		for(var dayOfWeek in week){
+		//console.log(members);
+		//return members;
+		//return members[0].profile.schedule["Monday"]["1"];
+		for(var dayOfWeekIdx = 0; dayOfWeekIdx< week.length; dayOfWeekIdx++){
 			var combinedSingleDay = [];
-			for(var timeSlot=1; timeSlot<13; i++){
+			for(var timeSlot=1; timeSlot<13; timeSlot++){
 				var combinedSingleTimeslot= [];
 				for(var memberIdx=0; memberIdx<members.length; memberIdx++){
+					//console.log(timeSlot.toString());
+					//console.log(typeof(timeSlot.toString()));
+					//console.log(members[memberIdx].profile.schedule[dayOfWeek]);
+					//console.log(week[dayOfWeekIdx]);
 					combinedSingleTimeslot.push(
-						"sth"
+						members[memberIdx].profile.schedule[week[dayOfWeekIdx]][timeSlot.toString()]
 						); 
 				}
 				combinedSingleDay.push(combinedSingleTimeslot);

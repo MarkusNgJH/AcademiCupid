@@ -59,7 +59,7 @@ Template.ScheduleSingle.helpers({
 	}
 });
 
-Template.TestTemplate.events({
+Template.ScheduleSingle.events({
 	"click .clickable": function(event){
 		var position = event.currentTarget.id;
 		var row = position.split(",")[0];

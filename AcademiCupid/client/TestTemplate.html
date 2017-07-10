@@ -1,5 +1,6 @@
 <template name="TestTemplate">
 	<h1>test Template</h1>
+	<!-- {{getSchedules}} -->
 	<table class="ui celled table">
 		<thead>
 			<tr>
@@ -19,8 +20,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		{{getSchedules}}
-<!-- 			{{#each getSchedules}} 
+			{{#each getSchedules}} 
 			{{#let rowIndex=@index}}
 			<tr> 	
 				<td>
@@ -31,16 +31,16 @@
 				{{#each this}} 
 				<td class = "{{conditionalColor rowIndex @index}}"> 
 					<div class = "clickable" onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
-						{{this}}
+						{{#each this}} <!-- timeslot -->
+							{{this}}
+						{{/each}}
 					</div>
 				</td> 
-				
 				{{/each}}
-				
 			</tr>
 			{{/let}}
 			{{/each}}
- -->
+
 		</tbody>
 	</table>
 </template>

@@ -100,6 +100,13 @@ FlowRouter.route('/testpage',{
 	}
 });
 
+FlowRouter.route('/schedulesingle',{
+	name: 'ScheduleSingle',
+	action(){
+		BlazeLayout.render('MainLayout', {main: "ScheduleSingle"});
+	}
+});
+
 /*
 Accounts.onLogin(function(){
 	FlowRouter.go('recipe-book');
