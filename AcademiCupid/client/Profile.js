@@ -119,7 +119,10 @@ Template.Profile.events({
 				Meteor.users.update(this.owner, {$set: obj});
 			}
 		}
-	}
+	},
+	'click .view-schedule': function() {
+        $('.ui.modal').modal('show');
+    }
 });
 
 function isNotDuplicate(str, arr) {

@@ -29,11 +29,13 @@
 					</button>
 				</td>
 				{{#each this}} 
-				<td class = "{{conditionalColor rowIndex @index}}"> 
-					<div class = "clickable" onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
-						{{#each this}} <!-- timeslot -->
+				<td style = {{conditional(this)}} class = ""> 
+<!-- 				<div class="ui button" data-tooltip="Add users to your feed" data-position="top center">   Top Center </div> -->
+					<div data-tooltip= {{getFreeIndividuals(this)}} onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
+						{{countFreeIndividuals(this)}}
+<!-- 						{{#each this}} timeslot
 							{{this}}
-						{{/each}}
+						{{/each}} -->
 					</div>
 				</td> 
 				{{/each}}

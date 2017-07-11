@@ -43,12 +43,10 @@ Template.TestTemplate.helpers({
 			for(var timeSlot=1; timeSlot<13; timeSlot++){
 				var combinedSingleTimeslot= [];
 				for(var memberIdx=0; memberIdx<members.length; memberIdx++){
-					//console.log(timeSlot.toString());
-					//console.log(typeof(timeSlot.toString()));
-					//console.log(members[memberIdx].profile.schedule[dayOfWeek]);
-					//console.log(week[dayOfWeekIdx]);
+					var cellPersonProfile = members[memberIdx].profile;
+					var cell = members[memberIdx].profile.schedule[week[dayOfWeekIdx]][timeSlot.toString()];
 					combinedSingleTimeslot.push(
-						members[memberIdx].profile.schedule[week[dayOfWeekIdx]][timeSlot.toString()]
+						[cellPersonProfile,cell]
 						); 
 				}
 				combinedSingleDay.push(combinedSingleTimeslot);
@@ -58,20 +56,43 @@ Template.TestTemplate.helpers({
 		console.log(combinedWeek);
 		return combinedWeek;
 	},
+	countFreeIndividuals:function(arr){
+		var count = 0;
+		for(var i=0; i < arr.length; i++){
+			if(arr[i][1]=="Free"){
+				count++;
+			}
+		}
+		return count;
+	},
+	getFreeIndividuals:function(arr){
+		var freeIndividuals = [];
+		for(var i=0; i<arr.length; i++){
+			if(arr[i][1]=="Free"){
+				freeIndividuals.push(arr[i][0].firstName);
+			}
+		}
+		return freeIndividuals;
+	},
 	conditionalColor: function(row, col){
-		var userId = Meteor.userId();
-		var weekSchedule = [];
-		var oneWeek = Meteor.users.findOne(userId).profile.schedule;
 		dayFinder = {"0": "Monday", "1": "Tuesday", "2": "Wednesday", "3": "Thursday", "4": "Friday", "5": "Saturday", "6": "Sunday"};
 		var timeSlot = (parseInt(col) + 1).toString();
 		var Day = dayFinder[row];
 		var timeSlot = oneWeek[Day][timeSlot]
-		if(timeSlot == "Busy"){
-			return "error";
+	},
+	conditional:function(arr){
+		var numFree = 0;
+		for(var i=0; i < arr.length; i++){
+			if(arr[i][1]=="Free"){
+				numFree++;
+			}
 		}
-		else if(timeSlot == "Free"){
-			return "positive";
-		}
+		var projectId = "kd3yKy9cgWrYAEZ58";
+		var project = Projects.findOne(projectId);
+		var numMembers = project.numMembers;
+		var saturation = numFree/numMembers * 100;
+		var lightness = numFree/numMembers * 50;
+		return "background-color: hsl(93,"+ 70 + "%," + lightness + "%)";
 	}
 });
 
