@@ -43,21 +43,31 @@ Template.ProjectSingle.helpers({
 		var id = FlowRouter.getParam('projectId');
 		var project = Projects.findOne({_id: id});
 		return project.numMembers; //+1 for the project leader
+	},
+	capacityOptions:function(){
+		return [2,3,4,5,6,7,8];
 	}
 });
 
 Template.ProjectSingle.events({
-	'click .toggle-edit': function() {
+	'click .openModal': function() {
+		$('.ui.modal').modal('show');
 		console.log(Session.get('editMode'));
 		Session.set('editMode', !Session.get('editMode'));
 	},
 	'click .validate-skill': function() {
 		console.log("skill validated");
 	},
-	'mouseenter .hover-animate':function(){
-    	$('.hover-animate').mouseenter(function(){
-        $(this).transition({animation: 'pulse', duration: 200});
-});
-		console.log("hover");
+	'submit form':function(event){
+		event.preventDefault();
+		var projectId = FlowRouter.getParam('projectId');
+		var Capacity = document.getElementsByClassName("item active selected");
+		var Capacity = Capacity[0].getAttribute("data-value");
+		Capacity = parseInt(Capacity);
+		var projectName = event.target.projectName.value;
+		var projectDescription = event.target.projectDescription.value;
+		Projects.update(projectId, {$set:{"name": projectName}});
+		Projects.update(projectId, {$set:{"description": projectDescription}});
+		Projects.update(projectId, {$set:{"capacity": Capacity}});
 	}
 });

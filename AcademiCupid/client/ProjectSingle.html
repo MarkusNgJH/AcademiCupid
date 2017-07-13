@@ -5,22 +5,41 @@
 				<i class = "angle double left icon"></i>
 				Back to Main Page
 			</a>
+			<div class="ui orange labeled icon button openModal">
+				<i class = "angle double left icon"></i>
+				Edit Project
+			</div>
 		</div>
-		{{#if editMode}}
-		<div class="ui row container">
-			{{> quickForm collection="Projects" id=getProjectId type="update" doc=getProject autosave=true}}
-			<button class="ui orange labeled icon button toggle-edit">
-				<i class = "compress icon"></i>
-				Click to close
-			</button>
-		</div>
-		{{else}}
-		<div class="ui row container">
-			<button class="ui teal labeled icon button toggle-edit">
-				<i class = "write icon"></i>
-				Click to edit project
-			</button>
-		</div>
+
+<!-- 		<div class="ui modal">
+			  <div class="header">
+    Edit Project Details
+  </div> -->
+				<script>
+					$('.ui.dropdown').dropdown();
+					$('.dropdown').dropdown('refresh');
+				</script>
+				<form class="ui form">
+					<div class="field">
+						<label>Project Name</label>
+						<input type="text" name="projectName" value={{getProject.name}}>
+					</div>
+					<div class="field">
+						<label>Description</label>
+						<input type="text" name="projectDescription" value="{{getProject.description}}">
+					</div>
+					<div class="field">
+						<label>Capacity</label>
+						<select name="skills" class="ui selection dropdown">
+							{{#each capacityOptions}}
+							<option> {{this}}</option>
+							{{/each}}
+						</select>
+					</div>
+					<input class="btn btn-primary" type="submit" value="Submit">
+				</form>
+			
+		<!-- </div> -->
 		<br><br><br>
 		<div class = "ui two column stackable grid raised container segment">
 			<div class = "four wide equal height column">
@@ -88,6 +107,6 @@
 				</div>
 			</div>
 		</div>
-		{{/if}}
+		
 	</div>
 </template>
