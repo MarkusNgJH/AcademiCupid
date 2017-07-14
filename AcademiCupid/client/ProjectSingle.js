@@ -51,23 +51,28 @@ Template.ProjectSingle.helpers({
 
 Template.ProjectSingle.events({
 	'click .openModal': function() {
-		$('.ui.modal').modal('show');
+		$('.ui.modal').modal({
+			closable: false,
+		}).modal('show');
 		console.log(Session.get('editMode'));
 		Session.set('editMode', !Session.get('editMode'));
 	},
 	'click .validate-skill': function() {
 		console.log("skill validated");
-	},
-	'submit form':function(event){
-		event.preventDefault();
+	}, 
+	'click #editProjectButton':function(e,t){
+		e.preventDefault();
 		var projectId = FlowRouter.getParam('projectId');
 		var Capacity = document.getElementsByClassName("item active selected");
 		var Capacity = Capacity[0].getAttribute("data-value");
 		Capacity = parseInt(Capacity);
-		var projectName = event.target.projectName.value;
-		var projectDescription = event.target.projectDescription.value;
+		var projectName = $('#pName').val();
+		var projectDescription = $('#pDescription').val();
+		console.log(projectName);
+		console.log(projectDescription);
 		Projects.update(projectId, {$set:{"name": projectName}});
 		Projects.update(projectId, {$set:{"description": projectDescription}});
 		Projects.update(projectId, {$set:{"capacity": Capacity}});
+		return false;
 	}
 });

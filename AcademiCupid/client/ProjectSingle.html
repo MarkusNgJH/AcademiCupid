@@ -11,35 +11,37 @@
 			</div>
 		</div>
 
-<!-- 		<div class="ui modal">
-			  <div class="header">
-    Edit Project Details
-  </div> -->
-				<script>
-					$('.ui.dropdown').dropdown();
-					$('.dropdown').dropdown('refresh');
-				</script>
-				<form class="ui form">
-					<div class="field">
-						<label>Project Name</label>
-						<input type="text" name="projectName" value={{getProject.name}}>
-					</div>
-					<div class="field">
-						<label>Description</label>
-						<input type="text" name="projectDescription" value="{{getProject.description}}">
-					</div>
-					<div class="field">
-						<label>Capacity</label>
-						<select name="skills" class="ui selection dropdown">
-							{{#each capacityOptions}}
-							<option> {{this}}</option>
-							{{/each}}
-						</select>
-					</div>
-					<input class="btn btn-primary" type="submit" value="Submit">
-				</form>
+		<div class="ui modal">
+			<div class="header">
+				Edit Project Details
+			</div>
+			<script>
+				$('.ui.dropdown').dropdown();
+				$('.dropdown').dropdown('refresh');
+			</script>
+			<form>
+			<div class="ui form" id="editProjectForm" action="action">
+				<div class="field">
+					<label>Project Name</label>
+					<input type="text" id="pName" value={{getProject.name}}>
+				</div>
+				<div class="field">
+					<label>Description</label>
+					<input type="text" id="pDescription" value="{{getProject.description}}">
+				</div>
+				<div class="field">
+					<label>Capacity</label>
+					<select class="ui selection dropdown">
+						{{#each capacityOptions}}
+						<option> {{this}}</option>
+						{{/each}}
+					</select>
+				</div>
+				<button class="ui blue large button" id="editProjectButton" type="submit">submit</button>
+				</div>
+			</form>
 			
-		<!-- </div> -->
+		</div>
 		<br><br><br>
 		<div class = "ui two column stackable grid raised container segment">
 			<div class = "four wide equal height column">
@@ -109,4 +111,7 @@
 		</div>
 		
 	</div>
+</template>
+<template name = "ProjectEditForm">
+
 </template>
