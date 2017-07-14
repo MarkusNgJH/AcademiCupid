@@ -46,14 +46,18 @@ Template.ProjectSingle.helpers({
 	},
 	capacityOptions:function(){
 		return [2,3,4,5,6,7,8];
+	},
+	getAllSkills: function() {
+		return Skills.find({});
 	}
 });
 
 Template.ProjectSingle.events({
 	'click .openModal': function() {
-		$('.ui.modal').modal({
-			closable: false,
-		}).modal('show');
+		$('.ui.modal').modal('show');
+		// modal({
+		// 	closable: false,
+		// }).
 		console.log(Session.get('editMode'));
 		Session.set('editMode', !Session.get('editMode'));
 	},
@@ -70,9 +74,15 @@ Template.ProjectSingle.events({
 		var projectDescription = $('#pDescription').val();
 		console.log(projectName);
 		console.log(projectDescription);
+		var skills = Projects.findOne(projectId).desiredSkills;
+		var skillsList = document.getElementsByClassName("item active filtered");
+		for(var i=0; i<skillsList.length; i++) {
+			skills.push(skillsList[i].getAttribute("data-value"));
+			}
 		Projects.update(projectId, {$set:{"name": projectName}});
 		Projects.update(projectId, {$set:{"description": projectDescription}});
 		Projects.update(projectId, {$set:{"capacity": Capacity}});
+		Projects.update(projectId, {$set:{"desiredSkills": skills}});
 		return false;
 	}
 });

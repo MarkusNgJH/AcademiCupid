@@ -12,6 +12,7 @@ AutoForm.hooks({
        doc.belongsToEvent = FlowRouter.getParam('eventId');
        doc.members = [];
        doc.numMembers = 1;
+       doc.desiredSkills = [];
        return doc;
       }
     },

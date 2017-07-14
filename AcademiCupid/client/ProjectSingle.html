@@ -11,7 +11,6 @@
 			</div>
 		</div>
 
-		<div class="ui modal">
 			<div class="header">
 				Edit Project Details
 			</div>
@@ -37,11 +36,18 @@
 						{{/each}}
 					</select>
 				</div>
+				<div class="field">
+					<label>Add desired skills</label>
+					<select multiple="" class="ui multiple search selection dropdown">
+						{{#each getAllSkills}}
+						<option> {{name}}</option>
+						{{/each}}
+					</select>
+				</div>
 				<button class="ui blue large button" id="editProjectButton" type="submit">submit</button>
 				</div>
 			</form>
-			
-		</div>
+
 		<br><br><br>
 		<div class = "ui two column stackable grid raised container segment">
 			<div class = "four wide equal height column">
