@@ -1,0 +1,21 @@
+<template name="AddSkills">
+	<h1>This is the add skills template</h1>
+	<!-- <div class="ui container raised segment">
+	{{#autoForm collection="Skills" id="insertSkillsForm" type="insert" template="semanticUI"}}
+		<fieldset>
+			<legend><h1 class="ui header">Add new Skills</h1></legend>
+			{{> afQuickField name='name'}}
+		</fieldset>
+		<br>
+		<button type="submit" class="btn btn-primary"> Submit </button>
+	{{/autoForm}}		
+	</div> -->
+	<div class="ui container raised segment">
+		{{> quickForm collection="Skills" id="insertSkillsForm" type="insert"}}
+	</div>
+	<!-- <div class="ui container raised segment">
+		{{#each getSkills}}
+			{{name}}
+		{{/each}}
+	</div> -->
+</template>

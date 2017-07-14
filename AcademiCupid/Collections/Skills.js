@@ -2,7 +2,7 @@ Skills = new Mongo.Collection('skills');
 
 Skills.allow({
 	insert: function(userId, doc){
-		return !!userId;
+		return true;
 	},
 	update:function(userId, doc){
 		return true;//!!userId;
@@ -12,7 +12,7 @@ Skills.allow({
 SkillsSchema = new SimpleSchema({
 	name:{
 		type: String,
-		unique: true,
+		// unique: true,
 		label: "Skill Name"
 	}
 });

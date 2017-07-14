@@ -9,11 +9,11 @@ User.allow({
 	}
 });
 
-Skills = new SimpleSchema({
-	name:{
-		type: String
-	}
-});
+// Skills = new SimpleSchema({
+// 	name:{
+// 		type: String
+// 	}
+// });
 
 UserSchema = new SimpleSchema({
 	name:{

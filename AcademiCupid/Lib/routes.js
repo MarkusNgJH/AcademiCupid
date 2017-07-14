@@ -107,6 +107,13 @@ FlowRouter.route('/schedulesingle',{
 	}
 });
 
+FlowRouter.route('/addskills',{
+	name: 'AddSkills',
+	action(){
+		BlazeLayout.render('HomeLayout', {main: "AddSkills"});
+	}
+});
+
 /*
 Accounts.onLogin(function(){
 	FlowRouter.go('recipe-book');

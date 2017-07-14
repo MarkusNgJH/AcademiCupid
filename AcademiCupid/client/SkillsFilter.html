@@ -1,0 +1,15 @@
+<template name="SkillsFilter">
+	<script>
+		$('ui dropdown').dropdown();
+		$('#multi-select').dropdown();
+		$('.dropdown').dropdown('refresh');
+	</script>
+	<label>Filter By Skill Tags</label>
+	<select name="skills" multiple="" class="ui fluid search dropdown" id="multi-select">
+		{{#each getProjects}}
+			{{#each reqSkills}}
+				<option>{{name}}</option>
+			{{/each}}
+		{{/each}}
+	</select>
+</template>
