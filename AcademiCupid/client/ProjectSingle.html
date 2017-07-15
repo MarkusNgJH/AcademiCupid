@@ -1,17 +1,51 @@
 <template name="ProjectSingle">
 	<div class = "ui grid">
 		<div class="ui row container">
-			<a href="/event={{getEventId}}" class="ui orange labeled icon button">
-				<i class = "angle double left icon"></i>
-				Back to Main Page
-			</a>
-			<div class="ui orange labeled icon button openModal">
-				<i class = "angle double left icon"></i>
-				Edit Project
+			{{#if editMode}}
+			<div class = "tiny ui buttons">
+				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
+					<i class = "angle double left icon"></i>
+					To Main Page
+				</a>
+				<div class="ui blue right labeled icon button toggle-edit">
+					<i class = "angle double right icon"></i>
+					To Your Project
+				</div>
 			</div>
-		</div>
+			{{else}}
+			{{#if openSchedule}}
+			<div class = "tiny ui buttons">
+				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
+					<i class = "angle double left icon"></i>
+					To Main Page
+				</a>
+				<div class="ui blue right labeled icon button open-schedule">
+					<i class = "angle double right icon"></i>
+					Back to Your Project
+				</div>
+			</div>
+			{{else}}
+			<div class = "tiny ui buttons">
+				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
+					<i class = "angle double left icon"></i>
+					To Main Page
+				</a>
+				<div class="ui blue labelled button toggle-edit">
+					<i class = "edit icon"></i>
+					Edit Project
+				</div>
+				<div class="ui orange right labeled icon button open-schedule">
+					<i class = "angle double right icon"></i>
+					View Schedule
+				</div>
+			</div>
+			{{/if}}
+			{{/if}}
 
-			<div class="header">
+		</div>
+		{{#if editMode}}
+		<div class = "ui raised container segment">
+			<div class="ui header">
 				Edit Project Details
 			</div>
 			<script>
@@ -19,105 +53,109 @@
 				$('.dropdown').dropdown('refresh');
 			</script>
 			<form>
-			<div class="ui form" id="editProjectForm" action="action">
-				<div class="field">
-					<label>Project Name</label>
-					<input type="text" id="pName" value={{getProject.name}}>
-				</div>
-				<div class="field">
-					<label>Description</label>
-					<input type="text" id="pDescription" value="{{getProject.description}}">
-				</div>
-				<div class="field">
-					<label>Capacity</label>
-					<select class="ui selection dropdown">
-						{{#each capacityOptions}}
-						<option> {{this}}</option>
-						{{/each}}
-					</select>
-				</div>
-				<div class="field">
-					<label>Add desired skills</label>
-					<select multiple="" class="ui multiple search selection dropdown">
-						{{#each getAllSkills}}
-						<option> {{name}}</option>
-						{{/each}}
-					</select>
-				</div>
-				<button class="ui blue large button" id="editProjectButton" type="submit">submit</button>
+				<div class="ui form" id="editProjectForm" action="action">
+					<div class="field">
+						<label>Project Name</label>
+						<input type="text" id="pName" value={{getProject.name}}>
+					</div>
+					<div class="field">
+						<label>Description</label>
+						<input type="text" id="pDescription" value="{{getProject.description}}">
+					</div>
+					<div class="field">
+						<label>Capacity</label>
+						<select class="ui selection dropdown">
+							{{#each capacityOptions}}
+							<option> {{this}}</option>
+							{{/each}}
+						</select>
+					</div>
+					<div class="field">
+						<label>Add desired skills</label>
+						<select multiple="" class="ui multiple search selection dropdown">
+							{{#each getAllSkills}}
+							<option> {{name}}</option>
+							{{/each}}
+						</select>
+					</div>
+					<button class="ui blue large button" id="editProjectButton" type="submit">submit</button>
 				</div>
 			</form>
-
-		<br><br><br>
-		<div class = "ui two column stackable grid raised container segment">
-			<div class = "four wide equal height column">
-				<h1 class="ui center aligned icon header">
-					<i class = "circular users icon"> </i>
-					{{getProject.name}}	
-				</h1>
-				<div class="ui center aligned container">
-					<div class="huge statistic">
-						<div class="value">
-							<i class= "user icon"></i> 
-							<strong> {{getNumMembers}} / {{getProjectCapacity}} Vacancies</strong>
-						</div>
-					</div>
-					<h2 class = "ui horizontal divider header">Skills sought after</h2>
-					<div class = "ui very relaxed huge celled list">
-
-						{{#each getProject.reqSkills}}
-						<a class = "item validate-skill">
-							<i class = "medium check circle icon"></i>
-							<div class = "content">
-								<div class = "header">{{name}}</div>
-							</div>
-						</a>
-						{{/each}}
-
+		</div>
+<!-- 		{{#if openSchedule}}
+	{{>ProjectInvitation}} -->
+	{{else}}
+	{{#if openSchedule}}
+	{{>ProjectInvitation}}
+	{{else}}
+	<br><br><br>
+	<div class = "ui two column stackable grid raised container segment">
+		<div class = "four wide equal height column">
+			<h1 class="ui center aligned icon header">
+				<i class = "circular users icon"> </i>
+				{{getProject.name}}	
+			</h1>
+			<div class="ui center aligned container">
+				<div class="huge statistic">
+					<div class="value">
+						<i class= "user icon"></i> 
+						<strong> {{getNumMembers}} / {{getProjectCapacity}} Vacancies</strong>
 					</div>
 				</div>
-			</div>
-			<div class = "eleven wide stretched column">
-				<h2 class = "ui center aligned header">Current Members</h2>
-				<div class = "ui center aligned container">
-					<div class="ui huge horizontal divided relaxed animated list">
-						<script>
-							$('.linked.item')
-							.popup();
-						</script>
-						{{#each getProjectMembers}}
-						<div class = "ui linked item" data-tooltip= "Click for Details" >
-							<a href="/profile={{_id}}">
-								<img class = "ui tiny avatar image" src="/images/download.png">
-								<div class = "content">
-									<li>
-										<div id = "name" class = "header">
-											{{profile.firstName}}&nbsp;{{profile.lastName}}
-										</div>
-										<br>
-										<div>
-											{{#each emails}}
-											{{address}}
-											{{/each}}
-										</div>
-									</li>
-								</div>
-							</a>
+				<h2 class = "ui horizontal divider header">Skills sought after</h2>
+				<div class = "ui very relaxed huge celled list">
+					{{#each getProject.desiredSkills}}
+					<a class = "item validate-skill">
+						<i class = "medium check circle icon"></i>
+						<div class = "content">
+							<div class = "header">{{this}}</div>
 						</div>
-						{{/each}}
-						<br><br><br>
-						<div class = "row"> 
-							<div class = "ui text container">
-								{{getProject.description}} 
+					</a>
+					{{/each}}
+
+				</div>
+			</div>
+		</div>
+		<div class = "eleven wide stretched column">
+			<h2 class = "ui center aligned header">Current Members</h2>
+			<div class = "ui center aligned container">
+				<div class="ui huge horizontal divided relaxed animated list">
+					<script>
+						$('.linked.item')
+						.popup();
+					</script>
+					{{#each getProjectMembers}}
+					<div class = "ui linked item" data-tooltip= "Click for Details" >
+						<a href="/profile={{_id}}">
+							<img class = "ui tiny avatar image" src="/images/download.png">
+							<div class = "content">
+								<li>
+									<div id = "name" class = "header">
+										{{profile.firstName}}&nbsp;{{profile.lastName}}
+									</div>
+									<br>
+									<div>
+										{{#each emails}}
+										{{address}}
+										{{/each}}
+									</div>
+								</li>
 							</div>
+						</a>
+					</div>
+					{{/each}}
+					<br><br><br>
+					<div class = "row"> 
+						<div class = "ui text container">
+							{{getProject.description}} 
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
 	</div>
-</template>
-<template name = "ProjectEditForm">
+	{{/if}}
+	{{/if}}
 
+</div>
 </template>

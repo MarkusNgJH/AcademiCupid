@@ -1,10 +1,17 @@
 $('.linked.item')
-  .popup()
+.popup()
 ;
 
+function isDuplicate(str, arr) {
+	return arr.indexOf(str) > -1;
+}
 
 Template.ProjectSingle.onCreated(function() {
-    Session.set('editMode', false);
+	Session.set('editMode', false);
+});
+
+Template.ProjectSingle.onCreated(function() {
+	Session.set('openSchedule', false);
 });
 
 Template.ProjectSingle.helpers({
@@ -34,6 +41,9 @@ Template.ProjectSingle.helpers({
 	editMode: function () {
 		return Session.get('editMode');
 	},
+	openSchedule:function(){
+		return Session.get('openSchedule');
+	},
 	getProjectCapacity:function(){
 		var id = FlowRouter.getParam('projectId');
 		var project = Projects.findOne({_id: id});
@@ -53,17 +63,16 @@ Template.ProjectSingle.helpers({
 });
 
 Template.ProjectSingle.events({
-	'click .openModal': function() {
-		$('.ui.modal').modal('show');
-		// modal({
-		// 	closable: false,
-		// }).
+	'click .toggle-edit': function() {
 		console.log(Session.get('editMode'));
 		Session.set('editMode', !Session.get('editMode'));
 	},
 	'click .validate-skill': function() {
 		console.log("skill validated");
 	}, 
+	'click .open-schedule':function(){
+		Session.set('openSchedule', !Session.get('openSchedule'));
+	},
 	'click #editProjectButton':function(e,t){
 		e.preventDefault();
 		var projectId = FlowRouter.getParam('projectId');
@@ -72,17 +81,32 @@ Template.ProjectSingle.events({
 		Capacity = parseInt(Capacity);
 		var projectName = $('#pName').val();
 		var projectDescription = $('#pDescription').val();
-		console.log(projectName);
-		console.log(projectDescription);
 		var skills = Projects.findOne(projectId).desiredSkills;
 		var skillsList = document.getElementsByClassName("item active filtered");
 		for(var i=0; i<skillsList.length; i++) {
-			skills.push(skillsList[i].getAttribute("data-value"));
+			var skillName = skillsList[i].getAttribute("data-value").replace(/\s/g, '');
+			if(isDuplicate(skillName, skills)){
+				swal({
+					title: skillName + ' is already added',
+					text: 'Please try again',
+					type: 'error',
+					showConfirmButton: true
+				});
+				
+			} else{
+				skills.push(skillName);
 			}
+		}
 		Projects.update(projectId, {$set:{"name": projectName}});
 		Projects.update(projectId, {$set:{"description": projectDescription}});
 		Projects.update(projectId, {$set:{"capacity": Capacity}});
 		Projects.update(projectId, {$set:{"desiredSkills": skills}});
-		return false;
+		swal({
+					title: 'Success!',
+					text: 'Your project has been updated',
+					type: 'success',
+					showConfirmButton: true
+				});
+		Session.set('editMode', !Session.get('editMode'));
 	}
 });
