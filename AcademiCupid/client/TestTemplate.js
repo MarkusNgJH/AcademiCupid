@@ -95,28 +95,3 @@ Template.TestTemplate.helpers({
 		return "background-color: hsl(93,"+ 70 + "%," + lightness + "%)";
 	}
 });
-
-Template.TestTemplate.events({
-	"click .clickable": function(event){
-		var position = event.currentTarget.id;
-		var row = position.split(",")[0];
-		var col = position.split(",")[1];
-		dayFinder = {"0": "Monday", "1": "Tuesday", "2": "Wednesday", "3": "Thursday", "4": "Friday", "5": "Saturday", "6": "Sunday"};
-		var timeSlot = (parseInt(col) + 1).toString();
-		var Day = dayFinder[row];
-		console.log(Day + timeSlot);
-		var user = Meteor.users.findOne(Meteor.userId());
-		var currentSchedule = user.profile.schedule;
-		var fieldToUpdate = "profile.schedule." + Day + "." + timeSlot;
-		if(currentSchedule[Day][timeSlot]==="Free"){
-			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Busy"}});
-		}
-		else if(currentSchedule[Day][timeSlot]==="Busy"){
-			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Free"}});
-		}
-		//console.log("schedule Updated");
-	},
-	"onHover .clickable":function(event){
-		return;
-	}
-});

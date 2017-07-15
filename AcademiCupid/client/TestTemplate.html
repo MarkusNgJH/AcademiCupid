@@ -1,35 +1,33 @@
 <template name="TestTemplate">
 	<h1>test Template</h1>
 	<!-- {{getSchedules}} -->
-	<table class="ui celled table">
+	<table class="ui celled large table">
 		<thead>
-			<tr>
-				<th>Day</th>
-				<th>"0000 to 0200"</th>
-				<th>"0200 to 0400"</th>
-				<th>"0400 to 0600"</th>
-				<th>"0600 to 0900"</th>
-				<th>"0800 to 1000"</th>
-				<th>"1000 to 1200"</th>
-				<th>"1200 to 1400"</th>
-				<th>"1400 to 1600"</th>
-				<th>"1600 to 1800"</th>
-				<th>"1800 to 2000"</th>
-				<th>"2000 to 2200"</th>
-				<th>"2200 to 0000"</th>
+			<tr class="center aligned">
+				<th></th>
+				<th>0000-0200</th>
+				<th>0200-0400</th>
+				<th>0400-0600</th>
+				<th>0600-0900</th>
+				<th>0800-1000</th>
+				<th>1000-1200</th>
+				<th>1200-1400</th>
+				<th>1400-1600</th>
+				<th>1600-1800</th>
+				<th>1800-2000</th>
+				<th>2000-2200</th>
+				<th>2200-0000</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each getSchedules}} 
 			{{#let rowIndex=@index}}
 			<tr> 	
-				<td>
-					<button class="fluid ui button"> 
-						{{getDayOfWeek(@index)}} 
-					</button>
+				<td class="right aligned">
+					{{getDayOfWeek(@index)}} 
 				</td>
 				{{#each this}} 
-				<td style = {{conditional(this)}} class = ""> 
+				<td style = {{conditional(this)}} class="center aligned"> 
 <!-- 				<div class="ui button" data-tooltip="Add users to your feed" data-position="top center">   Top Center </div> -->
 					<div data-tooltip= {{getFreeIndividuals(this)}} onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
 						{{countFreeIndividuals(this)}}

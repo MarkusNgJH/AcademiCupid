@@ -121,7 +121,10 @@ Template.Profile.events({
 		}
 	},
 	'click .view-schedule': function() {
-        $('.ui.modal').modal('show');
+        $('.ui.modal')
+            .modal({ observeChanges: true })
+            .modal('show');
+            refreshModal();
     }
 });
 
@@ -132,4 +135,9 @@ function isNotDuplicate(str, arr) {
 		}
 	}
 	return true;
+}
+
+function refreshModal() {
+    Meteor.setTimeout(function() { refreshModal() }, 1);
+    return $('.ui.modal').modal('refresh');
 }

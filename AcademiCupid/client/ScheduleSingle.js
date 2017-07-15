@@ -39,7 +39,6 @@ Template.ScheduleSingle.helpers({
 				weekSchedule.push(daySchedule);
 			}
 		}
-		console.log(weekSchedule); 
 		return weekSchedule;
 	},
 	conditionalColor: function(row, col){

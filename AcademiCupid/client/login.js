@@ -20,8 +20,16 @@ Template.login.events({
         return false;
     },
     'click #register-button': function() {
-        $('.ui.modal').modal('show');
+        $('.ui.modal')
+            .modal({ observeChanges: true })
+            .modal('show');
+            refreshModal();
     }
 });
+
+function refreshModal() {
+    Meteor.setTimeout(function() { refreshModal() }, 1);
+    return $('.ui.modal').modal('refresh');
+}
 
 Meteor.subscribe('userData');

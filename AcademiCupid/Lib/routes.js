@@ -100,6 +100,13 @@ FlowRouter.route('/testpage',{
 	}
 });
 
+FlowRouter.route('/testpage2',{
+	name: 'TestPage2',
+	action(){
+		BlazeLayout.render('MainLayout', {main: "TestTemplate2"});
+	}
+});
+
 FlowRouter.route('/schedulesingle',{
 	name: 'ScheduleSingle',
 	action(){

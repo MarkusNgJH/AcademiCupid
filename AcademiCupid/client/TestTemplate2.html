@@ -1,0 +1,30 @@
+<template name="TestTemplate2">
+	<h1>This is test template 2</h1>
+
+	<script type="text/javascript">
+		// $('.modal').modal('setting', { detachable:false }).modal('show');
+
+		// $('.ui.modal')
+	 //      .modal( {
+	 //        observeChanges: true,
+	 //      })
+	 //      .modal('show');
+
+	  // $('.ui.modal').modal({ detachable:false, observeChanges:true }).modal('show').modal('refresh');
+	</script>
+
+	<div class="container">
+		<button class="ui button" id="viewModal">View Modal</button>
+	</div>
+
+	<div class="ui fullscreen modal">
+	  <i class="close icon"></i>
+	  <div class="header">
+	    My Schedule
+	  </div>
+	  <div class="content">
+	  	{{> ScheduleSingle}}
+	  </div>
+	</div>
+
+</template>

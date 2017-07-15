@@ -26,8 +26,14 @@
 						<i class = "write icon"></i>
 						View Schedule
 					</button>
-					<div class="ui modal">
-						{{> ScheduleSingle}}
+					<div class="ui fullscreen modal">
+						<i class="close icon"></i>
+						<div class="header">
+						    My Schedule
+						</div>
+						<div class="content">
+							{{> ScheduleSingle}}	
+						</div>
 					</div>
 					{{/if}}
 				{{/if}}
