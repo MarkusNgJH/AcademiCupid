@@ -11,7 +11,7 @@ Template.ProjectSingle.onCreated(function() {
 });
 
 Template.ProjectSingle.onCreated(function() {
-	Session.set('openSchedule', false);
+	Session.set('openTeam', false);
 });
 
 Template.ProjectSingle.helpers({
@@ -41,8 +41,8 @@ Template.ProjectSingle.helpers({
 	editMode: function () {
 		return Session.get('editMode');
 	},
-	openSchedule:function(){
-		return Session.get('openSchedule');
+	openTeam:function(){
+		return Session.get('openTeam');
 	},
 	getProjectCapacity:function(){
 		var id = FlowRouter.getParam('projectId');
@@ -59,6 +59,17 @@ Template.ProjectSingle.helpers({
 	},
 	getAllSkills: function() {
 		return Skills.find({});
+	},
+	isProjectOwner: function () {
+		var currentEventId = FlowRouter.getParam('eventId');
+		var findProject = Projects.findOne( {
+			$and : [
+			{ belongsToEvent: currentEventId },
+			{ owner: Meteor.userId() }
+			]
+		} );
+		console.log(findProject);
+		return findProject != null;
 	}
 });
 
@@ -70,8 +81,8 @@ Template.ProjectSingle.events({
 	'click .validate-skill': function() {
 		console.log("skill validated");
 	}, 
-	'click .open-schedule':function(){
-		Session.set('openSchedule', !Session.get('openSchedule'));
+	'click .open-team':function(){
+		Session.set('openTeam', !Session.get('openTeam'));
 	},
 	'click #editProjectButton':function(e,t){
 		e.preventDefault();

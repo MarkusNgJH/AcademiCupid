@@ -3,10 +3,10 @@
 		<div class="row">
 			{{#if getProject}}
 				<h3 class="ui block header">
-					Enrolled Project: {{getProject.name}}
+					Enrolled Project: 
 					{{#if isProjectOwner}}	
-						<a href="/event={{eventId}}/project={{getProject._id}}/projectinvitation">
-							&nbsp;&nbsp;&nbsp;&nbsp;<button class="ui teal button">Manage Team</button>
+						<a href="/event={{eventId}}/project={{getProject._id}}">
+							{{getProject.name}}
 						</a>
 					{{/if}}
 				</h3>

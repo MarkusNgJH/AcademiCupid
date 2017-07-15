@@ -126,5 +126,16 @@ Template.ProjectInvitation.helpers ({
 		var ownerId = currentProject.owner;
 		var owner = Meteor.users.findOne(ownerId);
 		return owner;
+	},	
+	isProjectOwner: function () {
+		var currentEventId = FlowRouter.getParam('eventId');
+		var findProject = Projects.findOne( {
+			$and : [
+			{ belongsToEvent: currentEventId },
+			{ owner: Meteor.userId() }
+			]
+		} );
+		console.log(findProject);
+		return findProject != null;
 	}
 });

@@ -19,7 +19,7 @@
 					<i class = "angle double left icon"></i>
 					To Main Page
 				</a>
-				<div class="ui blue right labeled icon button open-schedule">
+				<div class="ui blue right labeled icon button open-team">
 					<i class = "angle double right icon"></i>
 					Back to Your Project
 				</div>
@@ -30,13 +30,15 @@
 					<i class = "angle double left icon"></i>
 					To Main Page
 				</a>
+				{{#if isProjectOwner}}
 				<div class="ui blue labelled button toggle-edit">
 					<i class = "edit icon"></i>
 					Edit Project
 				</div>
-				<div class="ui orange right labeled icon button open-schedule">
+				{{/if}}
+				<div class="ui orange right labeled icon button open-team">
 					<i class = "angle double right icon"></i>
-					View Schedule
+					View Team
 				</div>
 			</div>
 			{{/if}}
@@ -85,7 +87,7 @@
 <!-- 		{{#if openSchedule}}
 	{{>ProjectInvitation}} -->
 	{{else}}
-	{{#if openSchedule}}
+	{{#if openTeam}}
 	{{>ProjectInvitation}}
 	{{else}}
 	<br><br><br>
