@@ -1,13 +1,11 @@
 Template.ProfileCard.rendered = function () {
 	$('ui dropdown').dropdown();
 	$('#multi-select').dropdown();
-	Session.set('editProfile', false);
+	Session.set('viewSchedule', false);
+
 }
 
 Template.ProfileCard.helpers({
-	isEditMode: function() {
-		return Session.get('editProfile');
-	},
 	isOwner: function() {
 		return FlowRouter.getParam('userId') === Meteor.userId();
 	},
@@ -38,8 +36,19 @@ Template.ProfileCard.helpers({
 	},
 	getSkills: function() {
 		return Skills.find({});
+	},
+		viewSchedule: function() {
+		return Session.get('viewSchedule');
 	}
 });
+
+Template.ProfileCard.events({
+	'click .view-schedule': function(){
+		Session.set('viewSchedule', !Session.get('viewSchedule'));
+	}
+});
+
+
 
 function isNotDuplicate(str, arr) {
 	for(var i = 0; i < arr.length; i++) {

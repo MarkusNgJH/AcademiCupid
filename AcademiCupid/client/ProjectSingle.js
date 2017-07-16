@@ -1,7 +1,10 @@
 $('.linked.item')
 .popup()
 ;
-
+function refreshModal() {
+    Meteor.setTimeout(function() { refreshModal() }, 1);
+    return $('.ui.modal').modal('refresh');
+}
 function isDuplicate(str, arr) {
 	return arr.indexOf(str) > -1;
 }
@@ -85,7 +88,10 @@ Template.ProjectSingle.events({
 		Session.set('openTeam', !Session.get('openTeam'));
 	},
 	'click .openProfile':function(){
-		$('.ui.modal').modal('show');
+		$('.ui.modal')
+			.modal({ observeChanges: true })
+            .modal('show'); 
+            refreshModal();
 	},
 	'click #editProjectButton':function(e,t){
 		e.preventDefault();

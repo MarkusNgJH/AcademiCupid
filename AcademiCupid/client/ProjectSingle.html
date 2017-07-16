@@ -35,11 +35,11 @@
 					<i class = "edit icon"></i>
 					Edit Project
 				</div>
-				{{/if}}
 				<div class="ui orange right labeled icon button open-team">
 					<i class = "angle double right icon"></i>
-					View Team
+					Manage Team
 				</div>
+				{{/if}}
 			</div>
 			{{/if}}
 			{{/if}}
@@ -127,7 +127,7 @@
 						{{#each getProjectMembers}}
 						<div class = "ui linked item openProfile" data-tooltip= "Click for Details" >
 							<!-- <a href="/profile={{_id}}"> -->
-						<div class = "ui modal">
+						<div class = "ui fullscreen modal">
 								{{>ProfileCard getUser = this}}
 							</div>
 							<img class = "ui tiny avatar image" src="/images/download.png">

@@ -10,7 +10,26 @@
 					Email: {{#each getUser.emails}}{{address}}{{/each}}
 				</h3>
 			</div>
+			<div class = "six wide column">
+				{{#if viewSchedule}}
+				<button class="ui teal labeled icon button view-schedule">
+					<i class = "angle double left icon"></i>
+					Back to Profile
+				</button>
+				{{else}}
+				<button class="ui teal labeled icon button view-schedule">
+					<i class = "write icon"></i>
+					View Schedule
+				</button>
+				{{/if}}
+			</div>
 		</div>
+
+		{{#if viewSchedule}}
+		<div class="ui row raised container segment">
+			{{>ScheduleSingle}}
+		</div>	
+		{{else}}
 
 		<div class="row">
 			<div class="eight wide column">
@@ -119,6 +138,6 @@
 				</div>
 			</div>
 		</div>
-		
+		{{/if}}
 	</div>
 </template>
