@@ -31,8 +31,8 @@
 					{{getDayOfWeek(@index)}} 
 				</td>
 				{{#each this}} <!-- DAY -->
-				<td class = "{{conditionalColor rowIndex @index}} selectable"> 
-					<div class = {{isClickable}} onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
+				<td class = "{{conditionalColor rowIndex @index}} {{isSelectable}}"> 
+					<div class="{{isClickable}}" onmouseover="" style="{{showFinger}}" id = "{{rowIndex}},{{@index}}"> 
 						{{this}}
 					</div>
 				</td> 

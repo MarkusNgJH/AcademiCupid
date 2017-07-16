@@ -125,9 +125,10 @@
 							.popup();
 						</script>
 						{{#each getProjectMembers}}
+						{{this.profile.firstName}}
 						<div class = "ui linked item openProfile" data-tooltip= "Click for Details" >
 							<!-- <a href="/profile={{_id}}"> -->
-						<div class = "ui fullscreen modal">
+						<div class = "ui fullscreen modal" id="profileCardModal">
 								{{>ProfileCard getUser = this}}
 							</div>
 							<img class = "ui tiny avatar image" src="/images/download.png">

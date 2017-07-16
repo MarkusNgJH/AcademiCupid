@@ -88,7 +88,7 @@ Template.ProjectSingle.events({
 		Session.set('openTeam', !Session.get('openTeam'));
 	},
 	'click .openProfile':function(){
-		$('.ui.modal')
+		$('#profileCardModal')
 			.modal({ observeChanges: true })
             .modal('show'); 
             refreshModal();

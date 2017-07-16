@@ -24,7 +24,7 @@ Template.ScheduleSingle.helpers({
 	},
 	getSchedule: function(){
 		//console.log("schedule called")
-		var userId = Meteor.userId();
+		var userId = FlowRouter.getParam('userId');
 		var weekSchedule = [];
 		var oneWeek = Meteor.users.findOne(userId).profile.schedule;
 		//console.log(oneWeek);
@@ -42,7 +42,7 @@ Template.ScheduleSingle.helpers({
 		return weekSchedule;
 	},
 	conditionalColor: function(row, col){
-		var userId = Meteor.userId();
+		var userId = FlowRouter.getParam('userId');
 		var weekSchedule = [];
 		var oneWeek = Meteor.users.findOne(userId).profile.schedule;
 		dayFinder = {"0": "Monday", "1": "Tuesday", "2": "Wednesday", "3": "Thursday", "4": "Friday", "5": "Saturday", "6": "Sunday"};
@@ -59,6 +59,18 @@ Template.ScheduleSingle.helpers({
 	isClickable:function() {
 		if(Meteor.userId() == FlowRouter.getParam("userId")){
 			return "clickable";
+		}
+		return "";
+	},
+	isSelectable: function() {
+		if(Meteor.userId() == FlowRouter.getParam("userId")){
+			return "selectable";
+		}
+		return "";
+	},
+	showFinger: function() {
+		if(Meteor.userId() == FlowRouter.getParam("userId")){
+			return "cursor: pointer;";
 		}
 		return "";
 	}

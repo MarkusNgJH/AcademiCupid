@@ -15,6 +15,15 @@
 					<i class = "write icon"></i>
 					View Schedule
 				</button>
+				<div class="ui fullscreen modal" id='personalSchedule'>
+					<i class="close icon"></i>
+					<div class="header">
+						My Schedule
+					</div>
+					<div class="content">
+						{{> ScheduleSingle}}	
+					</div>
+				</div>
 				{{#if isEditMode}}
 				<button class="ui orange labeled icon button toggle-edit">
 					<i class = "compress icon"></i>
@@ -26,15 +35,6 @@
 					<i class = "write icon"></i>
 					Edit Profile
 				</button>
-				<div class="ui fullscreen modal" id='personalSchedule'>
-					<i class="close icon"></i>
-					<div class="header">
-						My Schedule
-					</div>
-					<div class="content">
-						{{> ScheduleSingle}}	
-					</div>
-				</div>
 				{{/if}}
 				{{/if}}
 			</div>
