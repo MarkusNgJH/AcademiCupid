@@ -1,0 +1,124 @@
+<template name="ProfileCard">
+	{{ScheduleSingle}}
+	<div class = "ui container grid getUser" style="margin: 20px 20px 0px 20px;">
+		<div class="ui row raised container segment">
+			<div class="ten wide column">
+				<h2 class="ui blue block header" style="font-size: 3em">
+					{{getUser.profile.firstName}}&nbsp;{{getUser.profile.lastName}}
+				</h2>
+				<h3 class="ui header">
+					Email: {{#each getUser.emails}}{{address}}{{/each}}
+				</h3>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="eight wide column">
+				<div class="ui row raised container segment">
+					<div class="ui sizer vertical segment">
+						<div class="ui huge header">
+							Description
+						</div>
+					</div>
+				</div>
+				<div class="ui row raised container segment">
+					<div class="ui sizer vertical segment">
+						<div class="ui huge header">
+							Skills
+						</div>
+						<div class="ui grid">
+							<div class="one wide column"></div>
+							<div class="thirteen wide column">
+								<div class="ui inverted segment">
+									<div class="ui inverted relaxed divided list">
+										{{#each getUser.profile.skills}}
+										<div class="item">
+											<div class="content">
+												<a class="ui {{validatedByCurrUser}} large label">
+													{{name}}
+													<div class="detail">{{validators.length}}</div>
+												</a>	
+											</div>
+										</div>
+										{{else}}
+										<div class="item">
+											<div class="content">
+												<div class="header">No skill to display.</div>
+											</div>
+										</div>
+										{{/each}}	
+									</div>			
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="eight wide column">
+				<div class="ui row raised container segment">
+					<div class="ui sizer vertical segment">
+						<div class="ui huge header">
+							Projects
+						</div>
+						<div class="ui grid">
+							<div class="one wide column"></div>
+							<div class="thirteen wide column">
+								<div class="ui inverted segment">
+									<div class="ui inverted relaxed divided list">
+										{{#each getUser.profile.projects}}
+										<div class="item">
+											<div class="content">
+												<div class="ui medium header">{{getProjectName(this)}}</div>
+												<div class="description">Event: {{getProjectBelongsToEventName(this)}}</div>
+											</div>
+										</div>
+										{{else}}
+										<div class="item">
+											<div class="content">
+												<div class="header">No project to display.</div>
+											</div>
+										</div>
+										{{/each}}	
+									</div>			
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ui row raised container segment">
+					<div class="ui sizer vertical segment">
+						<div class="ui huge header">
+							Events
+						</div>
+						<div class="ui grid">
+							<div class="one wide column"></div>
+							<div class="thirteen wide column">
+								<div class="ui inverted segment">
+									<div class="ui inverted relaxed divided list">
+										{{#each getUser.profile.enrolled}}
+										<div class="item">
+											<div class="content">
+												<div class="ui medium header">{{getEventName(this)}}</div>
+											</div>
+										</div>
+										{{else}}
+										<div class="item">
+											<div class="content">
+												<div class="header">No event to display.</div>
+											</div>
+										</div>
+										{{/each}}	
+									</div>			
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</template>

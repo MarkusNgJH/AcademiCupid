@@ -84,6 +84,9 @@ Template.ProjectSingle.events({
 	'click .open-team':function(){
 		Session.set('openTeam', !Session.get('openTeam'));
 	},
+	'click .openProfile':function(){
+		$('.ui.modal').modal('show');
+	},
 	'click #editProjectButton':function(e,t){
 		e.preventDefault();
 		var projectId = FlowRouter.getParam('projectId');
