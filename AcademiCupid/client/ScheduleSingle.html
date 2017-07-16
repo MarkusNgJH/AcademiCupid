@@ -35,11 +35,10 @@
 				</td>
 				{{#each this}} <!-- DAY -->
 				<td class = "{{conditionalColor rowIndex @index}}"> 
-					<div class = "clickable" onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
+					<div class = {{isClickable}} onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
 						{{this}}
 					</div>
 				</td> 
-				
 				{{/each}}
 				
 			</tr>

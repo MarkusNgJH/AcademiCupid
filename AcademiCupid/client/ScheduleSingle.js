@@ -56,6 +56,15 @@ Template.ScheduleSingle.helpers({
 		else if(timeSlot == "Free"){
 			return "positive";
 		}
+	},
+	isClickable:function(){
+		if(Meteor.userId() == FlowRouter.getParam("profile")){
+			console.log(Meteor.userId());
+			console.log(FlowRouter.getParam("profile"));
+			console.log(Meteor.userId() == FlowRouter.getParam("profile"));
+			return "clickable";
+		}
+		return "";
 	}
 });
 
