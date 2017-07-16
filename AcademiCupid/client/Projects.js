@@ -12,6 +12,9 @@ Template.Projects.helpers({
 		var eventId = FlowRouter.getParam('eventId');
 		return Projects.find({belongsToEvent: eventId});
 	},
+	skillsFilterMode: function() {
+		return Session.get('skillsFilterMode');
+	}
 });
 
 Template.Projects.events ({

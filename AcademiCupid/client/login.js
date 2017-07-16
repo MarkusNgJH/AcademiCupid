@@ -20,7 +20,7 @@ Template.login.events({
         return false;
     },
     'click #register-button': function() {
-        $('.ui.modal')
+        $('#registrationForm')
             .modal({ observeChanges: true })
             .modal('show');
             refreshModal();

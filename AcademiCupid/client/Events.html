@@ -1,5 +1,66 @@
-<template name = "Events">
-	<div class= "ui grid">
+<template name = "EventsSelection">
+	<div class="ui four cards">
+		{{#each events}}
+		<div class="ui card">
+			<div class="content">
+				<div class="header">{{this.name}}</div>
+			</div>
+			<div class="content">
+				<h4 class="ui sub header">Activity</h4>
+				<div class="ui small feed">
+					<div class="event">
+						<div class="content">
+							<div class="summary">
+								<a>Elliot Fu</a> added <a>Jenny Hess</a> to the project
+							</div>
+						</div>
+					</div>
+					<div class="event">
+						<div class="content">
+							<div class="summary">
+								<a>Stevie Feliciano</a> was added as an <a>Administrator</a>
+							</div>
+						</div>
+					</div>
+					<div class="event">
+						<div class="content">
+							<div class="summary">
+								<a>Helen Troy</a> added two pictures
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="extra content">
+				<a class="ui button" href="/event={{this._id}}">Go to event</a>
+			</div>
+		</div>
+		{{else}}
+		<div class="ui container raised segment">
+			You are not enrolled in any event.
+		</div>
+		{{/each}}
+	</div>
+	<br>
+	<div class="ui cotainer center aligned">
+		<button class="ui teal button" id="newEventBtn">Create new event</button>
+	</div>
+	<div class="ui modal" id="newEventForm">
+		<div class="ui container raised segment">
+			{{#autoForm collection="Events" id="insertEventForm" type="insert" template="semanticUI"}}
+			    <fieldset>
+			      <legend><h1 class="ui header">Create a new event</h1></legend>
+			      {{> afQuickField name='name'}}
+			      {{> afQuickField name='description' rows=6}}
+			    </fieldset>
+			    <br>
+			    <button type="submit" class="ui green button"> Submit </button>
+		  	{{/autoForm}}		
+		</div>
+	</div>
+</template>
+
+<!-- <div class= "ui grid">
 	<div class="container">
 		<h2>Event Selection Page</h2>
 	</div>
@@ -9,7 +70,7 @@
 				<h3>You can add new events here:</h3>
 			</div>
 			<div class="row">
-				{{> quickForm collection="Events" id="insertEventsForm" type="insert"}}
+				
 			</div>
 		</div>
 
@@ -26,5 +87,4 @@
 			{{/each}}
 		</ul>	
 	</div>
-	</div>
-</template>
+</div> -->

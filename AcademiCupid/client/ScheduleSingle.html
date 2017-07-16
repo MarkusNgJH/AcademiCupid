@@ -1,6 +1,6 @@
 <template name="ScheduleSingle">
 	<style>
-	.clickable:hover {
+		.clickable:hover {
 			font-weight: bold;
 		}
 	</style>
@@ -31,14 +31,12 @@
 					{{getDayOfWeek(@index)}} 
 				</td>
 				{{#each this}} <!-- DAY -->
-				<td class = "{{conditionalColor rowIndex @index}} selectable center aligned"> 
-					<div class = "clickable" onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
+				<td class = "{{conditionalColor rowIndex @index}} selectable"> 
+					<div class = {{isClickable}} onmouseover="" style="cursor: pointer;" id = "{{rowIndex}},{{@index}}"> 
 						{{this}}
 					</div>
 				</td> 
-				
-				{{/each}}
-				
+				{{/each}}	
 			</tr>
 			{{/let}}
 			{{/each}}

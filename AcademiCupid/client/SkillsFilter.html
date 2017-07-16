@@ -1,15 +1,27 @@
 <template name="SkillsFilter">
-	<script>
-		$('ui dropdown').dropdown();
-		$('#multi-select').dropdown();
-		$('.dropdown').dropdown('refresh');
-	</script>
-	<label>Filter By Skill Tags</label>
-	<select name="skills" multiple="" class="ui fluid search dropdown" id="multi-select">
-		{{#each getProjects}}
-			{{#each reqSkills}}
-				<option>{{name}}</option>
-			{{/each}}
-		{{/each}}
-	</select>
+	<div class="ui grid">
+	<div class="ui four wide column">
+		<button class="ui labeled icon button" id="skills-filter-btn">
+			<i class="filter icon"></i>
+			Fitler by Skills
+		</button>
+	</div>
+	{{#if isSkillsFilterMode}}
+		<div class="ui nine wide column">
+			<select name="skills" multiple="" class="ui fluid search dropdown" id="multi-select">
+				{{#each getUniqueSkills}}
+					<option>{{this}}</option>
+				{{/each}}
+			</select>
+		</div>	
+		<div class="ui three wide column">
+			<button id="submit-filter" class="ui teal button" type="submit">Submit</button>	
+		</div>
+		<script>
+			$('ui dropdown').dropdown();
+			$('#multi-select').dropdown();
+			$('.dropdown').dropdown('refresh');
+		</script>
+	{{/if}}
+	</div>
 </template>

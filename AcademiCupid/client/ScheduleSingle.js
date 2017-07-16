@@ -55,6 +55,12 @@ Template.ScheduleSingle.helpers({
 		else if(timeSlot == "Free"){
 			return "positive";
 		}
+	},
+	isClickable:function() {
+		if(Meteor.userId() == FlowRouter.getParam("userId")){
+			return "clickable";
+		}
+		return "";
 	}
 });
 

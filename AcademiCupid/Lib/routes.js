@@ -33,7 +33,7 @@ FlowRouter.route('/registration',{
 FlowRouter.route('/events', {
 	name: 'EventsPage',
 	action(){
-		BlazeLayout.render('MainLayout', {main: "Events"});
+		BlazeLayout.render('MainLayout', {main: "EventsSelection"});
 	}
 });
 

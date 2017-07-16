@@ -10,7 +10,10 @@
 		<input type="submit" value="submit">	
 	</form>
 
-	<div class="ui divided items">	
+	<div class="ui divided items">
+		{{#if skillsFilterMode}}
+			Filter Mode
+		{{else}}
 		{{#each getProjects}}
 		<div class="item">
 			<div class="ui tiny image">
@@ -26,8 +29,8 @@
 					</div>
 				</div>
 				<div class = "ui big horizontal list">
-					{{#each reqSkills}}
-					<div class="ui label">{{name}}</div>
+					{{#each desiredSkills}}
+					<div class="ui label">{{this}}</div>
 					{{/each}}
 				</div>
 				<div class="description">
@@ -51,6 +54,7 @@
 			<h3>This event has no project.</h3>
 		</div>
 		{{/each}}
+		{{/if}}
 	</div>
 </template>
 

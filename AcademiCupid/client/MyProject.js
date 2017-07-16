@@ -22,7 +22,6 @@ Template.MyProject.helpers({
 			{ owner: Meteor.userId() }
 			]
 		} );
-		console.log(findProject);
 		return findProject != null;
 	},
 	isMember: function () {
@@ -33,7 +32,6 @@ Template.MyProject.helpers({
 			{ owner: Meteor.userId() }
 			]
 		} );
-		console.log(findProject);
 		return findProject != null;
 	}
 });

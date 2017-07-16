@@ -3,20 +3,26 @@ Meteor.subscribe('Events');
 Meteor.subscribe('Projects');
 Meteor.subscribe('Skills');
 
-Template.Events.helpers({
+Template.EventsSelection.helpers({
  events: ()=> {
   return Events.find({});
  } //tutorial 12
 });
 
-Template.Events.events({
+Template.EventsSelection.events({
 	'click .event-selected': function() {
 		Session.set('currentEvent', this._id);
-	}
+	},
+  'click #newEventBtn': function() {
+    $('#newEventForm')
+            .modal({ observeChanges: true })
+            .modal('show');
+            refreshModal();
+  }
 });
 
 AutoForm.hooks({
-  insertEventsForm:{
+  insertEventForm:{
     before: {
       insert: function(doc) {
        doc.participants = [];
@@ -30,6 +36,7 @@ AutoForm.hooks({
       enrolled.push(eventId);
       Meteor.users.update(Meteor.userId(), {$set:{"profile.enrolled":enrolled}});
       FlowRouter.go('EventSingle', {eventId: eventId});
+      document.location.reload(true); //refreshes the page
     }
   }
 });
@@ -42,3 +49,8 @@ Template.Recipes.onCreated(function() {
  });
 }); //tutorial 13 */
 
+
+function refreshModal() {
+    Meteor.setTimeout(function() { refreshModal() }, 1);
+    return $('.ui.modal').modal('refresh');
+}

@@ -121,7 +121,7 @@ Template.Profile.events({
 		}
 	},
 	'click .view-schedule': function() {
-        $('.ui.modal')
+        $('#personalSchedule')
             .modal({ observeChanges: true })
             .modal('show');
             refreshModal();

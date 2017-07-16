@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			{{else}}
-			{{#if openSchedule}}
+			{{#if openTeam}}
 			<div class = "tiny ui buttons">
 				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
 					<i class = "angle double left icon"></i>
@@ -21,7 +21,7 @@
 				</a>
 				<div class="ui blue right labeled icon button open-team">
 					<i class = "angle double right icon"></i>
-					Back to Your Project
+					To Your Project
 				</div>
 			</div>
 			{{else}}
@@ -84,51 +84,52 @@
 				</div>
 			</form>
 		</div>
-<!-- 		{{#if openSchedule}}
-	{{>ProjectInvitation}} -->
-	{{else}}
-	{{#if openTeam}}
-	{{>ProjectInvitation}}
-	{{else}}
-	<br><br><br>
-	<div class = "ui two column stackable grid raised container segment">
-		<div class = "four wide equal height column">
-			<h1 class="ui center aligned icon header">
-				<i class = "circular users icon"> </i>
-				{{getProject.name}}	
-			</h1>
-			<div class="ui center aligned container">
-				<div class="huge statistic">
-					<div class="value">
-						<i class= "user icon"></i> 
-						<strong> {{getNumMembers}} / {{getProjectCapacity}} Vacancies</strong>
+		{{else}}
+		{{#if openTeam}}
+		{{>ProjectInvitation}}
+		{{else}}
+		<br><br><br>
+		<div class = "ui two column stackable grid raised container segment">
+			<div class = "four wide equal height column">
+				<h1 class="ui center aligned icon header">
+					<i class = "circular users icon"> </i>
+					{{getProject.name}}	
+				</h1>
+				<div class="ui center aligned container">
+					<div class="huge statistic">
+						<div class="value">
+							<i class= "user icon"></i> 
+							<strong> {{getNumMembers}} / {{getProjectCapacity}} Vacancies</strong>
+						</div>
+					</div>
+					<h2 class = "ui horizontal divider header">Skills sought after</h2>
+					<div class = "ui very relaxed huge celled list">
+						{{#each getProject.desiredSkills}}
+						<a class = "item validate-skill">
+							<i class = "medium check circle icon"></i>
+							<div class = "content">
+								<div class = "header">{{this}}</div>
+							</div>
+						</a>
+						{{/each}}
+
 					</div>
 				</div>
-				<h2 class = "ui horizontal divider header">Skills sought after</h2>
-				<div class = "ui very relaxed huge celled list">
-					{{#each getProject.desiredSkills}}
-					<a class = "item validate-skill">
-						<i class = "medium check circle icon"></i>
-						<div class = "content">
-							<div class = "header">{{this}}</div>
-						</div>
-					</a>
-					{{/each}}
-
-				</div>
 			</div>
-		</div>
-		<div class = "eleven wide stretched column">
-			<h2 class = "ui center aligned header">Current Members</h2>
-			<div class = "ui center aligned container">
-				<div class="ui huge horizontal divided relaxed animated list">
-					<script>
-						$('.linked.item')
-						.popup();
-					</script>
-					{{#each getProjectMembers}}
-					<div class = "ui linked item" data-tooltip= "Click for Details" >
-						<a href="/profile={{_id}}">
+			<div class = "eleven wide stretched column">
+				<h2 class = "ui center aligned header">Current Members</h2>
+				<div class = "ui center aligned container">
+					<div class="ui huge horizontal divided relaxed animated list">
+						<script>
+							$('.linked.item')
+							.popup();
+						</script>
+						{{#each getProjectMembers}}
+						<div class = "ui linked item openProfile" data-tooltip= "Click for Details" >
+							<!-- <a href="/profile={{_id}}"> -->
+						<div class = "ui modal">
+								{{>ProfileCard getUser = this}}
+							</div>
 							<img class = "ui tiny avatar image" src="/images/download.png">
 							<div class = "content">
 								<li>
@@ -143,21 +144,21 @@
 									</div>
 								</li>
 							</div>
-						</a>
-					</div>
-					{{/each}}
-					<br><br><br>
-					<div class = "row"> 
-						<div class = "ui text container">
-							{{getProject.description}} 
+							<!-- </a> -->
+						</div>
+						{{/each}}
+						<br><br><br>
+						<div class = "row"> 
+							<div class = "ui text container">
+								{{getProject.description}} 
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	{{/if}}
-	{{/if}}
+		{{/if}}
+		{{/if}}
 
-</div>
+	</div>
 </template>
