@@ -1,11 +1,11 @@
-<template name="ScheduleSingle">
+<template name="ProfileCardSchedule">
 	<style>
 		.clickable:hover {
 			font-weight: bold;
 		}
 	</style>
 
-	<table class="ui celled striped large table">
+	<table class="ui celled striped large table userId">
 		<thead>
 			<tr class="center aligned">
 				<th></th>
@@ -24,15 +24,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			{{#each getSchedule}} <!--WEEK --> 
+			{{#each getSchedule userId}} <!--WEEK --> 
 			{{#let rowIndex=@index}}
 			<tr> 	
 				<td class="right aligned">
 					{{getDayOfWeek(@index)}} 
 				</td>
 				{{#each this}} <!-- DAY -->
-				<td class = "{{conditionalColor rowIndex @index}} {{isSelectable}}"> 
-					<div class="{{isClickable}}" onmouseover="" style="{{showFinger}}" id = "{{rowIndex}},{{@index}}"> 
+				<td class = "{{conditionalColor userId rowIndex @index}} {{isSelectable userId}}"> 
+					<div class="{{isClickable userId}}" onmouseover="" style="{{showFinger userId}}" id = "{{rowIndex}},{{@index}}"> 
 						{{this}}
 					</div>
 				</td> 

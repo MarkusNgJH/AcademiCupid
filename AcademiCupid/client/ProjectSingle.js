@@ -17,6 +17,10 @@ Template.ProjectSingle.onCreated(function() {
 	Session.set('openTeam', false);
 });
 
+Template.ProjectSingle.onCreated(function() {
+	Session.set('openSchedule', false);
+});
+
 Template.ProjectSingle.helpers({
 	getProject: ()=> {
 		var id = FlowRouter.getParam('projectId'); //the param name is 'id'. Refer to routes.js. The name will be the string after the colon. Hence, we are getting the id from the route itself, i.e. from the URL
@@ -46,6 +50,9 @@ Template.ProjectSingle.helpers({
 	},
 	openTeam:function(){
 		return Session.get('openTeam');
+	},
+	openSchedule:function(){
+		return Session.get('openSchedule');
 	},
 	getProjectCapacity:function(){
 		var id = FlowRouter.getParam('projectId');
@@ -86,6 +93,9 @@ Template.ProjectSingle.events({
 	}, 
 	'click .open-team':function(){
 		Session.set('openTeam', !Session.get('openTeam'));
+	},
+	'click .open-schedule':function(){
+		Session.set('openSchedule', !Session.get('openSchedule'));
 	},
 	'click .openProfile':function(){
 		$('#' + this._id)

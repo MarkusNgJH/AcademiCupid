@@ -24,3 +24,7 @@ Template.Contacts.events ({
 		FlowRouter.go('ProfilePage', {userId: userId })
 	}
 });
+
+
+
+

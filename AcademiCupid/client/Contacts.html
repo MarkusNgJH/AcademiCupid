@@ -1,7 +1,7 @@
 <template name="Contacts">
-    <form>
-    <select class="ui fluid selection dropdown" id="multi-select" 
-    >
+  <div class = "ui container">
+        <form>
+    <select class="ui fluid selection dropdown" id="multi-select">
       {{#each getParticipants}}
       <option value={{_id}}>
               {{#each emails}}
@@ -10,10 +10,10 @@
       </option>
       {{/each}}
     </select>
-    <input type="submit" id="theSubmitButton" value="submit">
+    <input type="submit" value="submit">  
   </form>
 
-  {{#each getParticipants}}
+    {{#each getParticipants}}
     <a href="/profile={{_id}}">
       <div class="ui middle aligned celled list">
         <div class="item">
@@ -22,7 +22,7 @@
             <h6 class="ui medium header"> {{profile.firstName}} {{profile.lastName}}</h6>
             <a class="header">
               {{#each emails}}
-                {{address}}
+              {{address}}
               {{/each}}
             </a>
             {{#each profile.skills}}
@@ -38,5 +38,6 @@
         </div>
       </div>
     </a>
-  {{/each}}
+    {{/each}}
+  </div>
 </template>

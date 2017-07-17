@@ -37,7 +37,7 @@ Template.ProfileCard.helpers({
 	getSkills: function() {
 		return Skills.find({});
 	},
-		viewSchedule: function() {
+	viewSchedule: function() {
 		return Session.get('viewSchedule');
 	}
 });

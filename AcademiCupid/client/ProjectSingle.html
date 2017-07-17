@@ -25,6 +25,18 @@
 				</div>
 			</div>
 			{{else}}
+			{{#if openSchedule}}
+			<div class = "tiny ui buttons">
+				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
+					<i class = "angle double left icon"></i>
+					To Main Page
+				</a>
+				<div class="ui blue right labeled icon button open-schedule">
+					<i class = "angle double right icon"></i>
+					To Your Project
+				</div>
+			</div>
+			{{else}}
 			<div class = "tiny ui buttons">
 				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
 					<i class = "angle double left icon"></i>
@@ -36,14 +48,18 @@
 					Edit Project
 				</div>
 				<div class="ui orange right labeled icon button open-team">
-					<i class = "angle double right icon"></i>
+					<i class = "edit icon"></i>
 					Manage Team
+				</div>
+				<div class="ui blue right labeled icon button open-schedule">
+					<i class = "angle double right icon"></i>
+					View Schedule
 				</div>
 				{{/if}}
 			</div>
 			{{/if}}
 			{{/if}}
-
+			{{/if}}
 		</div>
 		{{#if editMode}}
 		<div class = "ui raised container segment">
@@ -87,6 +103,9 @@
 		{{else}}
 		{{#if openTeam}}
 		{{>ProjectInvitation}}
+		{{else}}
+		{{#if openSchedule}}
+			{{>TestTemplate}}
 		{{else}}
 		<br><br><br>
 		<div class = "ui two column stackable grid raised container segment">
@@ -159,6 +178,7 @@
 		</div>
 		{{/if}}
 		{{/if}}
-
+		{{/if}}
 	</div>
+	<!-- {{>TestTemplate}} -->
 </template>

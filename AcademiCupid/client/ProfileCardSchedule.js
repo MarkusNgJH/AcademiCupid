@@ -1,4 +1,4 @@
-Template.ScheduleSingle.helpers({
+Template.ProfileCardSchedule.helpers({
 	getDayOfWeek: function(arg){
 		if(arg == 0){
 			return "Monday";
@@ -22,9 +22,9 @@ Template.ScheduleSingle.helpers({
 			return "Sunday";
 		}
 	},
-	getSchedule: function(){
+	getSchedule: function(arg){
 		//console.log("schedule called")
-		var userId = FlowRouter.getParam('userId');
+		var userId = arg;
 		var weekSchedule = [];
 		var oneWeek = Meteor.users.findOne(userId).profile.schedule;
 		//console.log(oneWeek);
@@ -41,8 +41,8 @@ Template.ScheduleSingle.helpers({
 		}
 		return weekSchedule;
 	},
-	conditionalColor: function(row, col){
-		var userId = FlowRouter.getParam('userId');
+	conditionalColor: function(arg, row, col){
+		var userId = arg;
 		var weekSchedule = [];
 		var oneWeek = Meteor.users.findOne(userId).profile.schedule;
 		dayFinder = {"0": "Monday", "1": "Tuesday", "2": "Wednesday", "3": "Thursday", "4": "Friday", "5": "Saturday", "6": "Sunday"};
@@ -56,20 +56,20 @@ Template.ScheduleSingle.helpers({
 			return "positive";
 		}
 	},
-	isClickable:function() {
-		if(Meteor.userId() == FlowRouter.getParam("userId")){
+	isClickable:function(arg) {
+		if(Meteor.userId() == arg){
 			return "clickable";
 		}
 		return "";
 	},
-	isSelectable: function() {
-		if(Meteor.userId() == FlowRouter.getParam("userId")){
+	isSelectable: function(arg) {
+		if(Meteor.userId() == arg){
 			return "selectable";
 		}
 		return "";
 	},
-	showFinger: function() {
-		if(Meteor.userId() == FlowRouter.getParam("userId")){
+	showFinger: function(arg) {
+		if(Meteor.userId() == arg){
 			return "cursor: pointer;";
 		}
 		return "";
@@ -89,15 +89,12 @@ Template.ScheduleSingle.events({
 		var currentSchedule = user.profile.schedule;
 		var fieldToUpdate = "profile.schedule." + Day + "." + timeSlot;
 		if(currentSchedule[Day][timeSlot]==="Free"){
-			console.log("true")
 			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Busy"}});
 		}
 		else if(currentSchedule[Day][timeSlot]==="Busy"){
-			console.log("false")
 			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Free"}});
 		}
-		console.log("schedule Updated");
-		console.log(Meteor.userId())
+		//console.log("schedule Updated");
 	},
 	"onHover .clickable":function(event){
 		return;

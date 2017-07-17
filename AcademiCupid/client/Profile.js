@@ -2,6 +2,7 @@ Template.Profile.rendered = function () {
 	$('ui dropdown').dropdown();
 	$('#multi-select').dropdown();
 	Session.set('editProfile', false);
+	Session.set('openSchedule', false)
 }
 
 Template.Profile.helpers({
@@ -11,6 +12,9 @@ Template.Profile.helpers({
 	},
 	isEditMode: function() {
 		return Session.get('editProfile');
+	},
+	openSchedule: function() {
+		return Session.get('openSchedule');
 	},
 	isOwner: function() {
 		return FlowRouter.getParam('userId') === Meteor.userId();
@@ -94,6 +98,9 @@ Template.Profile.events({
 	'click .toggle-edit': function() {
 		Session.set('editProfile', !Session.get('editProfile'));
 	},
+	'click .open-schedule': function() {
+		Session.set('openSchedule', !Session.get('openSchedule'));
+	},
 	'click .label': function() {
 		// var clickedElement = $("a:contains(" + this.name + ")");
 		// if(clickedElement.hasClass("green")) {
@@ -120,12 +127,12 @@ Template.Profile.events({
 			}
 		}
 	},
-	'click .view-schedule': function() {
-        $('#personalSchedule')
-            .modal({ observeChanges: true })
-            .modal('show');
-            refreshModal();
-    }
+	// 'click .view-schedule': function() {
+ //        $('#personalSchedule')
+ //            .modal({ observeChanges: true })
+ //            .modal('show');
+ //            refreshModal();
+ //    }
 });
 
 function isNotDuplicate(str, arr) {

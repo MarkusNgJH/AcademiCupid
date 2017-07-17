@@ -1,5 +1,4 @@
 <template name="Profile">
-	{{ScheduleSingle}}
 	<div class = "ui container grid" style="margin: 20px 20px 0px 20px;">
 		<div class="ui row raised container segment">
 			<div class="ten wide column">
@@ -11,7 +10,7 @@
 				</h3>
 			</div>
 			<div class="six wide column">
-				<button class="ui teal labeled icon button view-schedule">
+				<button class="ui teal labeled icon button open-schedule">
 					<i class = "write icon"></i>
 					View Schedule
 				</button>
@@ -26,7 +25,7 @@
 					<i class = "write icon"></i>
 					Edit Profile
 				</button>
-				<div class="ui fullscreen modal" id='personalSchedule'>
+				<!-- <div class="ui fullscreen modal" id='personalSchedule'>
 					<i class="close icon"></i>
 					<div class="header">
 						My Schedule
@@ -34,10 +33,13 @@
 					<div class="content">
 						{{> ScheduleSingle}}	
 					</div>
-				</div>
+				</div> -->
 				{{/if}}
 				{{/if}}
 			</div>
+				{{#if openSchedule}}
+				{{> ScheduleSingle}}
+				{{/if}}
 		</div>
 
 		{{#if isEditMode}}
