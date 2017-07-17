@@ -13,7 +13,20 @@ Template.Projects.helpers({
 		return Projects.find({belongsToEvent: eventId});
 	},
 	skillsFilterMode: function() {
-		return Session.get('skillsFilterMode');
+		var isSkillsFilterMode = Session.get('skillsFilterMode');
+		if(isSkillsFilterMode) {
+			return true;
+		} else {
+			$('.dropdown').dropdown('clear');
+			Session.set('selectedSkillsFilter', []);
+			return false;
+		}
+	},
+	hasSelectedSkillsFilter: function() {
+		var selectedSkillsFilter = Session.get('selectedSkillsFilter');
+		console.log("selectedSkillsFilter:");
+		console.log(selectedSkillsFilter);
+		return selectedSkillsFilter.length > 0
 	}
 });
 

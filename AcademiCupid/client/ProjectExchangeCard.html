@@ -1,0 +1,35 @@
+<template name="ProjectExchangeCard">
+	<div class="item currProj">
+		<div class="ui tiny image">
+			<img src="/images/project.png">
+		</div>
+		<div class = content>
+			<a class="ui large header"> {{currProj.name}} </a>
+			<br>
+			<div class="huge statistic">
+				<div class="value">
+					<i class= "user icon"></i> 
+					<strong> {{currProj.numMembers}} / {{currProj.capacity}} Vacancies</strong>
+				</div>
+			</div>
+			<div class = "ui big horizontal list">
+				{{#each currProj.desiredSkills}}
+				<div class="ui label">{{this}}</div>
+				{{/each}}
+			</div>
+			<div class="description">
+				<div class="ui text container">
+					{{currProj.description}}
+				</div>
+			</div>
+			<br>
+			<div class="extra">
+				<a href="/event={{getEventId}}/project={{currProj._id}}" class="ui button">
+					Visit Project
+					<i class="right chevron icon"></i>
+				</a>
+			</div>
+		</div>	
+		<br>
+	</div>
+</template>
