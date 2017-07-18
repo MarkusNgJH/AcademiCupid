@@ -1,6 +1,7 @@
-Template.SkillsFilter.onCreated(function() {
+Template.EventSingle.rendered = function() {
 	Session.set('skillsFilterMode', false);
-});
+	Session.set('selectedSkillsFilter', []);
+}
 
 Template.SkillsFilter.helpers({
 	getUniqueSkills: function() {
@@ -33,9 +34,11 @@ Template.SkillsFilter.events({
 	},
 	'click #submit-filter': function() {
 		var selectedSkills = document.getElementsByClassName("item active filtered");
+		var selectedArr = [];
 		for(var i=0; i<selectedSkills.length; i++) {
-			console.log(selectedSkills[i].innerHTML);
-		}	
+			selectedArr.push(selectedSkills[i].innerHTML);
+		}
+		Session.set('selectedSkillsFilter', selectedArr);
 	}
 });
 
@@ -47,4 +50,3 @@ function isNotDuplicate(str, arr) {
 	}
 	return true;
 }
-		

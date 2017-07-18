@@ -12,48 +12,21 @@
 
 	<div class="ui divided items">
 		{{#if skillsFilterMode}}
-			Filter Mode
+			{{#if hasSelectedSkillsFilter}}
+				{{> FilteredProjects}}
+			{{else}}
+				<div class="container">
+					<h3>Select your skill(s) to filter.</h3>
+				</div>
+			{{/if}}
 		{{else}}
-		{{#each getProjects}}
-		<div class="item">
-			<div class="ui tiny image">
-				<img src="/images/project.png">
-			</div>
-			<div class = content>
-				<a class="ui large header"> {{name}} </a>
-				<br>
-				<div class="huge statistic">
-					<div class="value">
-						<i class= "user icon"></i> 
-						<strong> {{numMembers}} / {{capacity}} Vacancies</strong>
-					</div>
+			{{#each getProjects}}
+				{{> ProjectExchangeCard currProj=this}}
+			{{else}}
+				<div class="container">
+					<h3>This event has no project.</h3>
 				</div>
-				<div class = "ui big horizontal list">
-					{{#each desiredSkills}}
-					<div class="ui label">{{this}}</div>
-					{{/each}}
-				</div>
-				<div class="description">
-					<div class="ui text container">
-						{{description}}
-					</div>
-				</div>
-				<br>
-				<div class="extra">
-					<a href="/event={{getEventId}}/project={{_id}}" class="ui button">
-						Visit Project
-						<i class="right chevron icon"></i>
-					</a>
-				</div>
-			</div>	
-			<br>
-
-		</div>
-		{{else}}
-		<div class="container">
-			<h3>This event has no project.</h3>
-		</div>
-		{{/each}}
+			{{/each}}
 		{{/if}}
 	</div>
 </template>

@@ -98,7 +98,11 @@ Template.ProjectSingle.events({
 		Session.set('openSchedule', !Session.get('openSchedule'));
 	},
 	'click .openProfile':function(){
+<<<<<<< HEAD
 		$('#' + this._id)
+=======
+		$('#profileCardModal')
+>>>>>>> 3bb24a800afddb5f8c89c581e9c6ba8fe0bf48da
 			.modal({ observeChanges: true })
             .modal('show'); 
             refreshModal();

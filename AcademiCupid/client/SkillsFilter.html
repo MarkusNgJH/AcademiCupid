@@ -1,16 +1,16 @@
 <template name="SkillsFilter">
 	<div class="ui grid">
-	<div class="ui four wide column">
-		<button class="ui labeled icon button" id="skills-filter-btn">
-			<i class="filter icon"></i>
-			Fitler by Skills
-		</button>
-	</div>
-	{{#if isSkillsFilterMode}}
+		<div class="ui four wide column">
+			<button class="ui labeled icon button" id="skills-filter-btn">
+				<i class="filter icon"></i>
+				Fitler by Skills
+			</button>
+		</div>
+		{{#if isSkillsFilterMode}}
 		<div class="ui nine wide column">
 			<select name="skills" multiple="" class="ui fluid search dropdown" id="multi-select">
 				{{#each getUniqueSkills}}
-					<option>{{this}}</option>
+				<option>{{this}}</option>
 				{{/each}}
 			</select>
 		</div>	
@@ -22,6 +22,6 @@
 			$('#multi-select').dropdown();
 			$('.dropdown').dropdown('refresh');
 		</script>
-	{{/if}}
+		{{/if}}
 	</div>
 </template>
