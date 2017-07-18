@@ -23,7 +23,7 @@ Template.TestTemplate.helpers({
 		}
 	},
 	getSchedules: function(){
-		var projectId = "ZnwZqynGEqrwPXoYm";
+		var projectId = "DvxLbbj6aQjo5PKXt";
 		var project = Projects.findOne(projectId);
 		var membersID = project.members;
 		var members = []
@@ -87,7 +87,7 @@ Template.TestTemplate.helpers({
 				numFree++;
 			}
 		}
-		var projectId = "ZnwZqynGEqrwPXoYm";
+		var projectId = "DvxLbbj6aQjo5PKXt";
 		var project = Projects.findOne(projectId);
 		var numMembers = project.numMembers;
 		var saturation = numFree/numMembers * 100;
