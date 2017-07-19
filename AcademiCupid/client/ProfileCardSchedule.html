@@ -24,6 +24,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			{{#let classUserId=userId}}
 			{{#each getSchedule userId}} <!--WEEK --> 
 			{{#let rowIndex=@index}}
 			<tr> 	
@@ -31,8 +32,8 @@
 					{{getDayOfWeek(@index)}} 
 				</td>
 				{{#each this}} <!-- DAY -->
-				<td class = "{{conditionalColor userId rowIndex @index}} {{isSelectable userId}}"> 
-					<div class="{{isClickable userId}}" onmouseover="" style="{{showFinger userId}}" id = "{{rowIndex}},{{@index}}"> 
+				<td class = "{{conditionalColor classUserId rowIndex @index}} {{isSelectable classUserId}}"> 
+					<div class="{{isClickable classUserId}}" onmouseover="" style="{{showFinger classUserId}}" id = "{{rowIndex}},{{@index}}"> 
 						{{this}}
 					</div>
 				</td> 
@@ -40,7 +41,7 @@
 			</tr>
 			{{/let}}
 			{{/each}}
-
+			{{/let}}
 		</tbody>
 	</table>
 </template>
