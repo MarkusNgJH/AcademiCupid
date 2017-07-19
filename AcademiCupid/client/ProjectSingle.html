@@ -1,65 +1,45 @@
 <template name="ProjectSingle">
 	<div class = "ui grid">
-		<div class="ui row container">
-			{{#if editMode}}
-			<div class = "tiny ui buttons">
-				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
-					<i class = "angle double left icon"></i>
-					To Main Page
-				</a>
-				<div class="ui blue right labeled icon button toggle-edit">
-					<i class = "angle double right icon"></i>
-					To Your Project
+		<div class = "ui row container">
+			<div class = "ui one column grid" style="padding:0px 0px 0px 40px;">
+				<div class = "row">
+					<div class="ui massive breadcrumb">
+						<a href="/event={{getEventId}}" class="section"> {{getEventName}}</a>
+						<div class="divider"> / </div>
+						<a class="{{isActive}} section toProject"> {{getProjectName}}</a>
+						{{#if editMode}}
+						<div class="divider"> / </div>
+						<a class="active section">Edit Project</a>
+						{{else}}
+						{{#if openTeam}}
+						<div class="divider"> / </div>
+						<a class="active section">Team Management</a>
+						{{else}}
+						{{#if openSchedule}}
+						<div class="divider"> / </div>
+						<a class="active section">View Schedule</a>
+						{{/if}}
+						{{/if}}
+						{{/if}}
+					</div>
 				</div>
-			</div>
-			{{else}}
-			{{#if openTeam}}
-			<div class = "tiny ui buttons">
-				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
-					<i class = "angle double left icon"></i>
-					To Main Page
-				</a>
-				<div class="ui blue right labeled icon button open-team">
-					<i class = "angle double right icon"></i>
-					To Your Project
-				</div>
-			</div>
-			{{else}}
-			{{#if openSchedule}}
-			<div class = "tiny ui buttons">
-				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
-					<i class = "angle double left icon"></i>
-					To Main Page
-				</a>
-				<div class="ui blue right labeled icon button open-schedule">
-					<i class = "angle double right icon"></i>
-					To Your Project
-				</div>
-			</div>
-			{{else}}
-			<div class = "tiny ui buttons">
-				<a href="/event={{getEventId}}" class="ui orange labeled icon button">
-					<i class = "angle double left icon"></i>
-					To Main Page
-				</a>
-				{{#if isProjectOwner}}
-				<div class="ui blue labelled button toggle-edit">
-					<i class = "edit icon"></i>
-					Edit Project
-				</div>
-				<div class="ui orange right labeled icon button open-team">
-					<i class = "edit icon"></i>
-					Manage Team
-				</div>
-				<div class="ui blue right labeled icon button open-schedule">
-					<i class = "angle double right icon"></i>
-					View Schedule
+				{{#if viewProject}}
+				<div class = "row">
+					<div class="ui blue labelled button toggle-edit">
+						<i class = "edit icon"></i>
+						Edit Project
+					</div>
+					<div class="ui orange right labeled icon button open-team">
+						<i class = "edit icon"></i>
+						Manage Team
+					</div>
+					<div class="ui blue right labeled icon button open-schedule">
+						<i class = "angle double right icon"></i>
+						View Schedule
+					</div>
 				</div>
 				{{/if}}
 			</div>
-			{{/if}}
-			{{/if}}
-			{{/if}}
 		</div>
 		{{#if editMode}}
 		<div class = "ui raised container segment">
@@ -105,7 +85,7 @@
 		{{>ProjectInvitation}}
 		{{else}}
 		{{#if openSchedule}}
-			{{>TestTemplate}}
+		{{>TestTemplate}}
 		{{else}}
 		<br><br><br>
 		<div class = "ui two column stackable grid raised container segment">

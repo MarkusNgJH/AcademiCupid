@@ -2,8 +2,8 @@ $('.linked.item')
 .popup()
 ;
 function refreshModal() {
-    Meteor.setTimeout(function() { refreshModal() }, 1);
-    return $('.ui.modal').modal('refresh');
+	Meteor.setTimeout(function() { refreshModal() }, 1);
+	return $('.ui.modal').modal('refresh');
 }
 function isDuplicate(str, arr) {
 	return arr.indexOf(str) > -1;
@@ -28,6 +28,13 @@ Template.ProjectSingle.helpers({
 	},
 	getEventId: function () {
 		return FlowRouter.getParam('eventId');
+	},
+	getEventName:function(){
+		var event = Events.findOne(FlowRouter.getParam('eventId'));
+		return event.name;
+	},
+	getProjectName:function(){
+		return Projects.findOne(FlowRouter.getParam('projectId')).name
 	},
 	getProjectMembers: function() {
 		var currentProjectId = FlowRouter.getParam('projectId');
@@ -80,6 +87,20 @@ Template.ProjectSingle.helpers({
 		} );
 		console.log(findProject);
 		return findProject != null;
+	},
+	viewProject:function(){
+		return !(Session.get('openSchedule') || 
+			Session.get('openTeam') ||
+			Session.get('editMode')
+			);
+	},
+	isActive:function(){
+		if(!(Session.get('openSchedule') || Session.get('openTeam') || Session.get('editMode'))){
+			return "active";
+		}
+		else{
+			return "";
+		}
 	}
 });
 
@@ -99,9 +120,14 @@ Template.ProjectSingle.events({
 	},
 	'click .openProfile':function(){
 		$('#' + this._id)
-			.modal({ observeChanges: true })
-            .modal('show'); 
-            refreshModal();
+		.modal({ observeChanges: true })
+		.modal('show'); 
+		refreshModal();
+	},
+	'click .toProject':function(){
+		Session.set('openSchedule', false);
+		Session.set('openTeam', false);
+		Session.set('editMode', false);
 	},
 	'click #editProjectButton':function(e,t){
 		e.preventDefault();
@@ -132,11 +158,11 @@ Template.ProjectSingle.events({
 		Projects.update(projectId, {$set:{"capacity": Capacity}});
 		Projects.update(projectId, {$set:{"desiredSkills": skills}});
 		swal({
-					title: 'Success!',
-					text: 'Your project has been updated',
-					type: 'success',
-					showConfirmButton: true
-				});
+			title: 'Success!',
+			text: 'Your project has been updated',
+			type: 'success',
+			showConfirmButton: true
+		});
 		Session.set('editMode', !Session.get('editMode'));
 	}
 });
