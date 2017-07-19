@@ -76,8 +76,9 @@ Template.ProfileCardSchedule.helpers({
 	}
 });
 
-Template.ScheduleSingle.events({
+Template.ProfileCardSchedule.events({
 	"click .clickable": function(event){
+		console.log("schedule Updated");
 		var position = event.currentTarget.id;
 		var row = position.split(",")[0];
 		var col = position.split(",")[1];
@@ -88,10 +89,13 @@ Template.ScheduleSingle.events({
 		var user = Meteor.users.findOne(Meteor.userId());
 		var currentSchedule = user.profile.schedule;
 		var fieldToUpdate = "profile.schedule." + Day + "." + timeSlot;
+		console.log(Meteor.userId());
 		if(currentSchedule[Day][timeSlot]==="Free"){
+			console.log("Change to Busy");
 			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Busy"}});
 		}
 		else if(currentSchedule[Day][timeSlot]==="Busy"){
+			console.log("Change to Free");
 			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Free"}});
 		}
 		//console.log("schedule Updated");
