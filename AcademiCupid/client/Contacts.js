@@ -14,12 +14,12 @@ Template.Contacts.helpers ({
 });
 
 Template.Contacts.events ({
-	'submit form': function(event){
-		event.preventDefault();
-		console.log("form submitted");
+	'click .submitSearch': function(){
+		//event.preventDefault();
+		//console.log("form submitted");
 		var eventId = FlowRouter.getParam('eventId');
 		var selectedUserId = document.getElementsByClassName("item active selected");
-		console.log(selectedUserId[0]);
+		//console.log(selectedUserId[0]);
 		var userId = selectedUserId[0].getAttribute("data-value");
 		FlowRouter.go('ProfilePage', {userId: userId })
 	}

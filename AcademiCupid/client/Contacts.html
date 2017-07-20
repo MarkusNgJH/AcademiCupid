@@ -1,8 +1,9 @@
 <template name="Contacts">
   <div class = "ui container">
         <form>
-    <select class="ui fluid selection dropdown" id="multi-select">
+    <select class="ui fluid search selection dropdown" id="multi-select">
       {{#each getParticipants}}
+      <option value="">Search Participants...</option>
       <option value={{_id}}>
               {{#each emails}}
                 {{address}}
@@ -10,9 +11,12 @@
       </option>
       {{/each}}
     </select>
-    <input type="submit" value="submit">  
+    <button class = "ui small icon right floated button submitSearch">
+    <i class="search icon"></i>
+    <!-- <input class type="submit" value="search">   -->
+    </button>
   </form>
-
+    <br><br>
     {{#each getParticipants}}
     <a href="/profile={{_id}}">
       <div class="ui middle aligned celled list">

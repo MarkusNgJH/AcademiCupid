@@ -71,8 +71,12 @@ Template.ProjectSingle.helpers({
 		var project = Projects.findOne({_id: id});
 		return project.numMembers; //+1 for the project leader
 	},
-	capacityOptions:function(){
-		return [2,3,4,5,6,7,8];
+	capacityOptions:function(arg){
+		var result = []
+		for(var i=arg; i<9; i++){
+			result.push(i)
+		}
+		return result;
 	},
 	getAllSkills: function() {
 		return Skills.find({});

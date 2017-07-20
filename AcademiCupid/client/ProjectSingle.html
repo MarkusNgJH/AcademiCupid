@@ -63,7 +63,7 @@
 					<div class="field">
 						<label>Capacity</label>
 						<select class="ui selection dropdown">
-							{{#each capacityOptions}}
+							{{#each capacityOptions getNumMembers}}
 							<option> {{this}}</option>
 							{{/each}}
 						</select>
