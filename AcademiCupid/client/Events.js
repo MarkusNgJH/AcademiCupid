@@ -6,7 +6,13 @@ Meteor.subscribe('Skills');
 Template.EventsSelection.helpers({
  events: ()=> {
   return Events.find({});
- } //tutorial 12
+ }, //tutorial 12
+ getOwner(arg){
+    return Meteor.users.findOne(arg).profile.firstName;
+ },
+ getNumParticipants(arg){
+  return arg.length;
+ }
 });
 
 Template.EventsSelection.events({
