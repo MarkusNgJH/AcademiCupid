@@ -13,6 +13,8 @@ AutoForm.hooks({
        doc.members = [];
        doc.numMembers = 1;
        doc.desiredSkills = [];
+       doc.pendingMembers = [];
+       doc.owner = Meteor.userId();
        return doc;
       }
     },

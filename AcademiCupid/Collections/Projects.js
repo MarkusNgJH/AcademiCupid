@@ -47,14 +47,22 @@ ProjectsSchema = new SimpleSchema({
 	owner:{
 		type: String,
 		label: "Owner",
-		autoValue: function() {
-			return this.userId
-		},
+		optional: true,
+		// autoValue: function() {
+		// 	return this.userId
+		// },
 		autoform: {
 			type: "hidden" 
 		}
 	},
 	members: {
+		type: [String],
+		optional: true,
+		autoform: {
+			type: "hidden" 
+		}
+	},
+	pendingMembers: {
 		type: [String],
 		optional: true,
 		autoform: {

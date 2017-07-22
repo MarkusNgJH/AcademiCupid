@@ -2,8 +2,8 @@
   <div class = "ui container">
     <form>
       <select class="ui fluid search selection dropdown" id="multi-select">
+        <option value="" disabled selected>Search Participants...</option>
         {{#each getParticipants}}
-        <option value="">Search Participants...</option>
         <option value={{_id}}>
           {{#each emails}}
           {{address}}

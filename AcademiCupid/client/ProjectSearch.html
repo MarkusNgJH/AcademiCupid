@@ -1,0 +1,43 @@
+<template name="ProjectSearch">
+	<div class="ui grid">
+		<div class="ui four wide column">
+			<button class="ui labeled icon button" id="project-search-btn">
+				<i class="search icon"></i>
+				Search Projects
+			</button>
+		</div>
+		{{#if isSearchProjectsMode}}
+			<div class="ui nine wide column">
+				<select multiple="" class="ui fluid search dropdown" id="multi-select">
+					<option value="" disabled selected>Search Projects...</option>
+					{{#each getProjects}}
+						<option>{{name}}</option>
+					{{/each}}
+				</select>
+			</div>	
+			<div class="ui three wide column">
+				<button id="submit-search" class="ui teal button" type="submit">Submit</button>	
+			</div>
+			<script>
+				$('ui dropdown').dropdown();
+				$('#multi-select').dropdown();
+				$('.dropdown').dropdown('refresh');
+			</script>
+		{{/if}}
+		<!-- <div class="twelve wide column">
+			<select class="ui fluid search selection dropdown" id="multi-select">
+				<option value="" disabled selected>Search Projects...</option>
+				{{#each getProjects}}
+				<option value={{_id}}>
+					{{name}}
+				</option>
+				{{/each}}
+			</select>
+		</div>
+		<div class="four wide column">
+			<button type="submit" class = "ui small icon right floated button submitSearch">
+				<i class="search icon"></i>
+			</button>
+		</div> -->
+	</div>
+</template>

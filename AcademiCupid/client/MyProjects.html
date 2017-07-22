@@ -1,39 +1,27 @@
 <template name="MyProjects">
+	<div class="ui button enrolledProjectsView">My Enrolled Projects</div>
+	<div class="ui button pendingProjectsView">My Pending Projects</div>
 	<div class="ui raised very padded container segment">
-		<h2 class="ui header" style="font-size:3em;">{{getUser.profile.firstName}}&nbsp;{{getUser.profile.lastName}}'s Projects</h2>
-		<div class="ui divided items">
-			{{#each getUserProjects}}
-				{{> ProjectExchangeCard currProj=this}}
-			<!-- <div class="item">
-				<div class="ui tiny image">
-					<img src="/images/project.png">
-				</div>
-				<div class = content>
-					<a class="ui small header"> {{name}} </a>
-					<br>
-					<div class = "ui horizontal list">
-						{{#each desiredSkills}}
-						<div class="ui label">{{this}}</div>
-						{{/each}}
-					</div>
-					<div class="description">
-						<div class="ui text container">
-							{{description}}
-						</div>
-					</div>
-					<br>
-					<div class="extra">
-						<a href="/event={{this.belongsToEvent}}/project={{_id}}" class="ui button">
-							Visit Project
-							<i class="right chevron icon"></i>
-						</a>
-					</div>
-				</div>	
-				<br>
-			</div> -->
-			{{else}}
-			No project to display.			
-			{{/each}}
-		</div>
+		{{#if isEnrolledProjectsView}}
+			<h2 class="ui header" style="font-size:2em;">My Enrolled Projects</h2>
+			<div class="ui divided items">
+				{{#each getUserProjects}}
+					{{> ProjectExchangeCard currProj=this}}
+				{{else}}
+					No project to display.			
+				{{/each}}
+			</div>
+		{{else}}
+			<h2 class="ui header" style="font-size:2em;">My Pending Projects</h2>
+			<div class="ui divided items">
+				{{#each getUserPendingProjects}}
+					{{> ProjectExchangeCard currProj = this}}
+					<div class="ui green button acceptProj">Accept</div>
+					<div class="ui red button declineProj">Decline</div>
+				{{else}}
+					No pending project to display.
+				{{/each}}
+			</div>
+		{{/if}}
 	</div>
 </template>

@@ -8,6 +8,7 @@ Accounts.onCreateUser(function(options, user) {
     user.profile.skills = options.skills;
     user.profile.enrolled = [];
     user.profile.projects = [];
+    user.profile.pendingProjects = [];
     user.profile.description = "No user description available.";
     user.profile.schedule = {
         "Monday": {

@@ -90,11 +90,11 @@ Template.ScheduleSingle.events({
 		var fieldToUpdate = "profile.schedule." + Day + "." + timeSlot;
 		if(currentSchedule[Day][timeSlot]==="Free"){
 			//console.log("true")
-			Meteor.users.update(Meteor.userId(), {$set: {fieldToUpdate: "Busy"}});
+			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Busy"}});
 		}
 		else if(currentSchedule[Day][timeSlot]==="Busy"){
 			//console.log("false")
-			Meteor.users.update(Meteor.userId(), {$set: {fieldToUpdate: "Free"}});
+			Meteor.users.update(Meteor.userId(), {$set: {[fieldToUpdate]: "Free"}});
 		}
 		//console.log("schedule Updated");
 		//console.log(Meteor.userId())

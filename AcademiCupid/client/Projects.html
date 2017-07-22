@@ -1,31 +1,16 @@
 <template name="Projects">
-	<form>
-		<select class="ui fluid selection dropdown" id="multi-select">
-			{{#each getProjects}}
-			<option value={{_id}}>
-				{{name}}
-			</option>
-			{{/each}}
-		</select>
-		<input type="submit" value="submit">	
-	</form>
-
 	<div class="ui divided items">
 		{{#if skillsFilterMode}}
 			{{#if hasSelectedSkillsFilter}}
 				{{> FilteredProjects}}
 			{{else}}
-				<div class="container">
-					<h3>Select your skill(s) to filter.</h3>
-				</div>
+				<h3 class="ui medium header">Select your skill(s) to filter.</h3>
 			{{/if}}
 		{{else}}
 			{{#each getProjects}}
 				{{> ProjectExchangeCard currProj=this}}
 			{{else}}
-				<div class="container">
-					<h3>This event has no project.</h3>
-				</div>
+				<h3 class="ui medium header">This event has no project.</h3>
 			{{/each}}
 		{{/if}}
 	</div>

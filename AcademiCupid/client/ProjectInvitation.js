@@ -46,13 +46,18 @@ Template.ProjectInvitation.events ({
 					break;
 				}
 				var nextUser = Meteor.users.findOne(nextUserId);
-				var userProjects = nextUser.profile.projects;
-				userProjects.push(projectId);
-				var currentProjectMembers = currentProject.members;
-				currentProjectMembers.push(nextUserId);
-				Meteor.users.update(nextUserId, {$set: {"profile.projects": userProjects}});
-				Projects.update(projectId, {$set: {"members": currentProjectMembers}});
-				Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
+				// var userProjects = nextUser.profile.projects;
+				// userProjects.push(projectId);
+				var userPendingProjects = nextUser.profile.pendingProjects;
+				userPendingProjects.push(projectId);
+				// var currentProjectMembers = currentProject.members;
+				// currentProjectMembers.push(nextUserId);
+				var currentProjectPendingMembers = currentProject.pendingMembers;
+				currentProjectPendingMembers.push(nextUserId);
+				// var currentProjectMembers = currentProject.members;
+				Meteor.users.update(nextUserId, {$set: {"profile.pendingProjects": userPendingProjects}});
+				Projects.update(projectId, {$set: {"pendingMembers": currentProjectPendingMembers}});
+				// Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})
 			}
 			$('.dropdown').dropdown('clear');
 	},
@@ -63,9 +68,7 @@ Template.ProjectInvitation.events ({
 	},
 
 	'click .remove':function(){
-		console.log(this._id);
 		var projectId = FlowRouter.getParam('projectId');
-		console.log(projectId);
 		var currentProject = Projects.findOne(projectId); 
 		var userId = this._id;
 		var selectedUser = Meteor.users.findOne(userId);
@@ -75,7 +78,20 @@ Template.ProjectInvitation.events ({
 		remove(userId, currentProjectMembers);
 		Meteor.users.update(userId, {$set: {"profile.projects": userProjects}});
 		Projects.update(projectId, {$set: {"members": currentProjectMembers}});
-		Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}})	
+		Projects.update(projectId, {$set: {"numMembers": (currentProjectMembers.length + 1)}});
+	},
+	'click .remove-pending':function(){
+		var projectId = FlowRouter.getParam('projectId');
+		var currentProject = Projects.findOne(projectId); 
+		var userId = this._id;
+		console.log(userId);
+		var selectedUser = Meteor.users.findOne(userId);
+		var userPendingProjects = selectedUser.profile.pendingProjects;
+		var currentPendingMembers = currentProject.pendingMembers;
+		remove(projectId, userPendingProjects);
+		remove(userId, currentPendingMembers);
+		Meteor.users.update(userId, {$set: {"profile.pendingProjects": userPendingProjects}});
+		Projects.update(projectId, {$set: {"pendingMembers": currentPendingMembers}});
 	}
 });
 
@@ -137,5 +153,13 @@ Template.ProjectInvitation.helpers ({
 		} );
 		console.log(findProject);
 		return findProject != null;
+	},
+	getPendingMembers: function() {
+		var pendingMemberIds = Projects.findOne(FlowRouter.getParam('projectId')).pendingMembers;
+		var pendingMembers = [];
+		for(var i=0; i<pendingMemberIds.length; i++) {
+			pendingMembers.push(Meteor.users.findOne(pendingMemberIds[i]));
+		}
+		return pendingMembers;
 	}
 });

@@ -69,7 +69,7 @@ Template.TestTemplate.helpers({
 		var freeIndividuals = [];
 		for(var i=0; i<arr.length; i++){
 			if(arr[i][1]=="Free"){
-				freeIndividuals.push(arr[i][0].firstName);
+				freeIndividuals.push(" " + arr[i][0].firstName);
 			}
 		}
 		return freeIndividuals;

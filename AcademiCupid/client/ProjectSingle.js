@@ -72,7 +72,7 @@ Template.ProjectSingle.helpers({
 		return project.numMembers; //+1 for the project leader
 	},
 	capacityOptions:function(arg){
-		var result = []
+		var result = [];
 		for(var i=arg; i<9; i++){
 			result.push(i)
 		}
