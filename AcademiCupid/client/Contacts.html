@@ -24,21 +24,26 @@
       <div class="item">
         <img class="ui tiny avatar image" src="/images/download.png">
         <div class="content">
-          <a href="/profile={{_id}}">
-            <h6 class="ui medium header"> {{profile.firstName}} {{profile.lastName}}</h6>
-            <a class="header">
-              {{#each emails}}
-              {{address}}
-              {{/each}}
-            </a>
+          <h6 class="ui medium header openProfile"> {{profile.firstName}} {{profile.lastName}}</h6>
+          <a class="header openProfile">
+            {{#each emails}}
+            {{address}}
+            {{/each}}
           </a>
+          <div class = "ui fullscreen modal" style = "overflow: auto" id = {{_id}}>
+            
+            {{>ProfileCard getUser = this}}
+            
+          </div>
+
           <script>
             $('.ui.button')
             .popup()
             ;
           </script>
-          <div class="ui button" data-position="bottom center" data-inverted="">Skills</div>
-          <div class="ui fluid flowing popup">
+          <br>
+          <div class="ui tiny button" data-position="bottom left" data-variation="inverted">Skills</div>
+          <div class="ui popup">
             <div class="ui list" >
               {{#unless profile.skills}}
               No Skills

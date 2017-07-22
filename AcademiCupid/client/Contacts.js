@@ -22,7 +22,15 @@ Template.Contacts.events ({
 		//console.log(selectedUserId[0]);
 		var userId = selectedUserId[0].getAttribute("data-value");
 		FlowRouter.go('ProfilePage', {userId: userId })
+	},
+	'click .openProfile':function(){
+		$('#' + this._id)
+		.modal({ observeChanges: true })
+		.modal('show')
+		.modal('refresh')
+		.modal('refresh');
 	}
+
 });
 
 
