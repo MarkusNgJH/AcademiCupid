@@ -3,7 +3,8 @@
 		<h2 class="ui header" style="font-size:3em;">{{getUser.profile.firstName}}&nbsp;{{getUser.profile.lastName}}'s Projects</h2>
 		<div class="ui divided items">
 			{{#each getUserProjects}}
-			<div class="item">
+				{{> ProjectExchangeCard currProj=this}}
+			<!-- <div class="item">
 				<div class="ui tiny image">
 					<img src="/images/project.png">
 				</div>
@@ -29,7 +30,7 @@
 					</div>
 				</div>	
 				<br>
-			</div>
+			</div> -->
 			{{else}}
 			No project to display.			
 			{{/each}}

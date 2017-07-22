@@ -88,9 +88,11 @@ Template.Profile.events({
 		if (isValidInput) {
 			var fName = event.target.fName.value;
 			var lName = event.target.lName.value;
+			var description = event.target.description.value;
 			var updatedSkills = originalSkills.concat(newSkillArr)
 			Meteor.users.update(Meteor.userId(), {$set:{"profile.firstName": fName}});
 			Meteor.users.update(Meteor.userId(), {$set:{"profile.lastName": lName}});
+			Meteor.users.update(Meteor.userId(), {$set:{"profile.description": description}});
 			Meteor.users.update(Meteor.userId(), {$set:{"profile.skills": updatedSkills}});
 			$('.dropdown').dropdown('clear');
 		}

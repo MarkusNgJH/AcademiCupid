@@ -1,33 +1,52 @@
 <template name="ProjectExchangeCard">
 	<div class="item currProj">
-		<div class="ui tiny image">
-			<img src="/images/project.png">
-		</div>
-		<div class = content>
-			<a class="ui large header"> {{currProj.name}} </a>
-			<br>
-			<div class="huge statistic">
-				<div class="value">
-					<i class= "user icon"></i> 
-					<strong> {{currProj.numMembers}} / {{currProj.capacity}} Vacancies</strong>
+		<div class="middle aligned content">
+			<div class="ui internally celled middle aligned grid">
+				<div class="ui middle center aligned six wide column">
+					<!-- <div class="ui tiny image">
+						<img src="/images/project.png">
+					</div> -->
+					<h1 class="ui huge header">{{currProj.name}}</h1>
+					<div class="huge statistic">
+						<div class="value">
+							<i class= "large user icon"></i> 
+							<strong>{{currProj.numMembers}} / {{currProj.capacity}} </strong>
+						</div>
+					</div>
+					<div class="extra">
+						<a href="/event={{currProj.belongsToEvent}}/project={{currProj._id}}" class="ui grey button">
+							Visit Project
+							<i class="right chevron icon"></i>
+						</a>
+					</div>
 				</div>
-			</div>
-			<div class = "ui big horizontal list">
-				{{#each currProj.desiredSkills}}
-				<div class="ui label">{{this}}</div>
-				{{/each}}
-			</div>
-			<div class="description">
-				<div class="ui text container">
-					{{currProj.description}}
-				</div>
-			</div>
-			<br>
-			<div class="extra">
-				<a href="/event={{getEventId}}/project={{currProj._id}}" class="ui button">
-					Visit Project
-					<i class="right chevron icon"></i>
-				</a>
+				<div class="ui ten wide column">
+					<label class="ui orange label">Project Description:</label>
+					<div class="description">
+						{{currProj.description}}
+					</div>
+					<br>
+					<label class="ui orange label">Desired Skills:</label>
+					<div class="description">
+						<div class="ui small horizontal divided list">
+							{{#each currProj.desiredSkills}}
+							<div class="item">
+								<div class="content">
+									<div class="header">
+										{{this}}	
+									</div>
+								</div>
+							</div>
+							{{/each}}
+						</div>	
+					</div>
+				</div>				
+				<!-- <div class="extra">
+					<a href="/event={{getEventId}}/project={{currProj._id}}" class="ui teal button">
+						Visit Project
+						<i class="right chevron icon"></i>
+					</a>
+				</div> -->
 			</div>
 		</div>	
 		<br>

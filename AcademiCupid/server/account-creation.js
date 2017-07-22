@@ -8,7 +8,7 @@ Accounts.onCreateUser(function(options, user) {
     user.profile.skills = options.skills;
     user.profile.enrolled = [];
     user.profile.projects = [];
-    user.profile.description = null;
+    user.profile.description = "No user description available.";
     user.profile.schedule = {
         "Monday": {
             "1": "Free",

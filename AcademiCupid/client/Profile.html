@@ -62,6 +62,10 @@
 						<input type="text" name="lName" value="{{getUser.profile.lastName}}">
 					</div>
 					<div class="field">
+						<label>Description</label>
+						<input type="text" name="description" value="{{getUser.profile.description}}" rows=6>
+					</div>
+					<div class="field">
 						<label>Add new skills</label>
 						<select name="skills" multiple="" class="ui fluid search dropdown" id="multi-select">
 							{{#each getSkills}}
@@ -91,6 +95,16 @@
 					<div class="ui sizer vertical segment">
 						<div class="ui huge header">
 							Description
+						</div>
+						<div class="ui grid">
+							<div class="one wide column"></div>
+							<div class="thirteen wide column">
+								<div class="ui inverted segment">
+									<div class="ui left aligned container" style="font-weight: bold;">
+										{{getUser.profile.description}}
+									</div>			
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
