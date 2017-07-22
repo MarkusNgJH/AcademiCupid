@@ -101,7 +101,12 @@ Template.ProjectSingle.helpers({
 		else{
 			return "";
 		}
-	}
+	},
+	// isSelected:function() {
+	// 	console.log("hello");
+	// 	console.log(this.getAttribute("value"));
+	// 	return "";
+	// }
 });
 
 Template.ProjectSingle.events({
