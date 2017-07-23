@@ -25,6 +25,7 @@
 				</div>
 				{{#if viewProject}}
 				<div class = "row">
+					{{#if isProjectOwner}}
 					<div class="ui blue labelled button toggle-edit">
 						<i class = "edit icon"></i>
 						Edit Project
@@ -33,6 +34,7 @@
 						<i class = "edit icon"></i>
 						Manage Team
 					</div>
+					{{/if}}
 					<div class="ui blue right labeled icon button open-schedule">
 						<i class = "angle double right icon"></i>
 						View Schedule

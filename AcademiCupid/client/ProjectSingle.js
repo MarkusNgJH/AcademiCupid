@@ -89,7 +89,6 @@ Template.ProjectSingle.helpers({
 			{ owner: Meteor.userId() }
 			]
 		} );
-		console.log(findProject);
 		return findProject != null;
 	},
 	viewProject:function(){
