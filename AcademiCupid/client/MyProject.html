@@ -1,18 +1,14 @@
 <template name="MyProject">
 	<div class="ui container">
-		<div class="row">
+		<h3 class="ui header">
+			Your enrolled project: 
 			{{#if getProject}}
-				<h3 class="ui block header">
-					Enrolled Project: 
-					{{#if isProjectOwner}}	
-						<a href="/event={{eventId}}/project={{getProject._id}}">
-							{{getProject.name}}
-						</a>
-					{{/if}}
-				</h3>
+				<a class="ui grey label" href="/event={{eventId}}/project={{getProject._id}}">
+					{{getProject.name}}
+				</a>
 			{{else}}
-				<h3 class="ui block header">You currently have no project</h3>
+				(None)
 			{{/if}}	
-		</div>
+		</h3>
 	</div>
 </template>

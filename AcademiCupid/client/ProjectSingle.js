@@ -1,10 +1,10 @@
 $('.linked.item')
 .popup()
 ;
-function refreshModal() {
-	Meteor.setTimeout(function() { refreshModal() }, 1);
-	return $('.ui.modal').modal('refresh');
-}
+// function refreshModal() {
+// 	Meteor.setTimeout(function() { refreshModal() }, 1);
+// 	return $('.ui.modal').modal('refresh');
+// }
 function isDuplicate(str, arr) {
 	return arr.indexOf(str) > -1;
 }
@@ -129,8 +129,9 @@ Template.ProjectSingle.events({
 	'click .openProfile':function(){
 		$('#' + this._id)
 		.modal({ observeChanges: true })
-		.modal('show'); 
-		refreshModal();
+		.modal('show')
+		.modal('refresh')
+		.modal('refresh');
 	},
 	'click .toProject':function(){
 		Session.set('openSchedule', false);

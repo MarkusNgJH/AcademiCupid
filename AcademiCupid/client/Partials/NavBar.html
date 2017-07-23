@@ -1,30 +1,29 @@
 <template name="NavBar">
 	<div id="NavMenu" class="ui fluid vertical labeled icon inverted menu">
-	  <a class="item" href="/profile={{currentUserId}}">
-	    <i class="user icon"></i>
-	    My Profile
-	  </a>
-	  <a class="item" href="/events">
-	    <i class="university icon"></i>
-	    My Events
-	  </a>
-	  <a class="item" href="/profile={{currentUserId}}/myprojects">
-	    <i class="file text outline icon"></i>
-	    My Projects
-	  </a>
-	  {{#if selectedEvent}}
-		  <a class="item" href="/event={{eventId}}/projectcreation">
-		    <i class="add circle icon"></i>
-		    Create Project
-		  </a>
-		  {{#if isEventOwner}}
-			  <a class="item" href="/event={{eventId}}/eventinvitation">
-			    <i class="add user icon"></i>
-			    Event Management
-			  </a>
-		  {{/if}}
-	  {{/if}}
-	  
-	  
+		<a class="item" href="/profile={{currentUserId}}">
+			<i class="user icon"></i>
+			My Profile
+		</a>
+		<a class="item" href="/events">
+			<i class="university icon"></i>
+			My Events
+		</a>
+		<a class="item" href="/profile={{currentUserId}}/myprojects">
+			<i class="file text outline icon"></i>
+			My Projects
+		</a>
+		{{#if selectedEvent}}
+			<div class="ui divider"></div>
+			<a class="item" href="/event={{eventId}}/projectcreation">
+				<i class="grey add circle icon"></i>
+				<span style="color:grey;">Create Project</span>
+			</a>
+			{{#if isEventOwner}}
+				<a class="item" href="/event={{eventId}}/eventinvitation">
+					<i class="grey add user icon"></i>
+					<span style="color:grey;">Event Management</span>
+				</a>
+			{{/if}}
+		{{/if}}
 	</div>
 </template>

@@ -4,7 +4,7 @@ var id = parts.pop()
 Template.NavBar.rendered = function () {
 	$(document).ready(function(){
 	    $(window).scroll(function(){
-	        if($(window).scrollTop() > 185) {
+	        if($(window).scrollTop() > $(window).height()/3) {
         		if(!$("#NavMenu").hasClass("fixed")) {
         			$("#NavMenu").removeClass("fluid");
         			$("#NavMenu").addClass("fixed");

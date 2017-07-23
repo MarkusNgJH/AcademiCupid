@@ -1,19 +1,31 @@
 <template name="EventSingle">
+	<div class="ui center aligned raised container segment">
+		<label class="ui huge header" style="font-size:3rem;color:#153263">{{getEvent.name}}&nbsp;&nbsp;</label>		
+		<a class="ui black label openProfile">{{getOwnerName getEvent.owner}}</a>
+		<!-- EVENT OWNER PROFILE MODAL -->
+		<div class = "ui fullscreen modal" style = "overflow: auto" id = {{getEvent.owner}}>
+			{{>ProfileCard getUser = getOwner}}
+		</div>
+	</div>
 	<div class = "ui fluid grid">
-		<div id="ContactsContainer" class="ui four wide column">
+		<div id="ContactsContainer" class="ui five wide column">
 			<div class="ui container segment">
-				<h2 class="ui header">Participants</h2>
+				<div class="ui horizontal divider">
+					<h2 class="ui huge header" style="color:#075670">Participants</h2>	
+				</div>
 				{{> Contacts}}		
 			</div>	
 		</div>
-		<div id="ProjectExchangeContainer" class="ui right floated twelve wide column">
+		<div id="ProjectExchangeContainer" class="ui right floated eleven wide column">
 			<div class="ui container segment">
 				{{> MyProject}}	
 			</div>
 			<div class="ui container segment">
-				<h3 class="ui block header">
-					Project Exchange
-				</h3>
+				<div class="ui horizontal divider">
+					<h3 class="ui huge header" style="color:#075670">
+						Project Exchange
+					</h3>
+				</div>
 				<!-- SKILLS FILTER PANEL -->
 				{{> SkillsFilter}}
 				<!-- PROJECT SEARCH PANEL -->

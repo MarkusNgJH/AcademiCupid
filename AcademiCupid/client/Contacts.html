@@ -1,63 +1,61 @@
 <template name="Contacts">
-  <div class = "ui container">
-    <form>
-      <select class="ui fluid search selection dropdown" id="multi-select">
-        <option value="" disabled selected>Search Participants...</option>
-        {{#each getParticipants}}
-        <option value={{_id}}>
+  <form>
+    <div class="ui grid">
+    <div class="thirteen wide column">
+        <select class="ui fluid search selection dropdown" id="multi-select">
+          <option value="" disabled selected>Search Participants...</option>
+          {{#each getParticipants}}
+          <option value={{_id}}>
+            {{#each emails}}
+              {{address}}
+            {{/each}}
+          </option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="right floated three wide column">
+        <button class = "ui medium icon right floated button submitSearch">
+          <i class="search icon"></i>
+          <!-- <input class type="submit" value="search">   -->
+        </button>    
+      </div>
+    </div>
+  </form>
+  <br>
+  <div class="ui middle aligned celled list">
+    {{#each getParticipants}}
+    <div class="item">
+      <img class="ui tiny avatar image" src="/images/download.png">
+      <div class="content">
+        <h6 class="ui medium header openProfile"> {{profile.firstName}} {{profile.lastName}}</h6>
+        <a class="header openProfile">
           {{#each emails}}
           {{address}}
           {{/each}}
-        </option>
-        {{/each}}
-      </select>
-      <button class = "ui small icon right floated button submitSearch">
-        <i class="search icon"></i>
-        <!-- <input class type="submit" value="search">   -->
-      </button>
-    </form>
-    <br><br>
-    <div class="ui middle aligned celled list">
-      {{#each getParticipants}}
-      
-
-      <div class="item">
-        <img class="ui tiny avatar image" src="/images/download.png">
-        <div class="content">
-          <h6 class="ui medium header openProfile"> {{profile.firstName}} {{profile.lastName}}</h6>
-          <a class="header openProfile">
-            {{#each emails}}
-            {{address}}
+        </a>
+        <div class = "ui fullscreen modal" style = "overflow: auto" id = {{_id}}>
+          {{>ProfileCard getUser = this}}
+        </div>
+        <script>
+          $('.ui.button')
+          .popup()
+          ;
+        </script>
+        <br>
+        <div class="ui tiny button" data-position="bottom left" data-variation="inverted">Skills</div>
+        <div class="ui popup">
+          <div class="ui list" >
+            {{#unless profile.skills}}
+            No Skills
+            {{else}}
+            {{#each profile.skills}}
+            <div class="item">{{name}}</div>
             {{/each}}
-          </a>
-          <div class = "ui fullscreen modal" style = "overflow: auto" id = {{_id}}>
-            
-            {{>ProfileCard getUser = this}}
-            
-          </div>
-
-          <script>
-            $('.ui.button')
-            .popup()
-            ;
-          </script>
-          <br>
-          <div class="ui tiny button" data-position="bottom left" data-variation="inverted">Skills</div>
-          <div class="ui popup">
-            <div class="ui list" >
-              {{#unless profile.skills}}
-              No Skills
-              {{else}}
-              {{#each profile.skills}}
-              <div class="item">{{name}}</div>
-              {{/each}}
-              {{/unless}}
-            </div>
+            {{/unless}}
           </div>
         </div>
       </div>
-      
-      {{/each}}
     </div>
+    {{/each}}
   </div>
 </template>

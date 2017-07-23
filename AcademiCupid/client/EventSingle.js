@@ -36,7 +36,27 @@ Template.EventSingle.helpers({
 		return Events.findOne({_id: id}); //this id is then used to find the correct recipe within our Recipe collection
 	},
 	getEvent: function() {
-		var id = Session.get('currentEvent');
-		return Events.findOne({_id: id});
+		return Events.findOne(FlowRouter.getParam('eventId'));
+	},
+	getOwnerName: function(ownerId) {
+		var ownerProfile = Meteor.users.findOne(ownerId).profile;
+		return ownerProfile.firstName + " " + ownerProfile.lastName;
+	},
+	getOwner: function() {
+		var event = Events.findOne(FlowRouter.getParam('eventId'));
+		var ownerId = event.owner;
+		return Meteor.users.findOne(ownerId);
 	}
 });
+
+Template.EventSingle.events({
+	'click .openProfile':function(){
+		var event = Events.findOne(FlowRouter.getParam('eventId'));
+		var ownerId = event.owner;
+		$('#' + ownerId)
+		.modal({ observeChanges: true })
+		.modal('show')
+		.modal('refresh')
+		.modal('refresh');
+	}	
+})

@@ -1,14 +1,17 @@
 <template name = "Header">
-	<div class="ui grid" style="background-color:#212A42;height:200px;padding:40px 50px 0px 50px;">
-		<div class="thirteen wide column">
+	<div class="ui grid" style="background-color:#212A42;height:{{headerHeight}};padding:40px 50px 0px 50px;">
+		<div class="center aligned five wide column">
 			<div class="row">
-				<a href="/events" style="text-decoration: none">
+				<!-- <a href="/events" style="text-decoration: none">
 					<h1 class="ui huge header" style="font-size:6rem;color:#FFBA4C;">TeamUp</h1>
-				</a>	
+				</a>	 -->
+				<img class="ui fluid image" src="/images/TeamUP_logo_dark_w_slogan.png">
 			</div>
-			<div class="row">
-				<h1 class="ui medium header" style="color:white;">Form teams with synergy and efficiency</h1>
-			</div>
+			<!-- <div class="row">
+				<div class="ui fluid container">
+					<h3 class="ui header" style="color:#D6D6D6">Form teams with synergy and efficiency</h3>	
+				</div>
+			</div> -->
 			<!-- {{#if eventSelected}}
 			<div class="ui sizer vertical segment">
 				<div class="row">
@@ -20,6 +23,7 @@
 			</div>
 			{{/if}} -->
 		</div>
+		<div class="ui eight wide column"></div>
 		<div class="right aligned three wide column">
 			<div class="ui header">
 				{{> loginButtons}}	

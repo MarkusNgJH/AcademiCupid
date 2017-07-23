@@ -23,6 +23,10 @@
 // }
 
 Template.Header.helpers ({
+	headerHeight: function() {
+		console.log($(window).height() / 3);
+		return $(window).height() / 3;
+	},
 	eventSelected: function () {
 		return typeof FlowRouter.getParam('eventId') != 'undefined';
 	},
