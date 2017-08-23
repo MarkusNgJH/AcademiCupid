@@ -82,14 +82,10 @@ Template.ProjectSingle.helpers({
 		return Skills.find({});
 	},
 	isProjectOwner: function () {
-		var currentEventId = FlowRouter.getParam('eventId');
-		var findProject = Projects.findOne( {
-			$and : [
-			{ belongsToEvent: currentEventId },
-			{ owner: Meteor.userId() }
-			]
-		} );
-		return findProject != null;
+		var currentProjectId = FlowRouter.getParam('projectId');
+		var currentProject =  Projects.findOne(currentProjectId);
+		var ownerId = currentProject.owner;
+		return ownerId == Meteor.userId();
 	},
 	viewProject:function(){
 		return !(Session.get('openSchedule') || 
