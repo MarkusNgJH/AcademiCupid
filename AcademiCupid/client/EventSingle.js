@@ -50,7 +50,7 @@ Template.EventSingle.helpers({
 });
 
 Template.EventSingle.events({
-	'click .openProfile':function(){
+	'click .openCoordinatorProfile':function(){
 		var event = Events.findOne(FlowRouter.getParam('eventId'));
 		var ownerId = event.owner;
 		$('#' + ownerId)

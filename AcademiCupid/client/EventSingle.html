@@ -1,7 +1,7 @@
 <template name="EventSingle">
 	<div class="ui center aligned raised container segment">
 		<label class="ui huge header" style="font-size:3rem;color:#153263">{{getEvent.name}}&nbsp;&nbsp;</label>		
-		<a class="ui black label openProfile">{{getOwnerName getEvent.owner}}</a>
+		<a class="ui black tiny button openCoordinatorProfile">{{getOwnerName getEvent.owner}}</a>
 		<!-- EVENT OWNER PROFILE MODAL -->
 		<div class = "ui fullscreen modal" style = "overflow: auto" id = {{getEvent.owner}}>
 			{{>ProfileCard getUser = getOwner}}

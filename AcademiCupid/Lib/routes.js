@@ -1,21 +1,22 @@
-Accounts.onLogin(function(){
-	FlowRouter.go('EventsPage');
-});
+if(Meteor.isClient){
+	Accounts.onLogin(function(){
+		FlowRouter.go('EventsPage');
+	});
 
- Accounts.onLogout(function() {
-  FlowRouter.go('LoginPage');
- });
-
-FlowRouter.triggers.enter([function(context, redirect){
-	if(!Meteor.userId()){
+	Accounts.onLogout(function() {
 		FlowRouter.go('LoginPage');
-	}
-}]);
+	});
+
+	FlowRouter.triggers.enter([function(context, redirect){
+		if(!Meteor.userId()){
+			FlowRouter.go('LoginPage');
+		}
+	}]);
 
 
-FlowRouter.route('/',{
-	name: 'LoginPage',
-	action(){
+	FlowRouter.route('/',{
+		name: 'LoginPage',
+		action(){
 		if(Meteor.userId()) { //this returns true if the user is logged in
 			FlowRouter.go('EventsPage'); //hence if the user is logged in, redirect him to the recipe-book page (the next section of code below). Otherwise, render the HomeLayout
 		}
@@ -23,103 +24,103 @@ FlowRouter.route('/',{
 	}
 });
 
-FlowRouter.route('/registration',{
-	name: 'registrationPage',
-	action(){
-		BlazeLayout.render('HomeLayout', {main: "register"});
-	}
-});
+	FlowRouter.route('/registration',{
+		name: 'registrationPage',
+		action(){
+			BlazeLayout.render('HomeLayout', {main: "register"});
+		}
+	});
 
-FlowRouter.route('/events', {
-	name: 'EventsPage',
-	action(){
-		BlazeLayout.render('MainLayout', {main: "EventsSelection"});
-	}
-});
+	FlowRouter.route('/events', {
+		name: 'EventsPage',
+		action(){
+			BlazeLayout.render('MainLayout', {main: "EventsSelection"});
+		}
+	});
 
-FlowRouter.route('/event=:eventId', {
-	name: 'EventSingle',
+	FlowRouter.route('/event=:eventId', {
+		name: 'EventSingle',
 	action() { // this is what's going to happen when you hit this route
-		BlazeLayout.render('MainLayout', {main: 'EventSingle'});
-	}
+	BlazeLayout.render('MainLayout', {main: 'EventSingle'});
+}
 });
 
-FlowRouter.route('/event=:eventId/projectcreation', {
-	name: 'ProjectCreation',
+	FlowRouter.route('/event=:eventId/projectcreation', {
+		name: 'ProjectCreation',
 	action() { // this is what's going to happen when you hit this route
-		BlazeLayout.render('MainLayout', {main: 'ProjectCreation'});
-	}
+	BlazeLayout.render('MainLayout', {main: 'ProjectCreation'});
+}
 });
 
-FlowRouter.route('/event=:eventId/project=:projectId', {
-	name: 'ProjectSingle',
-	action() {
-		BlazeLayout.render('MainLayout', {main: 'ProjectSingle'});
-	}
-});
+	FlowRouter.route('/event=:eventId/project=:projectId', {
+		name: 'ProjectSingle',
+		action() {
+			BlazeLayout.render('MainLayout', {main: 'ProjectSingle'});
+		}
+	});
 
-FlowRouter.route('/profile=:userId/myprojects', {
-	name: 'MyProjects',
-	action() {
-		BlazeLayout.render('MainLayout', {main: 'MyProjects'});
-	}
-});
+	FlowRouter.route('/profile=:userId/myprojects', {
+		name: 'MyProjects',
+		action() {
+			BlazeLayout.render('MainLayout', {main: 'MyProjects'});
+		}
+	});
 
-FlowRouter.route('/event=:eventId/project=:projectId/projectinvitation', {
-	name: 'ProjectInvitation',
+	FlowRouter.route('/event=:eventId/project=:projectId/projectinvitation', {
+		name: 'ProjectInvitation',
 	action() { // this is what's going to happen when you hit this route
-		BlazeLayout.render('MainLayout', {main: 'ProjectInvitation'});
-	}
+	BlazeLayout.render('MainLayout', {main: 'ProjectInvitation'});
+}
 });
 
-FlowRouter.route('/mainpage',{
-	name: 'MainPage',
-	action(){
-		BlazeLayout.render('MainLayout', {main: "MainPage"});
-	}
-});
+	FlowRouter.route('/mainpage',{
+		name: 'MainPage',
+		action(){
+			BlazeLayout.render('MainLayout', {main: "MainPage"});
+		}
+	});
 
-FlowRouter.route('/event=:eventId/eventinvitation', {
-	name: 'EventInvitation',
+	FlowRouter.route('/event=:eventId/eventinvitation', {
+		name: 'EventInvitation',
 	action() { // this is what's going to happen when you hit this route
-		BlazeLayout.render('MainLayout', {main: 'EventInvitation'});
-	}
+	BlazeLayout.render('MainLayout', {main: 'EventInvitation'});
+}
 });
 
-FlowRouter.route('/profile=:userId',{
-	name: 'ProfilePage',
-	action(){
-		BlazeLayout.render('MainLayout', {main: "Profile"});
-	}
-});
+	FlowRouter.route('/profile=:userId',{
+		name: 'ProfilePage',
+		action(){
+			BlazeLayout.render('MainLayout', {main: "Profile"});
+		}
+	});
 
-FlowRouter.route('/testpage',{
-	name: 'TestPage',
-	action(){
-		BlazeLayout.render('MainLayout', {main: "TestTemplate"});
-	}
-});
+	FlowRouter.route('/testpage',{
+		name: 'TestPage',
+		action(){
+			BlazeLayout.render('MainLayout', {main: "TestTemplate"});
+		}
+	});
 
-FlowRouter.route('/testpage2',{
-	name: 'TestPage2',
-	action(){
-		BlazeLayout.render('MainLayout', {main: "TestTemplate2"});
-	}
-});
+	FlowRouter.route('/testpage2',{
+		name: 'TestPage2',
+		action(){
+			BlazeLayout.render('MainLayout', {main: "TestTemplate2"});
+		}
+	});
 
-FlowRouter.route('/schedulesingle',{
-	name: 'ScheduleSingle',
-	action(){
-		BlazeLayout.render('MainLayout', {main: "ScheduleSingle"});
-	}
-});
+	FlowRouter.route('/schedulesingle',{
+		name: 'ScheduleSingle',
+		action(){
+			BlazeLayout.render('MainLayout', {main: "ScheduleSingle"});
+		}
+	});
 
-FlowRouter.route('/addskills',{
-	name: 'AddSkills',
-	action(){
-		BlazeLayout.render('HomeLayout', {main: "AddSkills"});
-	}
-});
+	FlowRouter.route('/addskills',{
+		name: 'AddSkills',
+		action(){
+			BlazeLayout.render('HomeLayout', {main: "AddSkills"});
+		}
+	});
 
 /*
 Accounts.onLogin(function(){
@@ -179,3 +180,5 @@ FlowRouter.route('/shopping-list', {
 		BlazeLayout.render('MainLayout', {main: 'ShoppingList'});
 	}
 });*/
+
+}

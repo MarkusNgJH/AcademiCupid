@@ -45,7 +45,33 @@ Template.ProfileCard.helpers({
 Template.ProfileCard.events({
 	'click .view-schedule': function(){
 		Session.set('viewSchedule', !Session.get('viewSchedule'));
-	}
+	},
+	'click .label': function() {
+		// var clickedElement = $("a:contains(" + this.name + ")");
+		// if(clickedElement.hasClass("green")) {
+		// 	clickedElement.removeClass("green");
+		// } else {
+		// 	clickedElement.addClass("green");	
+		// }
+		if(isNotDuplicate(Meteor.userId(), this.validators)) {
+			this.validators.push(Meteor.userId());
+			// clickedElement.addClass("green");
+		} else {
+			var idx = this.validators.indexOf(Meteor.userId());
+			this.validators.splice(idx, 1);
+			// clickedElement.removeClass("green");
+		}
+		var skillOwner = Meteor.users.findOne(this.owner);
+		var ownerSkills = skillOwner.profile.skills;
+		for(var i = 0; i < ownerSkills.length; i++) {
+			if(ownerSkills[i].name === this.name) {
+				var fieldToUpdate = "profile.skills." + i + ".validators";
+				var obj = {};
+				obj[fieldToUpdate] = this.validators;
+				Meteor.users.update(this.owner, {$set: obj});
+			}
+		}
+	},
 });
 
 
